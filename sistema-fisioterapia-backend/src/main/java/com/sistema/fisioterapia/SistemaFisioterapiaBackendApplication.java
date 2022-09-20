@@ -23,7 +23,7 @@ public class SistemaFisioterapiaBackendApplication implements CommandLineRunner 
     }
 
     public void run(String... args) throws Exception {
-		Usuario usuario = new Usuario();
+		/*Usuario usuario = new Usuario();
 		usuario.setNombre("Chris");
 		usuario.setApellido("Ramirez");
 		usuario.setUsername("cri");
@@ -44,6 +44,6 @@ public class SistemaFisioterapiaBackendApplication implements CommandLineRunner 
 
 		Usuario usuarioGuardado = usuarioService.guardarUsuario(usuario, usuarioRoles);
 		System.out.println(usuarioGuardado.getUsername());
-	}
+	*/}
 
 }
