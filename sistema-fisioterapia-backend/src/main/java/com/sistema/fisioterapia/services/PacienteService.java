@@ -25,7 +25,7 @@ public class PacienteService {
         return pacienteRepository.findById(id).get();
     }
 
-    public void eliminarProducto(Long id){
+    public void eliminarPaciente(Long id){
         pacienteRepository.deleteById(id);
     }
 

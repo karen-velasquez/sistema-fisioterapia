@@ -52,7 +52,7 @@ public class PacienteController {
 
     @DeleteMapping("/pacientes/{id}")
     public void eliminarPaciente(@PathVariable Long id) {
-        pacienteService.eliminarProducto(id);
+        pacienteService.eliminarPaciente(id);
     }
 
 
