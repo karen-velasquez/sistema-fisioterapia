@@ -4,6 +4,7 @@ import com.sistema.fisioterapia.model.Usuario;
 import com.sistema.fisioterapia.model.UsuarioRol;
 import com.sistema.fisioterapia.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -19,19 +20,20 @@ public class UsuarioController {
 
     @PostMapping("/")
     public Usuario guardarUsuario(@RequestBody Usuario usuario) throws Exception {
-        usuario.setPerfil("default.png");
-
-        Set<UsuarioRol> roles = new HashSet<>();
+        Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
         Rol rol = new Rol();
         rol.setRolId(2L);
-        rol.setNombre("NORMAL");
+        rol.setRolNombre("NORMAL");
 
         UsuarioRol usuarioRol = new UsuarioRol();
         usuarioRol.setUsuario(usuario);
         usuarioRol.setRol(rol);
 
-        return usuarioService.guardarUsuario(usuario, roles);
+        usuarioRoles.add(usuarioRol);
+        return usuarioService.guardarUsuario(usuario,usuarioRoles);
+
+
     }
 
     @GetMapping("/{username}")

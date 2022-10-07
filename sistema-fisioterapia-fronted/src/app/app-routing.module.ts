@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './pages/homepage/homepage.component';
-import { LoginFisioterapeutaComponent } from './pages/login-fisioterapeuta/login-fisioterapeuta.component';
-import { SignupFisioterapeutaComponent } from './pages/signup-fisioterapeuta/signup-fisioterapeuta.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 const routes: Routes = [
   {
@@ -13,12 +13,12 @@ const routes: Routes = [
 
   {
     path : 'signup',
-    component : SignupFisioterapeutaComponent,
+    component : SignupComponent,
     pathMatch : 'full'
   },
   {
     path : 'login',
-    component : LoginFisioterapeutaComponent,
+    component : LoginComponent,
     pathMatch : 'full'
   }
 

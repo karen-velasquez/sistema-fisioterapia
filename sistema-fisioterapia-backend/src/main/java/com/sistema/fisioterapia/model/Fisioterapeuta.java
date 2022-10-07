@@ -1,14 +1,29 @@
 package com.sistema.fisioterapia.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sistema.fisioterapia.configuration.Authority;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
+
 @Entity
 @Table(name="fisioterapeutas")
-public class Fisioterapeuta {
+
+
+@XmlRootElement
+@NamedQueries({
+        @NamedQuery(name = "Fisioterapeuta.findByNickName", query = "SELECT c FROM Fisioterapeuta c WHERE c.fisioterapeutaId = :id"),
+})
+
+public class Fisioterapeuta implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -100,5 +115,40 @@ public class Fisioterapeuta {
 
     public Fisioterapeuta(){
 
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }
