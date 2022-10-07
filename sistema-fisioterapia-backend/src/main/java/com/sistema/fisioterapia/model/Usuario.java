@@ -1,6 +1,5 @@
 package com.sistema.fisioterapia.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistema.fisioterapia.configuration.Authority;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,6 +30,19 @@ public class Usuario implements UserDetails {
     @JsonIgnore
     private Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
+
+    public Usuario(){
+
+    }
+
+    public Usuario(Long id, String username, String password, String nombres, String apellidos, int edad) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.edad = edad;
+    }
 
     public Long getId() {
         return id;
@@ -120,7 +132,5 @@ public class Usuario implements UserDetails {
     }
 
 
-    public Usuario(){
 
-    }
 }

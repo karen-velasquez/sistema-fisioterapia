@@ -1,5 +1,6 @@
 package com.sistema.fisioterapia.services.impl;
 
+import com.sistema.fisioterapia.exceptions.UsuarioFoundException;
 import com.sistema.fisioterapia.model.Usuario;
 import com.sistema.fisioterapia.model.UsuarioRol;
 import com.sistema.fisioterapia.repositories.RolRepository;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-
 public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -24,7 +24,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuarioLocal = usuarioRepository.findByUsername(usuario.getUsername());
         if(usuarioLocal != null){
             System.out.println("El usuario ya existe");
-            throw new Exception("El usuario ya esta presente");
+            throw new UsuarioFoundException("El usuario ya esta presente");
         }else{
             for(UsuarioRol usuarioRol:usuarioRoles){
                 rolRepository.save(usuarioRol.getRol());

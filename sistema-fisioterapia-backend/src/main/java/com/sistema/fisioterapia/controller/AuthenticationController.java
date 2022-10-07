@@ -3,6 +3,7 @@ package com.sistema.fisioterapia.controller;
 import com.sistema.fisioterapia.configuration.JwtRequest;
 import com.sistema.fisioterapia.configuration.JwtResponse;
 import com.sistema.fisioterapia.configuration.JwtUtils;
+import com.sistema.fisioterapia.exceptions.UsuarioNotFoundException;
 import com.sistema.fisioterapia.model.Usuario;
 import com.sistema.fisioterapia.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class AuthenticationController {
     public ResponseEntity<?> generarToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         try{
             autenticar(jwtRequest.getUsername(),jwtRequest.getPassword());
-        }catch (Exception exception){
+        }catch (UsuarioNotFoundException exception){
             exception.printStackTrace();
             throw new Exception("Usuario no encontrado");
         }

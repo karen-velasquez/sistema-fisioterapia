@@ -38,8 +38,4 @@ public class UsuarioRol {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-
-    public UsuarioRol(){
-
-    }
 }

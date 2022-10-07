@@ -46,4 +46,9 @@ public class Rol {
     public Rol(){
 
     }
+
+    public Rol(Long rolId, String rolNombre) {
+        this.rolId = rolId;
+        this.rolNombre = rolNombre;
+    }
 }
