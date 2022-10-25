@@ -16,40 +16,57 @@ public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long usuarioId;
 
     private String username;
     private String password;
     private String nombres;
     private String apellidos;
 
-    private int edad;
+    private String correo;
+
+    private String fechaNac;
 
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
     @JsonIgnore
     private Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
+    /*uniendolo con la tabla de sesion*/
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "pacienteId")
+    @JsonIgnore
+    private Set<Sesion> pacienteId = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fisioterapeutaId")
+    @JsonIgnore
+    private Set<Sesion> fisioterapeutaId = new HashSet<>();
+
+    /*one to many de lesiones*/
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "pacienteId")
+    @JsonIgnore
+    private Set<Lesion> lesionId = new HashSet<>();
+
 
     public Usuario(){
 
     }
 
-    public Usuario(Long id, String username, String password, String nombres, String apellidos, int edad) {
-        this.id = id;
+    public Usuario(Long usuarioId, String username, String password, String nombres, String apellidos, String correo, String fechaNac) {
+        this.usuarioId = usuarioId;
         this.username = username;
         this.password = password;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.edad = edad;
+        this.correo = correo;
+        this.fechaNac = fechaNac;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public String getUsername() {
@@ -115,13 +132,22 @@ public class Usuario implements UserDetails {
         this.apellidos = apellidos;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
+
+    public String getFechaNac() {
+        return fechaNac;
+    }
+
+    public void setFechaNac(String fechaNac) {
+        this.fechaNac = fechaNac;
+    }
+
 
     public Set<UsuarioRol> getUsuarioRoles() {
         return usuarioRoles;
@@ -133,4 +159,27 @@ public class Usuario implements UserDetails {
 
 
 
+    public Set<Sesion> getPacienteId() {
+        return pacienteId;
+    }
+
+    public void setPacienteId(Set<Sesion> pacienteId) {
+        this.pacienteId = pacienteId;
+    }
+
+    public Set<Sesion> getFisioterapeutaId() {
+        return fisioterapeutaId;
+    }
+
+    public void setFisioterapeutaId(Set<Sesion> fisioterapeutaId) {
+        this.fisioterapeutaId = fisioterapeutaId;
+    }
+
+    public Set<Lesion> getLesionId() {
+        return lesionId;
+    }
+
+    public void setLesionId(Set<Lesion> lesionId) {
+        this.lesionId = lesionId;
+    }
 }

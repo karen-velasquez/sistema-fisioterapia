@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name="asignados")
 public class Asignado {
 
     @Id
@@ -15,27 +16,19 @@ public class Asignado {
     private Long asignadoId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Paciente paciente;
+    private Usuario pacienteId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Fisioterapeuta fisioterapeuta;
+    private Ejercicio ejercicioId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Repeticion repeticion;
+    private String repeticiones;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Ejercicio ejercicio;
-
-    private String fechaInicio;
-
-    private String fechaFinalizacion;
+    private String series;
 
 
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "asignado")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "asignadoId")
     @JsonIgnore
-    private Set<CumplimientoEjercicio> cumplimientoEjercicio = new HashSet<>();
-
+    private Set<Cumplimiento> cumplimientoEjercicio = new HashSet<>();
 
 
 
@@ -48,67 +41,45 @@ public class Asignado {
         this.asignadoId = asignadoId;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Usuario getPacienteId() {
+        return pacienteId;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setPacienteId(Usuario pacienteId) {
+        this.pacienteId = pacienteId;
     }
 
-    public Fisioterapeuta getFisioterapeuta() {
-        return fisioterapeuta;
+    public Ejercicio getEjercicioId() {
+        return ejercicioId;
     }
 
-    public void setFisioterapeuta(Fisioterapeuta fisioterapeuta) {
-        this.fisioterapeuta = fisioterapeuta;
+    public void setEjercicioId(Ejercicio ejercicioId) {
+        this.ejercicioId = ejercicioId;
     }
 
-    public Repeticion getRepeticion() {
-        return repeticion;
+    public String getRepeticiones() {
+        return repeticiones;
     }
 
-    public void setRepeticion(Repeticion repeticion) {
-        this.repeticion = repeticion;
+    public void setRepeticiones(String repeticiones) {
+        this.repeticiones = repeticiones;
     }
 
-    public Ejercicio getEjercicio() {
-        return ejercicio;
+    public String getSeries() {
+        return series;
     }
 
-    public void setEjercicio(Ejercicio ejercicio) {
-        this.ejercicio = ejercicio;
+    public void setSeries(String series) {
+        this.series = series;
     }
 
-    public String getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(String fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public String getFechaFinalizacion() {
-        return fechaFinalizacion;
-    }
-
-    public void setFechaFinalizacion(String fechaFinalizacion) {
-        this.fechaFinalizacion = fechaFinalizacion;
-    }
-
-
-
-
-    public Set<CumplimientoEjercicio> getCumplimientoEjercicio() {
+    public Set<Cumplimiento> getCumplimientoEjercicio() {
         return cumplimientoEjercicio;
     }
 
-    public void setCumplimientoEjercicio(Set<CumplimientoEjercicio> cumplimientoEjercicio) {
+    public void setCumplimientoEjercicio(Set<Cumplimiento> cumplimientoEjercicio) {
         this.cumplimientoEjercicio = cumplimientoEjercicio;
     }
-
-
-
 
     public Asignado(){
 

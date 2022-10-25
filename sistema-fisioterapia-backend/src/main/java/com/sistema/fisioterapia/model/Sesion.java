@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name="sesion")
 public class Sesion {
 
     @Id
@@ -16,18 +17,20 @@ public class Sesion {
     private Long sesionId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Paciente paciente;
+    private Usuario pacienteId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Fisioterapeuta fisioterapeuta;
+    private Usuario fisioterapeutaId;
 
-    private String fecha;
+    private String nombreSesion;
 
-    private String hora_inicio;
+    private String desdeFecha;
 
-    private String minutos;
+    private String hastaFecha;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "sesion")
+    private String descripcion;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "sesionId")
     @JsonIgnore
     private Set<NotaSesion> sesion = new HashSet<>();
 
@@ -39,44 +42,52 @@ public class Sesion {
         this.sesionId = sesionId;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Usuario getPacienteId() {
+        return pacienteId;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setPacienteId(Usuario pacienteId) {
+        this.pacienteId = pacienteId;
     }
 
-    public Fisioterapeuta getFisioterapeuta() {
-        return fisioterapeuta;
+    public Usuario  getFisioterapeutaId() {
+        return fisioterapeutaId;
     }
 
-    public void setFisioterapeuta(Fisioterapeuta fisioterapeuta) {
-        this.fisioterapeuta = fisioterapeuta;
+    public void setFisioterapeutaId(Usuario  fisioterapeutaId) {
+        this.fisioterapeutaId = fisioterapeutaId;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getNombreSesion() {
+        return nombreSesion;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setNombreSesion(String nombreSesion) {
+        this.nombreSesion = nombreSesion;
     }
 
-    public String getHora_inicio() {
-        return hora_inicio;
+    public String getDesdeFecha() {
+        return desdeFecha;
     }
 
-    public void setHora_inicio(String hora_inicio) {
-        this.hora_inicio = hora_inicio;
+    public void setDesdeFecha(String desdeFecha) {
+        this.desdeFecha = desdeFecha;
     }
 
-    public String getMinutos() {
-        return minutos;
+    public String getHastaFecha() {
+        return hastaFecha;
     }
 
-    public void setMinutos(String minutos) {
-        this.minutos = minutos;
+    public void setHastaFecha(String hastaFecha) {
+        this.hastaFecha = hastaFecha;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Set<NotaSesion> getSesion() {

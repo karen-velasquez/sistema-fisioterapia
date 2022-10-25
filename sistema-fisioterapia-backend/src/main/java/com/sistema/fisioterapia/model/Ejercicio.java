@@ -15,12 +15,16 @@ public class Ejercicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ejercicioId;
 
-    private String ejercicioNombre;
-    private String ejercicioTipo;
-    private String ejercicioImagen;
+    private String nombre;
+    private String tipo;
+    private String parteCuerpo;
+    private String descripcion;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private  PosicionCamara posicionCamaraId;
 
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ejercicio")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ejercicioId")
     @JsonIgnore
     private Set<Asignado> asignado = new HashSet<>();
 
@@ -34,28 +38,44 @@ public class Ejercicio {
         this.ejercicioId = ejercicioId;
     }
 
-    public String getEjercicioNombre() {
-        return ejercicioNombre;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setEjercicioNombre(String ejercicioNombre) {
-        this.ejercicioNombre = ejercicioNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getEjercicioTipo() {
-        return ejercicioTipo;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setEjercicioTipo(String ejercicioTipo) {
-        this.ejercicioTipo = ejercicioTipo;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public String getEjercicioImagen() {
-        return ejercicioImagen;
+    public String getParteCuerpo() {
+        return parteCuerpo;
     }
 
-    public void setEjercicioImagen(String ejercicioImagen) {
-        this.ejercicioImagen = ejercicioImagen;
+    public void setParteCuerpo(String parteCuerpo) {
+        this.parteCuerpo = parteCuerpo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public PosicionCamara getPosicionCamaraId() {
+        return posicionCamaraId;
+    }
+
+    public void setPosicionCamaraId(PosicionCamara posicionCamaraId) {
+        this.posicionCamaraId = posicionCamaraId;
     }
 
     public Set<Asignado> getAsignado() {

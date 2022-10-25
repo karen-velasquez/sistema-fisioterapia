@@ -1,6 +1,6 @@
 package com.sistema.fisioterapia.configuration;
 
-import com.sistema.fisioterapia.services.UserDetailsServiceImpl;
+import com.sistema.fisioterapia.services.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

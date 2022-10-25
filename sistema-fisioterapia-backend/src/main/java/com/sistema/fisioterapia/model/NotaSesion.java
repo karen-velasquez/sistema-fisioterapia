@@ -4,6 +4,7 @@ package com.sistema.fisioterapia.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name="notaSesion")
 public class NotaSesion {
 
     @Id
@@ -11,7 +12,7 @@ public class NotaSesion {
     private Long notaId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Sesion sesion;
+    private Sesion sesionId;
 
     private String notaSesion;
 
@@ -23,12 +24,12 @@ public class NotaSesion {
         this.notaId = notaId;
     }
 
-    public Sesion getSesion() {
-        return sesion;
+    public Sesion getSesionId() {
+        return sesionId;
     }
 
-    public void setSesion(Sesion sesion) {
-        this.sesion = sesion;
+    public void setSesionId(Sesion sesionId) {
+        this.sesionId = sesionId;
     }
 
     public String getNotaSesion() {

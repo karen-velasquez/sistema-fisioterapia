@@ -1,8 +1,7 @@
 package com.sistema.fisioterapia.security;
 
-import com.sistema.fisioterapia.services.FisioterapeutaService;
+import com.sistema.fisioterapia.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private FisioterapeutaService fisioterapeutaService;
+    private UsuarioService usuarioService;
 
 
 }

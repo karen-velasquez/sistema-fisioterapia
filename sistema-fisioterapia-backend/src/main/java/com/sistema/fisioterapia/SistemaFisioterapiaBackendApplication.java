@@ -22,6 +22,7 @@ public class SistemaFisioterapiaBackendApplication implements CommandLineRunner 
         SpringApplication.run(SistemaFisioterapiaBackendApplication.class, args);
     }
 
+    @Override
     public void run(String... args) throws Exception {
 		/*Usuario usuario = new Usuario();
 		usuario.setNombre("Chris");

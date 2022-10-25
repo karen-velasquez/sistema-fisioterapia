@@ -5,7 +5,7 @@ import com.sistema.fisioterapia.configuration.JwtResponse;
 import com.sistema.fisioterapia.configuration.JwtUtils;
 import com.sistema.fisioterapia.exceptions.UsuarioNotFoundException;
 import com.sistema.fisioterapia.model.Usuario;
-import com.sistema.fisioterapia.services.UserDetailsServiceImpl;
+import com.sistema.fisioterapia.services.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,8 +1,6 @@
-package com.sistema.fisioterapia.services;
+package com.sistema.fisioterapia.services.impl;
 
-import com.sistema.fisioterapia.model.Fisioterapeuta;
 import com.sistema.fisioterapia.model.Usuario;
-import com.sistema.fisioterapia.repositories.FisioterapeutaRepository;
 import com.sistema.fisioterapia.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

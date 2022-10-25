@@ -8,6 +8,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignupFisioterapeutaComponent } from './pages/signup-fisioterapeuta/signup-fisioterapeuta.component';
 import { LoginFisioterapeutaComponent } from './pages/login-fisioterapeuta/login-fisioterapeuta.component';
 
+
+import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -23,6 +25,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { authInterceptorProviders } from './services/auth.interceptor';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
+import { ViewPacientesComponent } from './pages/admin/view-pacientes/view-pacientes.component';
+import { ViewSeguimientoNotasComponent } from './pages/admin/view-seguimiento-notas/view-seguimiento-notas.component';
+
+
 
 @NgModule({
   declarations: [
@@ -34,7 +43,12 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
     SignupComponent,
     LoginComponent,
     DashboardComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    ProfileComponent,
+    SidebarComponent,
+    WelcomeComponent,
+    ViewPacientesComponent,
+    ViewSeguimientoNotasComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +62,8 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
     MatSnackBarModule,
     MatCardModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

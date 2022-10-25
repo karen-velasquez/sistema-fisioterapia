@@ -1,6 +1,6 @@
 package com.sistema.fisioterapia.configuration;
 
-import com.sistema.fisioterapia.services.UserDetailsServiceImpl;
+import com.sistema.fisioterapia.services.impl.UserDetailsServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

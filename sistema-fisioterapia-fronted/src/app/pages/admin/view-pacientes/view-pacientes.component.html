@@ -1,0 +1,25 @@
+<mat-card>
+    <mat-list>
+        <div mat-subheader>
+            Todas los pacientes
+
+        </div>
+
+        <mat-selection-list #paciente [multiple]="false">
+            <mat-list-option *ngFor="let p of pacientes">
+              {{p.nombre}}
+            </mat-list-option>
+          </mat-selection-list>
+
+        <mat-selection-list *ngFor="let p of pacientes">
+            <div mat-line>{{ p.nombre }}</div>
+            <div mat-line>{{ p.pacienteId }}</div>
+            <mat-divider></mat-divider>
+        </mat-selection-list>
+
+        <p>
+            Option selected: {{paciente.selectedOptions.selected[0]}}
+        </p>
+    </mat-list>
+
+</mat-card>

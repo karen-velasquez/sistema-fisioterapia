@@ -1,0 +1,22 @@
+<mat-card>
+    <mat-list>
+        <div mat-subheader>
+            Todas las notas
+        </div>
+        <mat-list-item *ngFor = 'let c of notas'>
+            <div mat-line>{{ c.fecha }}</div>
+            <div>{{ c.hora }}</div>
+            <div>{{ c.nota }}</div>
+
+
+        </mat-list-item>
+
+    </mat-list>
+
+    <div class = "container text-center mt20">
+        <button routerLink="/admin/profile" mat-raised-button color="primary"> Siguiente </button>
+
+
+    </div>
+
+</mat-card>
