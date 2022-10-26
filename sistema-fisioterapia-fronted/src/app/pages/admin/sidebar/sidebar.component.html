@@ -1,19 +1,21 @@
 <mat-card class="dashboard-card">
     <mat-action-list>
-      <div mat-subheader>Menu</div>
-      <button routerLink = "/admin" mat-list-item>
-        <mat-icon mat-list-icon>home</mat-icon> Crear usuario
+      <div mat-subheader>Menú</div>
+      <button routerLink = "/admin/crear" mat-list-item>
+        <mat-icon mat-list-icon>account_circle</mat-icon> Crear usuario
       </button>
-      <button mat-list-item routerLink = "/admin/profile">
-        <mat-icon mat-list-icon>account_circle</mat-icon>Programar sesión
+      <button mat-list-item routerLink = "/admin/sesiones">
+        <mat-icon mat-list-icon>home</mat-icon>Programar sesión
       </button>
-      <button mat-list-item routerLink = "/admin/pacientes">
+
+      <button mat-list-item routerLink = "/admin/asignar">
         <mat-icon mat-list-icon>list</mat-icon>Asignar ejercicios
       </button>
+      
       <button mat-list-item routerLink = "/admin/notas">
         <mat-icon mat-list-icon>list</mat-icon>Adicionar nota
       </button>
-      <button routerLink = "/admin" mat-list-item>
+      <button routerLink = "/admin/lesion" mat-list-item>
         <mat-icon mat-list-icon>home</mat-icon> Tratar lesión
       </button>
       <button routerLink = "/admin" mat-list-item>

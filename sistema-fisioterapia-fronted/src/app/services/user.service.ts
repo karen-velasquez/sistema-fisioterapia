@@ -12,4 +12,9 @@ export class UserService {
   public añadirUsuario(user:any){
     return this.httpClient.post(`${baserUrl}/usuarios/`,user);
   }
+
+  public listaPacientes(){
+    return this.httpClient.get(`${baserUrl}/usuarios/listar`)
+  }
+
 }

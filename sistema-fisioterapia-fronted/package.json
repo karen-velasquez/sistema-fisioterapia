@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@syncfusion/ej2-angular-dropdowns": "^20.3.50",
+    "@syncfusion/ej2-angular-schedule": "^20.3.50",
     "bootstrap": "^5.2.2",
     "jquery": "^3.6.1",
     "rxjs": "~7.5.0",

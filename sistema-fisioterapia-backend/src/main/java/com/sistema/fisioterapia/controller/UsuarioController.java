@@ -4,11 +4,13 @@ import com.sistema.fisioterapia.model.Usuario;
 import com.sistema.fisioterapia.model.UsuarioRol;
 import com.sistema.fisioterapia.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -29,8 +31,8 @@ public class UsuarioController {
         Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
         Rol rol = new Rol();
-        rol.setRolId(1L);
-        rol.setRolNombre("ADMIN");
+        rol.setRolId(2L);
+        rol.setRolNombre("PACIENTE");
 
         UsuarioRol usuarioRol = new UsuarioRol();
         usuarioRol.setUsuario(usuario);
@@ -50,5 +52,10 @@ public class UsuarioController {
     @DeleteMapping("/{usuarioId}")
     public void eliminarUsuario(@PathVariable("usuarioId") Long usuarioId) {
         usuarioService.eliminarUsuario(usuarioId);
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<?> listarPacientes() {
+        return ResponseEntity.ok(usuarioService.listarPacientes());
     }
 }

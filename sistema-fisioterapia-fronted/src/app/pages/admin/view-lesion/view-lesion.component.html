@@ -1,0 +1,77 @@
+<div class = "bootstrap-wrapper" >
+    <div class = "container" >
+      <div class = "row" style = "margin-top : 20px;" >
+        <div class = "col-md-6 offset-md-3">
+          <div class="container text-center">
+            <img src="../../../assets/icon.png" width = "100" height = "100">
+          </div>
+  
+          <h1 class="text-center">Registrate aqui</h1>
+
+          <form (ngSubmit) = "formSubmit()">
+
+              <!--Lista de pacientes-->
+              <ejs-dropdownlist
+              #dropdownlistaPacientes
+              [dataSource]="pacientes"
+              [fields]="dataFields"
+              placeholder="Selecciona a un paciente"
+              [ignoreAccent]="true"
+              allowFiltering="true"
+              [filterType]="dropdownListFilterType"
+              filterBarPlaceholder='busca el usuario del paciente'
+              >
+              <ng-template #itemTemplate let-pacientes>
+                <div>
+                  <span class="username">{{pacientes.username}}</span>
+                  <span class="nombres">{{pacientes.nombres}}&nbsp;</span>
+                  <span class="apellidos">{{pacientes.apellidos}}</span>
+                </div>
+              </ng-template>
+              <ng-template #headerTemplate let-pacientes>
+                <!--set the value to headerTemplate property-->
+                <span class='head'>
+                  <span class="username">username</span>
+                  <span class="nombres">nombres</span>
+                  <span class="apellidos">apellidos</span>
+                </span>
+              </ng-template>
+            </ejs-dropdownlist>
+            <br><br>
+
+            <span style="font-weight:800;">Selected Language: </span>
+                        <span style="font-style:oblique;color:#8a2be2;">
+                          dropdown-listaPacientes.get.value</span>
+                            <br>
+
+
+            <mat-form-field class="full-width"  appearance = "outline">
+              <mat-label>Nombre de lesion</mat-label>
+              <input required [(ngModel)] = "lesion.nombreLesion" name = "nombreLesion" matInput placeholder="Digite el nombre de la lesion">
+            </mat-form-field>
+  
+            <mat-form-field class="full-width">
+              <textarea required [(ngModel)] = "lesion.antecedentes" name = "antecedentes" matInput placeholder="Antecedentes" rows="3" ></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <textarea required [(ngModel)] = "lesion.evaluacion" name = "evaluacion" matInput placeholder="Evaluación" rows="3" ></textarea>
+            </mat-form-field>
+
+
+
+            <div class = "container text-center">
+              <button mat-raised-button color="primary">GUARDAR</button>
+            </div>
+
+
+          </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

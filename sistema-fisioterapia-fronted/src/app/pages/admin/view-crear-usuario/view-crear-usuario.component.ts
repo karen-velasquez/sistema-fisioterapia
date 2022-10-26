@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  selector: 'app-view-crear-usuario',
+  templateUrl: './view-crear-usuario.component.html',
+  styleUrls: ['./view-crear-usuario.component.css']
 })
-export class SignupComponent implements OnInit {
+export class ViewCrearUsuarioComponent implements OnInit {
+
   public user = {
     username : '',
     password : '',
     nombres : '',
     apellidos : '',
     correo : '',
-    fecha_nac : ''
+    fechaNac : ''
   }
 
   constructor(private userService:UserService,private snack:MatSnackBar) { }
@@ -46,4 +47,5 @@ export class SignupComponent implements OnInit {
       }
     )
   }
+
 }

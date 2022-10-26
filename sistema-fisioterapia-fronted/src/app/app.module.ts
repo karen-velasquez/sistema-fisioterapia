@@ -8,10 +8,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignupFisioterapeutaComponent } from './pages/signup-fisioterapeuta/signup-fisioterapeuta.component';
 import { LoginFisioterapeutaComponent } from './pages/login-fisioterapeuta/login-fisioterapeuta.component';
 
-
+import {DropDownListModule, MultiSelectModule} from '@syncfusion/ej2-angular-dropdowns';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {TextFieldModule} from '@angular/cdk/text-field';
+import { ScheduleModule, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
+import { MatTableModule } from '@angular/material/table'  
+import {MatSelectModule} from '@angular/material/select';
+
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,6 +35,10 @@ import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { ViewPacientesComponent } from './pages/admin/view-pacientes/view-pacientes.component';
 import { ViewSeguimientoNotasComponent } from './pages/admin/view-seguimiento-notas/view-seguimiento-notas.component';
+import { ViewCrearUsuarioComponent } from './pages/admin/view-crear-usuario/view-crear-usuario.component';
+import { ViewLesionComponent } from './pages/admin/view-lesion/view-lesion.component';
+import { ViewSesionesComponent } from './pages/admin/view-sesiones/view-sesiones.component';
+import { ViewAsignarEjerciciosComponent } from './pages/admin/view-asignar-ejercicios/view-asignar-ejercicios.component';
 
 
 
@@ -48,7 +57,11 @@ import { ViewSeguimientoNotasComponent } from './pages/admin/view-seguimiento-no
     SidebarComponent,
     WelcomeComponent,
     ViewPacientesComponent,
-    ViewSeguimientoNotasComponent
+    ViewSeguimientoNotasComponent,
+    ViewCrearUsuarioComponent,
+    ViewLesionComponent,
+    ViewSesionesComponent,
+    ViewAsignarEjerciciosComponent
   ],
   imports: [
     BrowserModule,
@@ -63,9 +76,15 @@ import { ViewSeguimientoNotasComponent } from './pages/admin/view-seguimiento-no
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    DropDownListModule,
+    MultiSelectModule,
+    TextFieldModule,
+    ScheduleModule,
+    MatTableModule,
+    MatSelectModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

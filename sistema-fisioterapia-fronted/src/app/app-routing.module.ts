@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { ViewAsignarEjerciciosComponent } from './pages/admin/view-asignar-ejercicios/view-asignar-ejercicios.component';
+import { ViewCrearUsuarioComponent } from './pages/admin/view-crear-usuario/view-crear-usuario.component';
+import { ViewLesionComponent } from './pages/admin/view-lesion/view-lesion.component';
 import { ViewPacientesComponent } from './pages/admin/view-pacientes/view-pacientes.component';
 import { ViewSeguimientoNotasComponent } from './pages/admin/view-seguimiento-notas/view-seguimiento-notas.component';
+import { ViewSesionesComponent } from './pages/admin/view-sesiones/view-sesiones.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -48,6 +52,22 @@ const routes: Routes = [
       {
         path: 'notas',
         component: ViewSeguimientoNotasComponent
+      },
+      {
+        path: 'crear',
+        component: ViewCrearUsuarioComponent
+      },
+      {
+        path: 'lesion',
+        component: ViewLesionComponent
+      },
+      {
+        path: 'sesiones',
+        component: ViewSesionesComponent
+      },
+      {
+        path: 'asignar',
+        component: ViewAsignarEjerciciosComponent
       }
 
     ]

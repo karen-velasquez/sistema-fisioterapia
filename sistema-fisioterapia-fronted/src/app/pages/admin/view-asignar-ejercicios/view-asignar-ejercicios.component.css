@@ -1,0 +1,13 @@
+.ename {
+    display: block !important;
+    opacity: .87;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.empImage{
+    margin: 6px 16px;
+    float: left;
+    width: 40px;
+    height: 40px;
+}
