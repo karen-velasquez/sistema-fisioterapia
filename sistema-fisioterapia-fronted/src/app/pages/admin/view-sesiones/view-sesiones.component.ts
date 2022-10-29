@@ -282,7 +282,7 @@ export class ViewSesionesComponent implements OnInit {
     
 
 /** */
-console.log("*********ESTA ES LA SOLUCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON*****************-");
+    console.log("*********ESTA ES LA SOLUCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON*****************-");
     var json = JSON.parse(JSON.stringify(args));
     console.log(json['data']);
     console.log("***2do paso :#");

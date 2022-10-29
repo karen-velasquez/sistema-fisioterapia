@@ -39,6 +39,8 @@ import { ViewCrearUsuarioComponent } from './pages/admin/view-crear-usuario/view
 import { ViewLesionComponent } from './pages/admin/view-lesion/view-lesion.component';
 import { ViewSesionesComponent } from './pages/admin/view-sesiones/view-sesiones.component';
 import { ViewAsignarEjerciciosComponent } from './pages/admin/view-asignar-ejercicios/view-asignar-ejercicios.component';
+import { UserSidebarComponent } from './pages/user/user-sidebar/user-sidebar.component';
+import { ViewRealizarEjerciciosComponent } from './pages/user/view-realizar-ejercicios/view-realizar-ejercicios.component';
 
 
 
@@ -61,7 +63,9 @@ import { ViewAsignarEjerciciosComponent } from './pages/admin/view-asignar-ejerc
     ViewCrearUsuarioComponent,
     ViewLesionComponent,
     ViewSesionesComponent,
-    ViewAsignarEjerciciosComponent
+    ViewAsignarEjerciciosComponent,
+    UserSidebarComponent,
+    ViewRealizarEjerciciosComponent
   ],
   imports: [
     BrowserModule,
