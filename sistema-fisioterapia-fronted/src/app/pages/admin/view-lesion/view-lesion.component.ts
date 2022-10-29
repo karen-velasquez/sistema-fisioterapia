@@ -1,10 +1,12 @@
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
-import {CdkTextareaAutosize} from '@angular/cdk/text-field';
-import {take} from 'rxjs/operators';
 import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
-import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 import { UserService } from 'src/app/services/user.service';
+import { LesionesService } from 'src/app/services/lesiones.service';
+
 
 @Component({
   selector: 'app-view-lesion',
@@ -27,15 +29,18 @@ export class ViewLesionComponent implements OnInit {
     antecedentes : '',
     evaluacion : '',
     nombreLesion : '',
-    pacienteIdUsuarioId :''
+    pacienteId:{
+      usuarioId:''
+    }
   }
  
 
-  constructor(private _ngZone: NgZone, private listarPaciente:UserService) {}
+  constructor(private snack:MatSnackBar, private _ngZone: NgZone, private userService:UserService
+    , private lesionService:LesionesService) {}
 
 
   ngOnInit(): void {
-    this.listarPaciente.listaPacientes().subscribe(
+    this.userService.listaPacientes().subscribe(
       (dato:any) =>{
         this.pacientes = dato;
         console.log(this.pacientes);
@@ -48,8 +53,52 @@ export class ViewLesionComponent implements OnInit {
 
 
   formSubmit(){
-    this.lesion.pacienteIdUsuarioId = (this.dropDownListObject.value).toString();
-    return;
+    console.log('click en login');
+
+    this.lesion.pacienteId.usuarioId = (this.dropDownListObject.value).toString();
+    /*-------------Revisando que no haya valores vacios y nulls---------------*/ 
+    if(this.lesion.antecedentes.trim() == '' || this.lesion.antecedentes.trim() == null){
+      this.snack.open('Los antecedentes son requeridos !!','Aceptar',{
+        duration:3000
+      })
+      return;
+    }
+
+    if(this.lesion.evaluacion.trim() == '' || this.lesion.evaluacion.trim() == null){
+      this.snack.open('La evaluacion es requerida !!','Aceptar',{
+        duration:3000
+      })
+      return;
+    }
+
+    if(this.lesion.nombreLesion.trim() == '' || this.lesion.nombreLesion.trim() == null){
+      this.snack.open('El nombre de la lesion es requerido!!','Aceptar',{
+        duration:3000
+      })
+      return;
+    }
+
+    if(this.lesion.pacienteId.usuarioId.trim() == '' || this.lesion.pacienteId.usuarioId.trim() == null){
+      this.snack.open('Escoge un paciente!!','Aceptar',{
+        duration:3000
+      })
+      return;
+    }
+    /*----------------------------------------------------------------------------*/ 
+
+
+    this.lesionService.guardarLesiones(this.lesion).subscribe(
+      (data) => {
+        console.log(data);
+        Swal.fire('Lesion guardada','Lesion registrada con exito en el sistema','success');
+      },(error) => {
+        console.log(error);
+        this.snack.open('Ha ocurrido un error en el sistema !!','Aceptar',{
+          duration : 3000
+        });
+      }
+    )
+    
   }
 
 
