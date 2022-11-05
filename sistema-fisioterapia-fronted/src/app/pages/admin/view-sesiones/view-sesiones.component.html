@@ -50,25 +50,25 @@
                   <tr>
                       <td class="e-textlabel">Summary</td>
                       <td colspan="4">
-                          <input id="Subject" [(ngModel)] = "sesion.titulo" class="e-field e-input" type="text" value="" name="Subject" style="width: 100%" />
+                          <input id="Subject"  class="e-field e-input" type="text" value="" name="Subject" style="width: 100%" />
                       </td>
                   </tr>
                   <tr>
                       <td class="e-textlabel">From</td>
                       <td colspan="4">
-                          <input id="StartTime" [(ngModel)] = "sesion.start" useValueAsDate class="e-field" type="text" name="StartTime" />
+                          <input id="StartTime" useValueAsDate class="e-field" type="text" name="StartTime" />
                       </td>
                   </tr>
                   <tr>
                       <td class="e-textlabel">To</td>
                       <td colspan="4">
-                          <input id="EndTime" [(ngModel)] = "sesion.from" class="e-field" type="text" name="EndTime" />
+                          <input id="EndTime"  class="e-field" type="text" name="EndTime" />
                       </td>
                   </tr>
                   <tr>
                       <td class="e-textlabel">Reason</td>
                       <td colspan="4">
-                          <textarea id="Description" [(ngModel)] = "sesion.descripcion" class="e-field e-input" name="Description" rows="3" cols="50" style="width: 100%; height: 60px !important; resize: vertical"></textarea>
+                          <textarea id="Description" class="e-field e-input" name="Description" rows="3" cols="50" style="width: 100%; height: 60px !important; resize: vertical"></textarea>
                       </td>
                   </tr>
               </tbody>
@@ -77,15 +77,5 @@
       </ejs-schedule>
 
 
-
-
-
-      
-      <br>
-      <br>
-      <ejs-schedule width='100%' height='550px' 
-      [selectedDate]='selectedDate2' 
-      [views]='views2' [eventSettings]='eventSettings2'
-      (actionBegin)="onActionBegin2($event)"></ejs-schedule>
 
 </div>

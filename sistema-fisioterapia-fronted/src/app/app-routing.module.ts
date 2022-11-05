@@ -4,6 +4,7 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { ViewAsignarEjerciciosComponent } from './pages/admin/view-asignar-ejercicios/view-asignar-ejercicios.component';
 import { ViewCrearUsuarioComponent } from './pages/admin/view-crear-usuario/view-crear-usuario.component';
 import { ViewLesionComponent } from './pages/admin/view-lesion/view-lesion.component';
+import { ViewNotasComponent } from './pages/admin/view-notas/view-notas.component';
 import { ViewPacientesComponent } from './pages/admin/view-pacientes/view-pacientes.component';
 import { ViewSeguimientoNotasComponent } from './pages/admin/view-seguimiento-notas/view-seguimiento-notas.component';
 import { ViewSesionesComponent } from './pages/admin/view-sesiones/view-sesiones.component';
@@ -52,7 +53,7 @@ const routes: Routes = [
       },
       {
         path: 'notas',
-        component: ViewSeguimientoNotasComponent
+        component: ViewNotasComponent
       },
       {
         path: 'crear',

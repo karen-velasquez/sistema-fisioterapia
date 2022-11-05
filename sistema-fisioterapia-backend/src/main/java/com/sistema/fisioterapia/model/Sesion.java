@@ -14,7 +14,7 @@ public class Sesion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sesionId;
+    private Long Id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Usuario pacienteId;
@@ -22,24 +22,24 @@ public class Sesion {
     @ManyToOne(fetch = FetchType.EAGER)
     private Usuario fisioterapeutaId;
 
-    private String nombreSesion;
+    private String Subject;
 
-    private String desdeFecha;
+    private String StartTime;
 
-    private String hastaFecha;
+    private String EndTime;
 
-    private String descripcion;
+    private String Description;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "sesionId")
     @JsonIgnore
     private Set<NotaSesion> sesion = new HashSet<>();
 
-    public Long getSesionId() {
-        return sesionId;
+    public Long getId() {
+        return Id;
     }
 
-    public void setSesionId(Long sesionId) {
-        this.sesionId = sesionId;
+    public void setId(Long id) {
+        Id = id;
     }
 
     public Usuario getPacienteId() {
@@ -58,36 +58,37 @@ public class Sesion {
         this.fisioterapeutaId = fisioterapeutaId;
     }
 
-    public String getNombreSesion() {
-        return nombreSesion;
+
+    public String getSubject() {
+        return Subject;
     }
 
-    public void setNombreSesion(String nombreSesion) {
-        this.nombreSesion = nombreSesion;
+    public void setSubject(String subject) {
+        Subject = subject;
     }
 
-    public String getDesdeFecha() {
-        return desdeFecha;
+    public String getStartTime() {
+        return StartTime;
     }
 
-    public void setDesdeFecha(String desdeFecha) {
-        this.desdeFecha = desdeFecha;
+    public void setStartTime(String startTime) {
+        StartTime = startTime;
     }
 
-    public String getHastaFecha() {
-        return hastaFecha;
+    public String getEndTime() {
+        return EndTime;
     }
 
-    public void setHastaFecha(String hastaFecha) {
-        this.hastaFecha = hastaFecha;
+    public void setEndTime(String endTime) {
+        EndTime = endTime;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescription(String description) {
+        Description = description;
     }
 
     public Set<NotaSesion> getSesion() {

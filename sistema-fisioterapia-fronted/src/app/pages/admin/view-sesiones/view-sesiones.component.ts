@@ -8,6 +8,7 @@ import { DateTimePicker } from '@syncfusion/ej2-calendars';
 import { UserService } from 'src/app/services/user.service';
 import { LesionesService } from 'src/app/services/lesiones.service';
 import { EventSettingsModel, EventFieldsMapping, ScheduleComponent,DayService, WeekService, WorkWeekService, MonthService, PopupOpenEventArgs, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
+import { SesionService } from 'src/app/services/sesion.service';
 
 
 @Component({
@@ -34,11 +35,17 @@ export class ViewSesionesComponent implements OnInit {
   ]
 
   public sesion = {
-    id: "",
-    titulo : "",
-    start :"",
-    descripcion : "",
-    from : ""
+    id:'',
+    subject:'',
+    description:'',
+    startTime:'',
+    endTime:'',
+    pacienteId:{
+      usuarioId:''
+    },
+    fisioterapeutaId:{
+      usuarioId:''
+    }
   }
 
   /* {
@@ -49,7 +56,7 @@ export class ViewSesionesComponent implements OnInit {
 
 
   constructor(private snack:MatSnackBar, private userService:UserService
-    , private lesionService:LesionesService) { }
+    , private lesionService:LesionesService, private sesionService:SesionService) { }
 
   /*Metiendo los datos en el Dropdown*/ 
   ngOnInit(): void {
@@ -68,15 +75,15 @@ export class ViewSesionesComponent implements OnInit {
   public datapicker: Object[] = [
     {
         Id: 1,
-        Subject: 'Explosion of Betelgeuse Star',
-        StartTime: new Date(2018, 1, 11, 9, 30),
-        EndTime: new Date(2018, 1, 11, 11, 0),
+        Subject: 'la prueba yyyyyyyyyy ',
+        StartTime: '2018-02-12T17:30:00.000Z',
+        EndTime: '2018-02-12T19:00:00.000Z',
         CategoryColor: '#1aaa55'
     }, {
         Id: 2,
-        Subject: 'Thule Air Crash Report',
-        StartTime: new Date(2018, 1, 12, 12, 0),
-        EndTime: new Date(2018, 1, 12, 14, 0),
+        Subject: 'Esta es mi primera prueba',
+        StartTime: '2018-02-13T17:30:00.000Z',
+        EndTime: '2018-02-13T19:30:00.000Z',
         CategoryColor: '#357cd2'
     }, {
         Id: 3,
@@ -131,6 +138,11 @@ export class ViewSesionesComponent implements OnInit {
 
   //args: ActionEventArgs
 
+
+
+
+
+  
   public onActionBegin(args: ActionEventArgs): void {
     console.log(args);
     console.log(args.data?.values.Subject);
@@ -149,54 +161,39 @@ export class ViewSesionesComponent implements OnInit {
     */
 
     if(args.requestType == 'eventCreate') {
-        console.log("se toco el boton de Save");
-        console.log(this.sesion.titulo);
-        console.log(this.sesion.descripcion);
-        console.log(this.sesion.start);
-        console.log(this.sesion.from);
-        console.log("se t-----------------------------");
-
-        console.log("el arg data");
-        //console.log(args.data[0].EndTime);
-        
-       // let startElement: HTMLInputElement = args.values.querySelector('#StartTime') as HTMLInputElement;
-        var fecha = args.data; 
-
-        console.log("el arg data tipo");
-        console.log(typeof args.data);
-        
-        console.log("el arg values");
-        console.log(args.data?.values);
-
-        console.log("prueba");
-        //console.log(args.data?.values.StartTime.getTime);
-        console.log(args.data?.values.startElement);
-        
-        const name: object = args.data as object;
-        //name.values.StartTime;
-
-        /*
-        let eventData: any = args.data as any;
-        let eventField: EventFieldsMapping = this.scheduleObj.eventFields;
-        let startDate: Date = (((<Object[]>args.data).length > 0)
-            ? eventData[0][eventField.startTime] : eventData[eventField.startTime]) as Date;
-        let endDate: Date = (((<Object[]>args.data).length > 0)
-            ? eventData[0][eventField.endTime] : eventData[eventField.endTime]) as Date;
-*/
-
-
-
-
-
-        console.log("intentando convertir");
-        console.log(args.addedRecords?.toString);
-
-        console.log("obteniendo los valores aparte");
         console.log(args);
+        console.log("se toco el boton de Save");
+        console.log("*********ESTA ES LA SOLUCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON*****************-");
+        var json = JSON.parse(JSON.stringify(args));
+        console.log(json['data']);
+        console.log("***2do paso :#");
+        console.log(json.data[0].Subject);
+        console.log(json.data[0].StartTime);
+        console.log("***********************************************-");
 
-        console.log(args.data?.values.Subject.toString());
-        console.log(args.data?.values.StartTime);
-            
+        this.sesion.subject = json.data[0].Subject;
+        this.sesion.startTime = json.data[0].StartTime;
+        this.sesion.endTime = json.data[0].EndTime;
+        this.sesion.description = json.data[0].Description;
+        this.sesion.pacienteId.usuarioId = (this.dropDownListObject.value).toString();
+        this.sesion.fisioterapeutaId.usuarioId = (this.dropDownListObject.value).toString();
+        
+
+        this.sesionService.guardarSesion(this.sesion).subscribe(
+          (data) => {
+            console.log(data);
+            Swal.fire('Sesion guardada','Sesion registrada con exito en el sistema','success');
+          },(error) => {
+            console.log(error);
+            this.snack.open('Ha ocurrido un error en el sistema !!','Aceptar',{
+              duration : 3000
+            });
+          }
+        )
+
+
+
+
     }
 
 
@@ -211,169 +208,6 @@ export class ViewSesionesComponent implements OnInit {
 
   
   }
-
-
-
-  /*SEGUNDA PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
-
-
-
-
-  minValidation: (args: { [key: string]: string }) => boolean = (args: { [key: string]: string }) => {
-    return args['value'].length >= 5;
-  };
-  public selectedDate2: Date = new Date(2018, 1, 15);
-  public views2: Array<string> = ['Day', 'Week', 'WorkWeek', 'Month', 'Agenda'];
-  public eventSettings2: EventSettingsModel = {
-      dataSource: this.datapicker,
-      fields: {
-          id: 'Id',
-          subject: { name: 'Subject', validation: { required: true } },
-          location: { name: 'Location', validation: { required: true } },
-          description: {
-              name: 'Description', validation: {
-                  required: true, minLength: [this.minValidation, 'Need atleast 5 letters to be entered']
-              }
-          },
-          startTime: { name: 'StartTime', validation: { required: true } },
-          endTime: { name: 'EndTime', validation: { required: true } }
-      }
-  };
-
-
-  
-  public eljson: Object[] = [
-  {"requestType":"eventCreate",
-  "cancel":false,
-  "data":
-  /* esto tiene un array adentro un objeto json  */
-  [
-    {
-      "Subject":"aaaaaaaaaaaa",
-      "Id":7,
-      "StartTime":"2018-02-14T15:00:00.000Z",
-      "EndTime":"2018-02-14T15:30:00.000Z",
-      "IsAllDay":false
-    }],
-    "addedRecords":
-    [
-      {"Subject":"aaaaaaaaaaaa",
-      "Id":7,"StartTime":"2018-02-14T15:00:00.000Z",
-      "EndTime":"2018-02-14T15:30:00.000Z",
-      "IsAllDay":false}],
-
-    "changedRecords":[],
-    "deletedRecords":[],
-    "name":
-    "actionBegin"}]
-
-
-
-  public onActionBegin2(args: ActionEventArgs): void {
-    console.log("la prueba del segundo calendario---------");
-    console.log(args);
-
-    console.log("la prueba del segundo calendario------22-");
-    console.log(args["data"]);
-    
-    console.log(typeof args["data"]);
-    var hola = args["data"];
-    
-    
-
-/** */
-    console.log("*********ESTA ES LA SOLUCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON*****************-");
-    var json = JSON.parse(JSON.stringify(args));
-    console.log(json['data']);
-    console.log("***2do paso :#");
-    console.log(json.data[0].Subject);
-    console.log(json.data[0].StartTime);
-    console.log("***********************************************-");
-
-    hola
-
-    /**/ 
-    console.log("hola estoy ingresando entrar al data");
-    for (const role in hola) {
-      console.log(JSON.stringify(role));
-      console.log(typeof role);
-      console.log(role.valueOf);
-      console.log(role["0"]);
-    }
-
-    
-
-    console.log("la prueba del subject-");
-    console.log(hola?.length);
-
-   
-    
-    
-
-
-
-    console.log("values------22-");
-
-    /*let result = hola.next();
-    while (!result.done) {
-        console.log(result.value); // 1 3 5 7 9
-        result = hola.next();
-      }*/
-
-
-
-    console.log(hola?.keys());
-    let claves = hola?.keys;
-    for(let i=0; i<claves.length; i++){
-      let clave = claves[i];
-      console.log("-+++++++++++++++++++++++++++");
-      let result = clave.next();
-      while (!result.done) {
-      console.log(result.value); // 1 3 5 7 9
-      result = clave.next();
-      }
-      console.log("-+++++++++++++++++++++++++++");
-
-
-      console.log(clave);
-
-
-      
-
-    }
-   /* for(var i=0; i<hola.length; i++) {
-
-
-    }*/
-
-    
-    
-
-
-    console.log("tratando de convertir a json---------");
-    console.log(JSON.stringify(args));
-
-    var myjson = JSON.stringify(args);
-
-    console.log("probando abrir el json--------");
-    console.log(JSON.stringify(args, ["Subject"]));
-
-    //myjson['members'][1]['powers'][2];
-   // myjson["data"];
-  
-
-
-
-
-    console.log(args.data?.values[0]);
-    console.log(args.data?.values.StartTime);
-    console.log("prueba???????---------");
-    console.log(this.eventSettings2.fields?.startTime);
-    console.log(this.eventSettings2.fields?.subject);
-    console.log(args.data?.values['StartTime']);
-  }
-
-
 
 
 

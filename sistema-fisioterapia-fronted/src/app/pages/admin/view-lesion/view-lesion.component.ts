@@ -44,12 +44,15 @@ export class ViewLesionComponent implements OnInit {
       (dato:any) =>{
         this.pacientes = dato;
         console.log(this.pacientes);
+        
       },
       (error) => {
         console.log(error);
       }
     )
   }
+
+
 
 
   formSubmit(){

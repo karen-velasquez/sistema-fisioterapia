@@ -1,4 +1,151 @@
+from flask import Flask
+from flask import render_template
+from flask import Response
 import cv2
+import mediapipe as mp
+import numpy as np
+mp_drawing = mp.solutions.drawing_utils
+mp_pose = mp.solutions.pose
+
+app = Flask(__name__)
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+
+#global variable
+x = 0
+print(x)
+
+
+def generate():
+    global x 
+    
+    x = 0
+    
+    with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
+        while True:
+            ret, frame = cap.read()
+            
+            # Recolor image to RGB
+            image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            image.flags.writeable = False
+        
+            # Make detection
+            results = pose.process(image)
+        
+            # Recolor back to BGR
+            image.flags.writeable = True
+            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+            
+            # Render detections
+            mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
+                                    mp_drawing.DrawingSpec(color=(245,117,66), thickness=2, circle_radius=2), 
+                                    mp_drawing.DrawingSpec(color=(245,66,230), thickness=2, circle_radius=2) 
+                                    )               
+            
+           
+            
+            x = x + 1
+            #Text
+            # font
+            font = cv2.FONT_HERSHEY_SIMPLEX 
+            # org
+            org = (50, 50)         
+            # fontScale
+            fontScale = 1          
+            # Blue color in BGR
+            color = (255, 0, 0)       
+            # Line thickness of 2 px
+            thickness = 2           
+            # Using cv2.putText() method
+            image = cv2.putText(image, str(x) , org, font, 
+                            fontScale, color, thickness, cv2.LINE_AA)
+           
+           
+            
+            (flag, encodedImage) = cv2.imencode(".jpg", image) 
+            if not flag:
+                continue
+            yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' +
+                bytearray(encodedImage) + b'\r\n')
+        
+  
+       
+       
+       
+def generate2():
+    global x 
+    with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
+        while True:
+            ret, frame = cap.read()
+            
+            # Recolor image to RGB
+            image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            image.flags.writeable = False
+        
+            # Make detection
+            results = pose.process(image)
+        
+            # Recolor back to BGR
+            image.flags.writeable = True
+            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+            
+            # Render detections
+            mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
+                                    mp_drawing.DrawingSpec(color=(245,117,66), thickness=2, circle_radius=2), 
+                                    mp_drawing.DrawingSpec(color=(245,66,230), thickness=2, circle_radius=2) 
+                                    )               
+            
+
+            #Text
+            # font
+            font = cv2.FONT_HERSHEY_SIMPLEX 
+            # org
+            org = (50, 50)         
+            # fontScale
+            fontScale = 1          
+            # Blue color in BGR
+            color = (255, 0, 0)       
+            # Line thickness of 2 px
+            thickness = 2           
+            # Using cv2.putText() method
+            image = cv2.putText(image, str(x) , org, font, 
+                            fontScale, color, thickness, cv2.LINE_AA)
+           
+           
+            
+            (flag, encodedImage) = cv2.imencode(".jpg", image) 
+            if not flag:
+                continue
+            yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' +
+                bytearray(encodedImage) + b'\r\n')       
+       
+       
+       
+              
+              
+               
+@app.route("/")
+def index():
+     return render_template("index.html")
+ 
+@app.route("/video_feed")
+def video_feed():
+     return Response(generate(),
+          mimetype = "multipart/x-mixed-replace; boundary=frame")
+     
+@app.route("/video_feed2")
+def video_feed2():
+     return Response(generate2(),
+          mimetype = "multipart/x-mixed-replace; boundary=frame")
+     
+if __name__ == "__main__":
+     app.run(debug=False)
+cap.release()
+
+
+
+
+
+'''import cv2
 import mediapipe as mp
 import numpy as np
 
@@ -7,13 +154,13 @@ mp_pose = mp.solutions.pose
 
 """while cap.isOpened():
 mp_drawing.DrawingSpec(color=(245,117,66), thickness=2, circle_radius=2), """
-
+'''
 '''cap = cv2.VideoCapture("images/videos/curl2.mp4")'''
-cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+'''cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)'''
 
 
 '''-------- Funcion para calcular angulos -----------'''
-def calculate_angle(a,b,c):
+'''def calculate_angle(a,b,c):
     a = np.array(a) # First
     b = np.array(b) # Mid
     c = np.array(c) # End
@@ -24,7 +171,7 @@ def calculate_angle(a,b,c):
     if angle >180.0:
         angle = 360-angle
         
-    return angle 
+    return angle '''
 '''-------- Fin Funcion para calcular angulos -----------'''
 
 
@@ -33,7 +180,7 @@ def calculate_angle(a,b,c):
 
 
 # Curl counter variables
-counter = 0 
+'''counter = 0 
 stage = None
 
 ## Setup mediapipe instance
@@ -142,4 +289,4 @@ while True:
             break
         
 cap.release()
-cv2.destroyAllWindows()"""
+cv2.destroyAllWindows()"""'''

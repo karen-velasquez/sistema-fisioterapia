@@ -33,7 +33,7 @@ public class Usuario implements UserDetails {
     private Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
     /*uniendolo con la tabla de sesion*/
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "pacienteId")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "Id")
     @JsonIgnore
     private Set<Sesion> pacienteId = new HashSet<>();
 
