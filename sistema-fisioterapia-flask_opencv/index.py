@@ -1,14 +1,19 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask import render_template
 from flask import Response
+from flask_cors import CORS,cross_origin
 import cv2
 import mediapipe as mp
 import numpy as np
+
+
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
 app = Flask(__name__)
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+
+CORS(app, support_credentials=True)
 
 #global variable
 x = 0
@@ -66,9 +71,18 @@ def generate():
                 continue
             yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' +
                 bytearray(encodedImage) + b'\r\n')
+  
+  
         
   
-       
+def valor():
+    global x 
+    return jsonify({
+            'valor': x
+        })      
+      
+      
+      
        
        
 def generate2():
@@ -136,6 +150,16 @@ def video_feed():
 def video_feed2():
      return Response(generate2(),
           mimetype = "multipart/x-mixed-replace; boundary=frame")
+     
+     
+@app.route('/valor', methods=['GET'])    
+def valor():
+    global x 
+    response = jsonify({
+            'valor': x
+        })
+    
+    return response
      
 if __name__ == "__main__":
      app.run(debug=False)

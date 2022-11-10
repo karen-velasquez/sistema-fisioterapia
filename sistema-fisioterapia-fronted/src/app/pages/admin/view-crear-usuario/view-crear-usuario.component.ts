@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user.service';
+import {FormControl} from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-view-crear-usuario',
@@ -9,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./view-crear-usuario.component.css']
 })
 export class ViewCrearUsuarioComponent implements OnInit {
+  date = new FormControl(new Date());
+  serializedDate = new FormControl(new Date().toISOString());
 
   public user = {
     username : '',

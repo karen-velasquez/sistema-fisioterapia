@@ -15,4 +15,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     //PhonesEntity searchExistencePhone(@Param("idUser") int idUser, @Param("phoneNumber")int phoneNumber, @Param("status") int status);
     public Usuario findByUsername(String username);
 
+    public Usuario findBytokenpassword(String tokenPassword);
+
+
+
 }

@@ -5,8 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { SignupFisioterapeutaComponent } from './pages/signup-fisioterapeuta/signup-fisioterapeuta.component';
-import { LoginFisioterapeutaComponent } from './pages/login-fisioterapeuta/login-fisioterapeuta.component';
+
+
+import {MatSliderModule} from "@angular/material/slider";
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+
 
 import {DropDownListModule, MultiSelectModule} from '@syncfusion/ej2-angular-dropdowns';
 import {MatListModule} from '@angular/material/list';
@@ -16,6 +19,11 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import { ScheduleModule, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
 import { MatTableModule } from '@angular/material/table'  
 import {MatSelectModule} from '@angular/material/select';
+import { GridModule, EditService, ToolbarService, SortService, PageService } from '@syncfusion/ej2-angular-grids';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+
+
 
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
@@ -42,6 +50,9 @@ import { ViewAsignarEjerciciosComponent } from './pages/admin/view-asignar-ejerc
 import { UserSidebarComponent } from './pages/user/user-sidebar/user-sidebar.component';
 import { ViewRealizarEjerciciosComponent } from './pages/user/view-realizar-ejercicios/view-realizar-ejercicios.component';
 import { ViewNotasComponent } from './pages/admin/view-notas/view-notas.component';
+import { SendEmailComponent } from './pages/changepassword/send-email/send-email.component';
+import { ChangePasswordComponent } from './pages/changepassword/change-password/change-password.component';
+import { ViewInformacionComponent } from './pages/user/view-informacion/view-informacion.component';
 
 
 
@@ -49,8 +60,6 @@ import { ViewNotasComponent } from './pages/admin/view-notas/view-notas.componen
   declarations: [
     AppComponent,
     NavbarComponent,
-    SignupFisioterapeutaComponent,
-    LoginFisioterapeutaComponent,
     HomepageComponent,
     SignupComponent,
     LoginComponent,
@@ -67,7 +76,10 @@ import { ViewNotasComponent } from './pages/admin/view-notas/view-notas.componen
     ViewAsignarEjerciciosComponent,
     UserSidebarComponent,
     ViewRealizarEjerciciosComponent,
-    ViewNotasComponent
+    ViewNotasComponent,
+    SendEmailComponent,
+    ChangePasswordComponent,
+    ViewInformacionComponent
   ],
   imports: [
     BrowserModule,
@@ -88,9 +100,15 @@ import { ViewNotasComponent } from './pages/admin/view-notas/view-notas.componen
     TextFieldModule,
     ScheduleModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    GridModule, 
+    MatDatepickerModule,
+    MatSliderModule,
+    MatNativeDateModule, 
+    MatRippleModule 
   ],
-  providers: [authInterceptorProviders, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService],
+  providers: [authInterceptorProviders, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService
+  ,EditService, ToolbarService, SortService, PageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,7 +4,7 @@
             <div class="col-md-6 offset-md-3">
                 <mat-card>
                     <div class="container text-center">
-                        <img src="../../../assets/icon.png" width="100" height="100">
+                        <img src="../../../assets/icons/usuario.png" width="100" height="100">
                     </div>
 
                     <h1 class = "text-center">Inicio de sesión</h1>
@@ -22,9 +22,11 @@
             
                         <br><br>
             
+                        <a [routerLink]="'/sendemail'"><i>Recuperar mi cuenta</i></a>
+                        <br><br>
+
                         <div class = "container text-center">
                           <button type = "submit" mat-raised-button color="primary">Iniciar sesión</button>
-                          <button type="reset" style = "margin-left: 20px;" mat-raised-button color="accent">Limpiar</button>
                         </div>
                       </form>
 
@@ -32,4 +34,5 @@
             </div>
        </div>
     </div>
+
 </div>

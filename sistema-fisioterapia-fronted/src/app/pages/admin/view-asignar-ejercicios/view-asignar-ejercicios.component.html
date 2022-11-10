@@ -1,6 +1,11 @@
 <div class="control-section">
-    <ejs-multiselect [dataSource]="localData" [fields]="dataFields"
-    placeholder="Select a name">
+    <ejs-multiselect 
+    #dropdownlistaEjercicios
+    [dataSource]="localData" 
+    [fields]="dataFields"
+    placeholder="Select a name"
+    (change)="ejercicioChange()"
+    >
         <ng-template #itemTemplate let-data>
             <div>
                 <img class="empImage" src='{{data.Image}}' alt="employee"/>
@@ -13,31 +18,57 @@
 
 </div>
 
+<button class="btn btn-primary" (click)="imprimir()">imprimir</button>
+
+<button class="btn btn-primary" (click)="obtenervalores()">OBTENER</button>
+
 <div class="bootstrap-wrapper">
     <div class="container">
         <div class = "row">
             <div class = "col-md-10 offset-md-1">
-              <table class = "table text-center" cellspacing="0">
 
-                <tr *ngFor="let p of dataSource">
+              <table class = "table text-center" cellspacing="0">
+                <tr *ngFor="let p of dataSource" id="tabla">
+
                     <td>{{p.name}}</td>
                     <td>{{p.weight}}</td>
                     <td>{{p.symbol}}</td>
                     <td>
-                        <select name="" id="">
+                        <select id="serie">
                             <option>
-                                1
+                                12
                             </option>
                             <option>
-                                2
+                                13
                             </option>
                         </select>
                     </td>
 
                 </tr>
-
               </table>
+
             </div>
           </div>
     </div>
 </div>
+
+
+
+
+<div class="control-section">
+    <button ej-button class='e-flat' (click)='add()'> Add </button>
+    <ejs-grid 
+    #grid
+    [dataSource]='data' [editSettings]='editSettings' [toolbar]='toolbar' height='273px'>
+      <e-columns>
+          <e-column field='OrderID' headerText='Order ID' textAlign='Right' isPrimaryKey='true' width=100></e-column>
+          <e-column field='CustomerID' headerText='Customer ID' width=120></e-column>
+          <e-column field='Freight' headerText='Freight' textAlign= 'Right'
+          editType= 'numericedit' width=120 format= 'C2'></e-column>
+          <e-column field='ShipCountry' headerText='Ship Country' editType= 'dropdownedit' width=150>
+              <ng-template #template let-data>
+                  <a href="#">{{data.ShipCountry}}</a>
+              </ng-template>
+          </e-column>
+      </e-columns>
+      </ejs-grid>

@@ -32,7 +32,7 @@ public class UsuarioController {
 
         Rol rol = new Rol();
         rol.setRolId(2L);
-        rol.setRolNombre("PACIENTE");
+        rol.setRolNombre("ADMIN");
 
         UsuarioRol usuarioRol = new UsuarioRol();
         usuarioRol.setUsuario(usuario);

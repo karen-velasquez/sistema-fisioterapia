@@ -1,7 +1,5 @@
 package com.sistema.fisioterapia.services;
 
-
-import com.sistema.fisioterapia.model.Lesion;
 import com.sistema.fisioterapia.model.Sesion;
 
 import java.util.List;

@@ -42,9 +42,6 @@ export class ViewSesionesComponent implements OnInit {
     endTime:'',
     pacienteId:{
       usuarioId:''
-    },
-    fisioterapeutaId:{
-      usuarioId:''
     }
   }
 
@@ -176,7 +173,6 @@ export class ViewSesionesComponent implements OnInit {
         this.sesion.endTime = json.data[0].EndTime;
         this.sesion.description = json.data[0].Description;
         this.sesion.pacienteId.usuarioId = (this.dropDownListObject.value).toString();
-        this.sesion.fisioterapeutaId.usuarioId = (this.dropDownListObject.value).toString();
         
 
         this.sesionService.guardarSesion(this.sesion).subscribe(

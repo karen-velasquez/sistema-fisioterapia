@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { SesionService } from 'src/app/services/sesion.service';
 import { EventSettingsModel, EventFieldsMapping, ScheduleComponent,DayService, WeekService, WorkWeekService, MonthService, PopupOpenEventArgs, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
 import { ThisReceiver } from '@angular/compiler';
+import { NotasService } from 'src/app/services/notas.service';
 
 
 
@@ -21,7 +22,7 @@ import { ThisReceiver } from '@angular/compiler';
 
 export class ViewNotasComponent implements OnInit {
 
-  constructor(private snack:MatSnackBar, private sesionService:SesionService) { }
+  constructor(private snack:MatSnackBar, private sesionService:SesionService, private notasService:NotasService) { }
 
   @ViewChild("scheduleObj")
   public scheduleObj!: ScheduleComponent;
@@ -35,6 +36,15 @@ export class ViewNotasComponent implements OnInit {
   public selectedDate: Date = new Date(2018, 1, 15);
   public showQuickInfo: Boolean = false;
   
+
+  public nota = {
+    notaSesion:'',
+    sesionId:{
+      id:''
+    }
+  }
+
+
 
   public datapicker: Object[] = [
     {
@@ -93,7 +103,7 @@ export class ViewNotasComponent implements OnInit {
    // console.log(args.data?.values.Id);
     //console.log(args.data?.values.Subject);
     //console.log(args.data['id']);
-    console.log( (<{ [key: string]: Object }>(args.data))['endTime'] as string);
+    console.log( (<{ [key: string]: Object }>(args.data))['nota'] as string);
     console.log( (<{ [key: string]: Object }>(args.data))['id'] as string);
   }
 
@@ -108,6 +118,11 @@ export class ViewNotasComponent implements OnInit {
     if(args.requestType == 'eventCreate') {
       console.log("se toco el boton de saveeeeeee");
       console.log(args.data);  
+      this.nota.notaSesion = (<{ [key: string]: Object }>(args.data))['nota'] as string;
+      this.nota.sesionId.id = (<{ [key: string]: Object }>(args.data))['id'] as string;
+      console.log(this.nota.notaSesion);
+      console.log(this.nota.sesionId.id);
+
     }
     if(args.requestType == 'eventRemove') {
       console.log("se toco el boton de delete");
@@ -116,7 +131,81 @@ export class ViewNotasComponent implements OnInit {
     if(args.requestType == 'eventChange') {
       console.log("se toco el boton de actualizar");
       console.log(args.data);
+      this.nota.notaSesion = (<{ [key: string]: Object }>(args.data))['nota'] as string;
+      this.nota.sesionId.id = (<{ [key: string]: Object }>(args.data))['id'] as string;
+      console.log(this.nota.notaSesion);
+      console.log(this.nota.sesionId.id);
+
+
+      /*guardando el valor de la nota */
+      this.notasService.guardarNota(this.nota).subscribe(
+        (data) => {
+          console.log(data);
+          Swal.fire('Nota guardada','Nota registrada con exito en el sistema','success');
+        },(error) => {
+          console.log(error);
+          this.snack.open('Ha ocurrido un error en el sistema !!','Aceptar',{
+            duration : 3000
+          });
+        }
+      )
+
+
     }
+  }
+
+
+
+
+  public imprimir(): void {
+    var notas = [];
+    notas.push(
+      {
+        "sesionId": {
+            "id": 5
+        },
+        "notaSesion": "mi prueba"
+    })
+    notas.push(
+      {
+        "sesionId": {
+            "id": 5
+        },
+        "notaSesion": "queridisima prueba"
+    })
+
+
+   // console.log((JSON.stringify(carros)));
+    /*let carro = {
+      "color": "rojo",
+      "typo": "cabrio",
+    }
+
+    let carro2 = {
+      "color": "verde",
+      "typo": "cabrio",
+    }
+    carros.push(carro);
+    carros.push(carro2);*/
+
+    console.log(notas);
+
+
+    /*guardando varias nota */
+    this.notasService.guardarvariasNota(notas).subscribe(
+      (data) => {
+        console.log(data);
+        Swal.fire('Notas guardada','Notas registrada con exito en el sistema','success');
+      },(error) => {
+        console.log(error);
+        this.snack.open('Ha ocurrido un error en el sistema !!','Aceptar',{
+          duration : 3000
+        });
+      }
+    )
+
+
+
   }
 
 

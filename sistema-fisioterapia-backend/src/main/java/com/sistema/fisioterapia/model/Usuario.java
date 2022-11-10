@@ -20,6 +20,7 @@ public class Usuario implements UserDetails {
 
     private String username;
     private String password;
+    private String tokenpassword;
     private String nombres;
     private String apellidos;
 
@@ -37,9 +38,6 @@ public class Usuario implements UserDetails {
     @JsonIgnore
     private Set<Sesion> pacienteId = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fisioterapeutaId")
-    @JsonIgnore
-    private Set<Sesion> fisioterapeutaId = new HashSet<>();
 
     /*one to many de lesiones*/
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "pacienteId")
@@ -51,10 +49,11 @@ public class Usuario implements UserDetails {
 
     }
 
-    public Usuario(Long usuarioId, String username, String password, String nombres, String apellidos, String correo, String fechaNac) {
+    public Usuario(Long usuarioId, String username, String password, String nombres, String apellidos, String correo, String fechaNac, String tokenpassword) {
         this.usuarioId = usuarioId;
         this.username = username;
         this.password = password;
+        this.tokenpassword = tokenpassword;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correo = correo;
@@ -116,6 +115,15 @@ public class Usuario implements UserDetails {
         this.password = password;
     }
 
+
+    public String getTokenpassword() {
+        return tokenpassword;
+    }
+
+    public void setTokenpassword(String tokenpassword) {
+        this.tokenpassword = tokenpassword;
+    }
+
     public String getNombres() {
         return nombres;
     }
@@ -167,13 +175,7 @@ public class Usuario implements UserDetails {
         this.pacienteId = pacienteId;
     }
 
-    public Set<Sesion> getFisioterapeutaId() {
-        return fisioterapeutaId;
-    }
 
-    public void setFisioterapeutaId(Set<Sesion> fisioterapeutaId) {
-        this.fisioterapeutaId = fisioterapeutaId;
-    }
 
     public Set<Lesion> getLesionId() {
         return lesionId;

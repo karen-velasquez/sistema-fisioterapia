@@ -10,6 +10,6 @@ export class FisioterapeutaService {
   constructor(private httpClient: HttpClient) { }
 
   public adicionarFisioterapeuta(fisioterapeuta:any){
-    return this.httpClient.post(`${baserUrl}/fisioterapeutas`,fisioterapeuta);
+    return this.httpClient.get(`${baserUrl}/fisioterapeutas`,fisioterapeuta);
   }
 }

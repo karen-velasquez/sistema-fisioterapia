@@ -19,8 +19,6 @@ public class Sesion {
     @ManyToOne(fetch = FetchType.EAGER)
     private Usuario pacienteId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Usuario fisioterapeutaId;
 
     private String Subject;
 
@@ -49,15 +47,6 @@ public class Sesion {
     public void setPacienteId(Usuario pacienteId) {
         this.pacienteId = pacienteId;
     }
-
-    public Usuario  getFisioterapeutaId() {
-        return fisioterapeutaId;
-    }
-
-    public void setFisioterapeutaId(Usuario  fisioterapeutaId) {
-        this.fisioterapeutaId = fisioterapeutaId;
-    }
-
 
     public String getSubject() {
         return Subject;

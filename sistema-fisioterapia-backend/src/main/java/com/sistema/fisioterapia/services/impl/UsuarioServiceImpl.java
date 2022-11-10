@@ -37,10 +37,19 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public Usuario actualizarUsuario(Usuario usuario){
+        return usuarioRepository.save(usuario);
+    }
+
+    @Override
     public Usuario obtenerUsuario(String username) {
         return usuarioRepository.findByUsername(username);
     }
 
+    @Override
+    public Usuario obterUsuarioPorToken(String tokenPassword){
+        return usuarioRepository.findBytokenpassword(tokenPassword);
+    };
     @Override
     public void eliminarUsuario(Long usuarioId) {
         usuarioRepository.deleteById(usuarioId);

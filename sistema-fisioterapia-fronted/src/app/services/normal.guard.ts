@@ -20,6 +20,9 @@ export class NormalGuard implements CanActivate {
       }
 
       this.router.navigate(['login']);
+
+      this.router.navigate(['sendemail']);
+
       return false;
   }
   

@@ -13,9 +13,12 @@ public interface UsuarioService {
 
     public Usuario obtenerUsuario(String username);
 
+    public Usuario obterUsuarioPorToken(String tokenPassword);
+
     public void eliminarUsuario(Long usuarioId);
 
     public List<Usuario> listarPacientes();
 
+    public Usuario actualizarUsuario(Usuario usuario);
 
 }

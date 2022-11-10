@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import {FormControl} from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-signup',
@@ -9,6 +11,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  date = new FormControl(new Date());
+  serializedDate = new FormControl(new Date().toISOString());
+
   public user = {
     username : '',
     password : '',

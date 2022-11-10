@@ -12,4 +12,15 @@ export class NotasService {
   public listaNotas(){
     return this.http.get(`${baserUrl}/notas/`)
   }
+
+  
+  public guardarNota(nota:any){
+    return this.http.post(`${baserUrl}/nota_sesion/`,nota)
+  }
+  
+
+  public guardarvariasNota(notas:any){
+    return this.http.post(`${baserUrl}/nota_sesion/todos`,notas)
+  }
+
 }
