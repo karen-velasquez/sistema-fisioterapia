@@ -1,81 +1,84 @@
-<div>
-    <div>
-        <ejs-dropdownlist
-              #dropdownlistaPacientes
-              [dataSource]="pacientes"
-              [fields]="dataFields"
-              placeholder="Selecciona a un paciente"
-              [ignoreAccent]="true"
-              allowFiltering="true"
-              [filterType]="dropdownListFilterType"
-              filterBarPlaceholder='busca el usuario del paciente'
-              >
-              <ng-template #itemTemplate let-pacientes>
-                <div>
-                  <span class="username">{{pacientes.username}}</span>
-                  <span class="nombres">{{pacientes.nombres}}&nbsp;</span>
-                  <span class="apellidos">{{pacientes.apellidos}}</span>
-                </div>
-              </ng-template>
-              <ng-template #headerTemplate let-pacientes>
-                <!--set the value to headerTemplate property-->
-                <span class='head'>
-                  <span class="username">username</span>
-                  <span class="nombres">nombres</span>
-                  <span class="apellidos">apellidos</span>
-                </span>
-              </ng-template>
-            </ejs-dropdownlist>
-            <br><br>
+<div class = "bootstrap-wrapper">
+    <div class = "container" style="overflow:auto;">
+      <div class = "row" style = "margin-top : 30px;">
+        <div>
+          <div class="container text-center" class = "col-md-6 offset-md-3">
+            <h1 class="container text-center">Programar Sesión</h1>
+            <!-- Aqui configuramos el dropdownList la lista de pacientes-->
+            <ejs-dropdownlist
+                #dropdownlistaPacientes
+                [dataSource]="pacientes"
+                [fields]="dataFields"
+                placeholder="Selecciona a un paciente"
+                [ignoreAccent]="true"
+                allowFiltering="true"
+                [filterType]="dropdownListFilterType"
+                filterBarPlaceholder='busca al paciente mediante su usuario'
+                >
+                <ng-template #itemTemplate let-pacientes>
+                    <div>
+                    <span style="float: left; width: 120px; " class="username">{{pacientes.username}}&nbsp;&nbsp;</span>
+                    <span class="nombres">{{pacientes.nombres}}&nbsp;&nbsp;</span>
+                    <span class="apellidos">{{pacientes.apellidos}}</span>
+                    </div>
+                </ng-template>
+                <ng-template #headerTemplate let-pacientes>
+                    <!--set the value to headerTemplate property-->
+                    <span class='head'>
+                    <span style="float: left; width: 120px; justify-content: center; display: flex; " class="username"><b>Username&nbsp;&nbsp;&nbsp;</b></span>
+                    <span style="justify-content: center; display: flex; " class="nombres"><b>Nombres&nbsp;&nbsp;Apellidos</b></span>
+                    </span>
+                </ng-template>
+                </ejs-dropdownlist><br>
+          </div>
 
+           <!-- Aqui configuramos el Schedule object que son las sesiones -->
+                <ejs-schedule 
+                #scheduleObj
+                width='100%' height='450px' 
+                startHour='09:00' endHour='21:00'
+                [minDate]='minDate' [maxDate]='maxDate'
+                [workDays]='workWeekDays'
+                [showWeekend]="showWeekend" 
+                [selectedDate]='selectedDate' 
+                [views]='views' [eventSettings]='eventSettings' 
+                [showQuickInfo]='showQuickInfo' 
+                (popupOpen)='onPopupOpen($event)' 
+                (actionBegin)="onActionBegin($event)">
 
+                <ng-template #editorTemplate>
+                    <table class="custom-event-editor" width="100%" cellpadding="5">
+                        <tbody>
+                            <tr>
+                                <td class="e-textlabel">Titulo</td>
+                                <td colspan="4">
+                                    <input id="Subject"  class="e-field e-input" type="text" value="" name="Subject" style="width: 100%" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="e-textlabel">Desde</td>
+                                <td colspan="4">
+                                    <input id="StartTime" useValueAsDate class="e-field" type="text" name="StartTime" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="e-textlabel">Hasta</td>
+                                <td colspan="4">
+                                    <input id="EndTime"  class="e-field" type="text" name="EndTime" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="e-textlabel">Descripción</td>
+                                <td colspan="4">
+                                    <textarea id="Description" class="e-field e-input" name="Description" rows="3" cols="50" style="width: 100%; height: 60px !important; resize: vertical"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-template>
+                </ejs-schedule>
 
+            </div>
+        </div>
     </div>
-
-
-
-    <ejs-schedule 
-    #scheduleObj
-    width='100%' height='550px' 
-    [selectedDate]='selectedDate' 
-    [views]='views' [eventSettings]='eventSettings' 
-    [showQuickInfo]='showQuickInfo' 
-    (popupOpen)='onPopupOpen($event)'
-    timezone="UTC"
-    (actionBegin)="onActionBegin($event)">
-
-      <ng-template #editorTemplate>
-          <table class="custom-event-editor" width="100%" cellpadding="5">
-              <tbody>
-                  <tr>
-                      <td class="e-textlabel">Summary</td>
-                      <td colspan="4">
-                          <input id="Subject"  class="e-field e-input" type="text" value="" name="Subject" style="width: 100%" />
-                      </td>
-                  </tr>
-                  <tr>
-                      <td class="e-textlabel">From</td>
-                      <td colspan="4">
-                          <input id="StartTime" useValueAsDate class="e-field" type="text" name="StartTime" />
-                      </td>
-                  </tr>
-                  <tr>
-                      <td class="e-textlabel">To</td>
-                      <td colspan="4">
-                          <input id="EndTime"  class="e-field" type="text" name="EndTime" />
-                      </td>
-                  </tr>
-                  <tr>
-                      <td class="e-textlabel">Reason</td>
-                      <td colspan="4">
-                          <textarea id="Description" class="e-field e-input" name="Description" rows="3" cols="50" style="width: 100%; height: 60px !important; resize: vertical"></textarea>
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
-      </ng-template>
-      </ejs-schedule>
-
-
-
 </div>

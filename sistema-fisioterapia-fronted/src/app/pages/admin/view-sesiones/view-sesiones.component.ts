@@ -7,7 +7,7 @@ import { DateTimePicker } from '@syncfusion/ej2-calendars';
 
 import { UserService } from 'src/app/services/user.service';
 import { LesionesService } from 'src/app/services/lesiones.service';
-import { EventSettingsModel, EventFieldsMapping, ScheduleComponent,DayService, WeekService, WorkWeekService, MonthService, PopupOpenEventArgs, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
+import { EventSettingsModel, ScheduleComponent,DayService, WeekService, WorkWeekService, MonthService, PopupOpenEventArgs, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
 import { SesionService } from 'src/app/services/sesion.service';
 
 
@@ -17,23 +17,55 @@ import { SesionService } from 'src/app/services/sesion.service';
   styleUrls: ['./view-sesiones.component.css']
 })
 export class ViewSesionesComponent implements OnInit {
-  @ViewChild('scheduleObj')
-  public scheduleObj!: ScheduleComponent;
 
-
-
-
-
+/************************* CONFIGURANDO EL DROPDOWNLIST ********************************************* */ 
+ /* Llamando la objeto que muestra la lista de Pacientes */
   @ViewChild('dropdownlistaPacientes')
   public dropDownListObject !: DropDownListComponent;
-
   public dataFields: Object = {text:'username', value:'usuarioId'};
   public dropdownListFilterType: string='Contains';
+  /*Objeto para obtener la lista de pacientes*/ 
+  pacientes:any = []
 
-  /*lista de pacientes MODIFICAR a una mejor practica de angular*/ 
-  pacientes:any = [
-  ]
 
+
+  /************************* CONFIGURANDO EL SCHEDULE OBJECT********************************************* */ 
+  /* Llamando al objeto Calendario para programar sesiones */
+  @ViewChild('scheduleObj')
+  public scheduleObj!: ScheduleComponent;
+  /* Configurando la fecha actual */
+  public selectedDate: Date = new Date();
+  /* Seleccionando los dias de trabajo */
+  public workWeekDays: number[] = [1, 2, 3, 4, 5, 6];
+  public showWeekend: boolean = false;
+  /* Seleccionando un rango de fechas */
+  public minDate: Date = new Date(this.selectedDate.getTime()-(1000 * 60 * 60 * 24 * 1));
+  public maxDate: Date = new Date(this.selectedDate.getTime()+(1000 * 60 * 60 * 24 * 30));
+  /* Configurando los dias que se puede ver */
+  public views: Array<string> = ['Day', 'Week', 'Month'];
+  public showQuickInfo: Boolean = false;
+  /* Objeto para recibir las sesiones */
+  public sesiones: any = []
+  /* Configurando los campos ya que el JSON devuelve todo el minuscula */
+  /* validacion */
+ /* si queremos hacer validacion minValidation: (args: { [key: string]: string }) => boolean = (args: { [key: string]: string }) => {
+    return args['value'].length >= 5;
+  };*/
+  public eventSettings: EventSettingsModel = {
+    dataSource: this.sesiones,
+    fields: {
+      id: 'id',
+      subject: { name: 'subject'},
+      description: { name: 'description' },
+      startTime: { name: 'startTime' },
+      endTime: { name: 'endTime' }
+    }};
+   
+
+
+ 
+
+  /* ---- Objeto sesion para almacenar las sesiones en la Base de Datos */
   public sesion = {
     id:'',
     subject:'',
@@ -45,18 +77,15 @@ export class ViewSesionesComponent implements OnInit {
     }
   }
 
-  /* {
-    Endtime:'',
-    prototype: {
-      }
-  }*/
-
 
   constructor(private snack:MatSnackBar, private userService:UserService
-    , private lesionService:LesionesService, private sesionService:SesionService) { }
+    ,private lesionService:LesionesService, private sesionService:SesionService) { }
 
-  /*Metiendo los datos en el Dropdown*/ 
+  
+
+
   ngOnInit(): void {
+    /* ---- INGRESANDO LOS DATOS DE PACIENTES EN EL DROPDOWN ---- */
     this.userService.listaPacientes().subscribe(
       (dato:any) =>{
         this.pacientes = dato;
@@ -66,130 +95,97 @@ export class ViewSesionesComponent implements OnInit {
         console.log(error);
       }
     )
+    /* ---- FINALIZA: INGRESANDO LOS DATOS DE PACIENTES EN EL DROPDOWN ---- */
+
+    /* ---- OBTENIENDO LOS DATOS DE LAS SESIONES ---- */
+    this.sesionService.listar().subscribe(
+      (data:any) => {
+        this.scheduleObj.addEvent(data);
+      }
+    );
+    /* ---- FINALIZA: OBTENIENDO LOS DATOS DE LAS SESIONES ---- */
   }
 
 
-  public datapicker: Object[] = [
-    {
-        Id: 1,
-        Subject: 'la prueba yyyyyyyyyy ',
-        StartTime: '2018-02-12T17:30:00.000Z',
-        EndTime: '2018-02-12T19:00:00.000Z',
-        CategoryColor: '#1aaa55'
-    }, {
-        Id: 2,
-        Subject: 'Esta es mi primera prueba',
-        StartTime: '2018-02-13T17:30:00.000Z',
-        EndTime: '2018-02-13T19:30:00.000Z',
-        CategoryColor: '#357cd2'
-    }, {
-        Id: 3,
-        Subject: 'Blue Moon Eclipse',
-        StartTime: new Date(2018, 1, 13, 9, 30),
-        EndTime: new Date(2018, 1, 13, 11, 0),
-        CategoryColor: '#7fa900'
-    }, {
-        Id: 4,
-        Subject: 'Meteor Showers in 2018',
-        StartTime: new Date(2018, 1, 14, 13, 0),
-        EndTime: new Date(2018, 1, 14, 14, 30),
-        CategoryColor: '#ea7a57'
-    }, {
-        Id: 5,
-        Subject: 'Milky Way as Melting pot',
-        StartTime: new Date(2018, 1, 15, 12, 0),
-        EndTime: new Date(2018, 1, 15, 14, 0),
-        CategoryColor: '#00bdae'
-    }, {
-        Id: 6,
-        Subject: 'Mysteries of Bermuda Triangle',
-        StartTime: new Date(2018, 1, 15, 9, 30),
-        EndTime: new Date(2018, 1, 15, 11, 0),
-        CategoryColor: '#f57f17'
-    }
-  ]
-
-
-
-  public selectedDate: Date = new Date(2018, 1, 15);
-    public views: Array<string> = ['Day', 'Week', 'WorkWeek', 'Month'];
-    public showQuickInfo: Boolean = false;
-    public eventSettings: EventSettingsModel = {
-        dataSource: this.datapicker
-    };
-    onPopupOpen(args: PopupOpenEventArgs): void {
-        if (args.type === 'Editor') {
-            
-            let startElement: HTMLInputElement = args.element.querySelector('#StartTime') as HTMLInputElement;
-            if (!startElement.classList.contains('e-datetimepicker')) {
-                new DateTimePicker({ value: new Date(startElement.value) || new Date() }, startElement);
-            }
-            let endElement: HTMLInputElement = args.element.querySelector('#EndTime') as HTMLInputElement;
-            if (!endElement.classList.contains('e-datetimepicker')) {
-                new DateTimePicker({ value: new Date(endElement.value) || new Date() }, endElement);
-            }
-            console.log(this.datapicker);
-            console.log(this.datapicker.toString());
-        }
-  }
-
-  //args: ActionEventArgs
 
 
 
 
 
   
-  public onActionBegin(args: ActionEventArgs): void {
-    console.log(args);
-    console.log(args.data?.values.Subject);
-    console.log(args.data?.values.StartTime);
-    
+  /* ***************** FUNCION PARA CADA VEZ QUE SE ABRE LA VENTANA DE NUEVO EVENTO************************** */
 
-  /*  if (args.requestType === 'Editor' && !isNullOrUndefined(args.data)) {
-      let subjectElement = args.element.querySelector('#Subject')
-        if (subjectElement) {
-            args.data.Subject = subjectElement.value
+    onPopupOpen(args: PopupOpenEventArgs): void {
+        /* -------- CONFIGURANDO LOS CAMPOS DE FECHA PARA QUE APAREZCAN COMO FECHAS ----*/
+      if (args.type === 'Editor' && this.dropDownListObject.value != null) {
+        let startElement: HTMLInputElement = args.element.querySelector('#StartTime') as HTMLInputElement;
+        if (!startElement.classList.contains('e-datetimepicker')) {
+            startElement.value = (<{ [key: string]: Object }>(args.data))['startTime'] as string;
+            new DateTimePicker({ value: new Date(startElement.value) || new Date() }, startElement);
         }
-    let statusElement = args.element.querySelector('#EventType')
-    if (statusElement) {
-      args.data.EventType = statusElement.value
-    }}
-    */
+        let endElement: HTMLInputElement = args.element.querySelector('#EndTime') as HTMLInputElement;
+        if (!endElement.classList.contains('e-datetimepicker')) {
+            endElement.value = (<{ [key: string]: Object }>(args.data))['endTime'] as string;
+            new DateTimePicker({ value: new Date(endElement.value) || new Date() }, endElement);
+        }
+        /* -------- FINALIZA: CONFIGURANDO LOS CAMPOS DE FECHA PARA QUE APAREZCAN COMO FECHAS ----*/
+      }else{
+         /* -------- VERIFICANDO QUE SE HAYA ESCOGIDO A UN PACIENTE EN EL DROPDOWN ----*/
+        args.cancel = true;
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Debes escoger a un paciente antes de programar una sesion!!!',
+        })
+        /* -------- FINALIZA: VERIFICANDO QUE SE HAYA ESCOGIDO A UN PACIENTE EN EL DROPDOWN ----*/ 
+      }       
+  }
 
+
+
+
+  /******************* FUNCION PARA REALIZAR ACCIONES CUANDO SE HACE CLICK EN SAVE************************ */ 
+  public onActionBegin(args: ActionEventArgs): void {
+    /* En caso de que se seleccione el boton create */
     if(args.requestType == 'eventCreate') {
-        console.log(args);
-        console.log("se toco el boton de Save");
-        console.log("*********ESTA ES LA SOLUCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON*****************-");
+      /* Primero se convierte los datos obtenidos en una cadena string*/
         var json = JSON.parse(JSON.stringify(args));
-        console.log(json['data']);
-        console.log("***2do paso :#");
-        console.log(json.data[0].Subject);
-        console.log(json.data[0].StartTime);
-        console.log("***********************************************-");
-
+        /* Se obtiene los valores y se los coloca el objeto sesion para guardarlo */
         this.sesion.subject = json.data[0].Subject;
         this.sesion.startTime = json.data[0].StartTime;
         this.sesion.endTime = json.data[0].EndTime;
         this.sesion.description = json.data[0].Description;
         this.sesion.pacienteId.usuarioId = (this.dropDownListObject.value).toString();
-        
+      
 
+        /* ---- GUARDANDO LA SESION EN EL SISTEMA ---- */
         this.sesionService.guardarSesion(this.sesion).subscribe(
           (data) => {
             console.log(data);
             Swal.fire('Sesion guardada','Sesion registrada con exito en el sistema','success');
           },(error) => {
-            console.log(error);
             this.snack.open('Ha ocurrido un error en el sistema !!','Aceptar',{
               duration : 3000
             });
+            /*---- Error 500 es error al guardar la sesion ---- */
+            if(error.status === 500){
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un error al guardar la sesion!!!',
+              })
+            }
+            /* ---- Error 0 en caso de que no haya conexion con el Backend ---- */
+            if(error.status === 0){
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No hay conexión con el Servidor',
+              })
+            }
           }
         )
-
-
-
-
+        /* ---- FINALIZA:  GUARDANDO LA SESION EN EL SISTEMA---- */
     }
 
 

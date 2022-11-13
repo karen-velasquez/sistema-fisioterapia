@@ -21,7 +21,8 @@ import { MatTableModule } from '@angular/material/table'
 import {MatSelectModule} from '@angular/material/select';
 import { GridModule, EditService, ToolbarService, SortService, PageService } from '@syncfusion/ej2-angular-grids';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
+import {MatDialogModule} from '@angular/material/dialog'
+import { CarouselModule } from "@syncfusion/ej2-angular-navigations";
 
 
 
@@ -53,6 +54,10 @@ import { ViewNotasComponent } from './pages/admin/view-notas/view-notas.componen
 import { SendEmailComponent } from './pages/changepassword/send-email/send-email.component';
 import { ChangePasswordComponent } from './pages/changepassword/change-password/change-password.component';
 import { ViewInformacionComponent } from './pages/user/view-informacion/view-informacion.component';
+import { ViewSeleccionTipoComponent } from './pages/admin/view-seleccion-tipo/view-seleccion-tipo.component';
+import { ViewCantidadSeriesComponent } from './pages/admin/view-cantidad-series/view-cantidad-series.component';
+import { ViewEjerciciosAsignadosComponent } from './pages/user/view-ejercicios-asignados/view-ejercicios-asignados.component';
+import { ViewIndicacionesComponent } from './pages/user/view-indicaciones/view-indicaciones.component';
 
 
 
@@ -79,7 +84,11 @@ import { ViewInformacionComponent } from './pages/user/view-informacion/view-inf
     ViewNotasComponent,
     SendEmailComponent,
     ChangePasswordComponent,
-    ViewInformacionComponent
+    ViewInformacionComponent,
+    ViewSeleccionTipoComponent,
+    ViewCantidadSeriesComponent,
+    ViewEjerciciosAsignadosComponent,
+    ViewIndicacionesComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +114,9 @@ import { ViewInformacionComponent } from './pages/user/view-informacion/view-inf
     MatDatepickerModule,
     MatSliderModule,
     MatNativeDateModule, 
-    MatRippleModule 
+    MatRippleModule,
+    MatDialogModule,
+    CarouselModule
   ],
   providers: [authInterceptorProviders, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService
   ,EditService, ToolbarService, SortService, PageService],

@@ -7,6 +7,7 @@ import { ViewLesionComponent } from './pages/admin/view-lesion/view-lesion.compo
 import { ViewNotasComponent } from './pages/admin/view-notas/view-notas.component';
 import { ViewPacientesComponent } from './pages/admin/view-pacientes/view-pacientes.component';
 import { ViewSeguimientoNotasComponent } from './pages/admin/view-seguimiento-notas/view-seguimiento-notas.component';
+import { ViewSeleccionTipoComponent } from './pages/admin/view-seleccion-tipo/view-seleccion-tipo.component';
 import { ViewSesionesComponent } from './pages/admin/view-sesiones/view-sesiones.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { ChangePasswordComponent } from './pages/changepassword/change-password/change-password.component';
@@ -16,10 +17,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { ViewEjerciciosAsignadosComponent } from './pages/user/view-ejercicios-asignados/view-ejercicios-asignados.component';
+import { ViewIndicacionesComponent } from './pages/user/view-indicaciones/view-indicaciones.component';
 import { ViewInformacionComponent } from './pages/user/view-informacion/view-informacion.component';
 import { ViewRealizarEjerciciosComponent } from './pages/user/view-realizar-ejercicios/view-realizar-ejercicios.component';
 import { AdminGuard } from './services/admin.guard';
 import { NormalGuard } from './services/normal.guard';
+
 
 const routes: Routes = [
   {
@@ -83,7 +87,12 @@ const routes: Routes = [
       {
         path: 'asignar',
         component: ViewAsignarEjerciciosComponent
+      },
+      {
+        path: 'seleccionar',
+        component: ViewSeleccionTipoComponent
       }
+      
 
     ]
   },
@@ -94,7 +103,7 @@ const routes: Routes = [
     children:[
       {
         path:'ejercicios',
-        component: ViewRealizarEjerciciosComponent
+        component: ViewIndicacionesComponent
       },
       {
         path:'informacion',

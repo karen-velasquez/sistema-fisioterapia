@@ -1,11 +1,14 @@
 <mat-card class="user-dashboard-card">
     <mat-action-list>
-      <div mat-subheader>Menú</div>
-      <button routerLink = "/user/ejercicios" mat-list-item>
-        <mat-icon mat-list-icon>account_circle</mat-icon> Hacer ejercicios
+      <div mat-subheader><h2>Menú</h2></div>
+
+      <button class="button" mat-list-item routerLink = "/user/ejercicios">
+        <mat-icon svgIcon="ejercicios"></mat-icon> &nbsp;&nbsp; Hacer ejercicios
       </button>
-      <button mat-list-item routerLink = "/user/informacion">
-        <mat-icon mat-list-icon>home</mat-icon>Información extra
+      <br>
+
+      <button class="button" mat-list-item routerLink = "/user/informacion">
+        <mat-icon svgIcon="extra"></mat-icon> &nbsp;&nbsp;Información extra
       </button>
 
     </mat-action-list>

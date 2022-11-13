@@ -1,74 +1,63 @@
-<div class="control-section">
-    <ejs-multiselect 
-    #dropdownlistaEjercicios
-    [dataSource]="localData" 
-    [fields]="dataFields"
-    placeholder="Select a name"
-    (change)="ejercicioChange()"
-    >
-        <ng-template #itemTemplate let-data>
-            <div>
-                <img class="empImage" src='{{data.Image}}' alt="employee"/>
-                <div class="ename">{{data.Name}}</div>
-
-            </div>
-        </ng-template>
-
-    </ejs-multiselect>
-
-</div>
-
-<button class="btn btn-primary" (click)="imprimir()">imprimir</button>
-
-<button class="btn btn-primary" (click)="obtenervalores()">OBTENER</button>
-
-<div class="bootstrap-wrapper">
-    <div class="container">
-        <div class = "row">
-            <div class = "col-md-10 offset-md-1">
-
-              <table class = "table text-center" cellspacing="0">
-                <tr *ngFor="let p of dataSource" id="tabla">
-
-                    <td>{{p.name}}</td>
-                    <td>{{p.weight}}</td>
-                    <td>{{p.symbol}}</td>
-                    <td>
-                        <select id="serie">
-                            <option>
-                                12
-                            </option>
-                            <option>
-                                13
-                            </option>
-                        </select>
-                    </td>
-
-                </tr>
-              </table>
-
-            </div>
+<div class = "bootstrap-wrapper">
+    <div class = "container" style="overflow:auto;">
+      <div class = "row" style = "margin-top : 30px;">
+        <div class="container text-center">
+          <div class = "col-md-6 offset-md-3">
+            <h1 class="container text-center">Asignar ejercicios</h1>
+            <!-- Aqui configuramos el dropdownList la lista de pacientes-->
+                <ejs-dropdownlist
+                #dropdownlistaPacientes
+                [dataSource]="pacientes"
+                [fields]="dataFields1"
+                placeholder="Selecciona a un paciente"
+                [ignoreAccent]="true"
+                allowFiltering="true"
+                [filterType]="dropdownListFilterType"
+                filterBarPlaceholder='busca al paciente mediante su usuario'
+                >
+                <ng-template #itemTemplate let-pacientes>
+                    <div>
+                    <span style="float: left; width: 120px; " class="username">{{pacientes.username}}&nbsp;&nbsp;</span>
+                    <span class="nombres">{{pacientes.nombres}}&nbsp;&nbsp;</span>
+                    <span class="apellidos">{{pacientes.apellidos}}</span>
+                    </div>
+                </ng-template>
+                <ng-template #headerTemplate let-pacientes>
+                    <!--set the value to headerTemplate property-->
+                    <span class='head'>
+                    <span style="float: left; width: 120px; justify-content: center; display: flex; " class="username"><b>Username&nbsp;&nbsp;&nbsp;</b></span>
+                    <span style="justify-content: center; display: flex; " class="nombres"><b>Nombres&nbsp;&nbsp;Apellidos</b></span>
+                    </span>
+                </ng-template>
+                </ejs-dropdownlist><br>
           </div>
+             <!-- Configurando el dropdown de ejercicios -->
+            <div class="container text-center" class = "col-md-6 offset-md-3">
+                <h1 class="container text-center">Selecciona los ejercicios</h1>
+                    <ejs-multiselect 
+                    #dropdownlistaEjercicios
+                    [dataSource]="ejercicios" 
+                    [fields]="dataFields"
+                    placeholder="Select a name"
+                    >
+                        <ng-template #itemTemplate let-data>
+                            <div>
+                                <img class="ejerImage" [src]='data.link_imagen' alt="ejercicioimagen"/>
+                                <div class="ename">{{data.nombre}}</div>
+                
+                            </div>
+                        </ng-template>
+                
+                    </ejs-multiselect>
+
+                </div>
+                <button 
+                class="btn btn-primary" 
+                (click)="obtenerEjercicios()">SIGUIENTE</button>
+    
+            </div>
+        </div>
     </div>
 </div>
 
-
-
-
-<div class="control-section">
-    <button ej-button class='e-flat' (click)='add()'> Add </button>
-    <ejs-grid 
-    #grid
-    [dataSource]='data' [editSettings]='editSettings' [toolbar]='toolbar' height='273px'>
-      <e-columns>
-          <e-column field='OrderID' headerText='Order ID' textAlign='Right' isPrimaryKey='true' width=100></e-column>
-          <e-column field='CustomerID' headerText='Customer ID' width=120></e-column>
-          <e-column field='Freight' headerText='Freight' textAlign= 'Right'
-          editType= 'numericedit' width=120 format= 'C2'></e-column>
-          <e-column field='ShipCountry' headerText='Ship Country' editType= 'dropdownedit' width=150>
-              <ng-template #template let-data>
-                  <a href="#">{{data.ShipCountry}}</a>
-              </ng-template>
-          </e-column>
-      </e-columns>
-      </ejs-grid>
+<br>

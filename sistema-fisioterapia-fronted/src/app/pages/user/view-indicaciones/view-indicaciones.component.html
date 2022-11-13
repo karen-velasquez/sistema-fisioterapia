@@ -1,0 +1,27 @@
+<div class = "bootstrap-wrapper">
+    <div class = "container" style="overflow:auto;">
+      <div class = "row" style = "margin-top : 30px;">
+        <div>
+          <div class="container text-center" class = "col-md-6 offset-md-3">
+            <h1 class="container text-center">Realizar ejercicios</h1>
+            <h1 class="container text-center">INDICACIONES DEL EJERCICIO Y DE LA CAMARA</h1>
+            <!-- Impriendo los datos obtenidos del ejercicios escogido-->
+            
+            <span>{{ejercicioEscogido.asignadoId}}</span><br>
+            <span>{{ejercicioEscogido.ejercicioId.nombre}}</span><br>
+            <span>{{ejercicioEscogido.ejercicioId.descripcion}}</span><br>
+            <span>{{ejercicioEscogido.ejercicioId.parteCuerpo}}</span><br>
+        </div>
+          <button mat-raised-button color = "primary"
+          class="container text-center"
+           (click)="onClick()">SIGUIENTE: REALIZAR EJERCICIOS</button><br><br>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    
+      

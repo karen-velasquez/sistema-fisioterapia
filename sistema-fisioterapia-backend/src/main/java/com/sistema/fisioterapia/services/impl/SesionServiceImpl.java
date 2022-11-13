@@ -27,6 +27,7 @@ public class SesionServiceImpl implements SesionService {
 
 
 
+    @Override
     public Sesion obtenerSesion(Long sesion_id){
         return sesionRepository.findById(sesion_id).get();
     };

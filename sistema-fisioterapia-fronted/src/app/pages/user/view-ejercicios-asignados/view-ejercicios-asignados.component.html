@@ -1,0 +1,41 @@
+<div class = "bootstrap-wrapper">
+    <div class = "container" style="overflow:auto;">
+      <div class = "row" style = "margin-top : 30px;">
+        <div>
+          <div class="container text-center">
+            <h1 class="container text-center">Realizar ejercicios</h1>
+            <!-- Aqui configuramos el dropdownList la lista de pacientes-->
+            <div style="width:400px;">
+                <ejs-carousel [dataSource]="asignados">
+                    <ng-template #itemTemplate let-data>
+                        <mat-card class="example-card" >
+                            <mat-card-header>
+                              <div mat-card-avatar class="example-header-image"></div>
+                              <mat-card-title>{{data.ejercicioId.nombre}}</mat-card-title>
+                              <mat-card-subtitle>{{data.ejercicioId.tipo}}</mat-card-subtitle>
+                            </mat-card-header>
+                            <img mat-card-image [src]="data.ejercicioId.link_imagen" alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                              <span>{{data.repeticiones}}</span><br>
+                              <span>{{data.series}}</span>
+                            </mat-card-content>
+                            <mat-card-actions>
+                              <button style="background: green;" mat-button (click)="obtenerEjercicios(data)">REALIZAR EJERCICIO</button>
+                            </mat-card-actions>
+                          </mat-card>
+                    </ng-template>
+                </ejs-carousel>
+                </div>   
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    
+      
+          
+

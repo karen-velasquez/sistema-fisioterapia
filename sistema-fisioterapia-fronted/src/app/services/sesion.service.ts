@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import baserUrl from './helper';
 import { map, catchError } from 'rxjs/operators';
-import { Sesion } from 'src/app/pages/admin/model/sesion'; 
+import { Sesion } from 'src/app/pages/admin/model/Sesion'; 
 
 @Injectable({
   providedIn: 'root'

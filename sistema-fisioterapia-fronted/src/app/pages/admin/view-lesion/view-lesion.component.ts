@@ -14,17 +14,17 @@ import { LesionesService } from 'src/app/services/lesiones.service';
   styleUrls: ['./view-lesion.component.css']
 })
 export class ViewLesionComponent implements OnInit {
-  @ViewChild('dropdownlistaPacientes')
-  public dropDownListObject !: DropDownListComponent;
+  /************************* CONFIGURANDO EL DROPDOWNLIST ********************************************* */ 
+ /* Llamando la objeto que muestra la lista de Pacientes */
+ @ViewChild('dropdownlistaPacientes')
+ public dropDownListObject !: DropDownListComponent;
+ public dataFields: Object = {text:'username', value:'usuarioId'};
+ public dropdownListFilterType: string='Contains';
+ /*Objeto para obtener la lista de pacientes*/ 
+ pacientes:any = []
 
-  public dataFields: Object = {text:'username', value:'usuarioId'};
-  public dropdownListFilterType: string='Contains';
 
-  /*lista de pacientes MODIFICAR a una mejor practica de angular*/ 
-  pacientes:any = [
-  ]
-
-  /*creando el objeto lesion*/ 
+/* ---- Objeto lesion para almacenar las lesiones en la Base de Datos */
   public lesion = {
     antecedentes : '',
     evaluacion : '',
@@ -40,26 +40,26 @@ export class ViewLesionComponent implements OnInit {
 
 
   ngOnInit(): void {
+    /* ---- INGRESANDO LOS DATOS DE PACIENTES EN EL DROPDOWN ---- */
     this.userService.listaPacientes().subscribe(
       (dato:any) =>{
         this.pacientes = dato;
         console.log(this.pacientes);
-        
       },
       (error) => {
         console.log(error);
       }
     )
+    /* ---- FINALIZA: INGRESANDO LOS DATOS DE PACIENTES EN EL DROPDOWN ---- */
   }
 
 
 
 
   formSubmit(){
-    console.log('click en login');
-
-    this.lesion.pacienteId.usuarioId = (this.dropDownListObject.value).toString();
-    /*-------------Revisando que no haya valores vacios y nulls---------------*/ 
+    /*Conviertiendo el valor a String*/
+    console.log(this.lesion);
+    /*-------------REVISANDO QUE NO  HAYA VALORES NULL O VACIOS---------------*/ 
     if(this.lesion.antecedentes.trim() == '' || this.lesion.antecedentes.trim() == null){
       this.snack.open('Los antecedentes son requeridos !!','Aceptar',{
         duration:3000
@@ -81,15 +81,18 @@ export class ViewLesionComponent implements OnInit {
       return;
     }
 
-    if(this.lesion.pacienteId.usuarioId.trim() == '' || this.lesion.pacienteId.usuarioId.trim() == null){
-      this.snack.open('Escoge un paciente!!','Aceptar',{
+    if(this.dropDownListObject.value == null){
+      this.snack.open('Debes escoger a un paciente!!','Aceptar',{
         duration:3000
       })
       return;
+    }else{
+      this.lesion.pacienteId.usuarioId = (this.dropDownListObject.value).toString();
     }
-    /*----------------------------------------------------------------------------*/ 
+    /*--------------FINALIZA: REVISANDO QUE NO  HAYA VALORES NULL O VACIOS-----------------------*/ 
 
 
+    /*------------------------GUARDANDO LA LESION EN EL SISTEMA ------------------- */
     this.lesionService.guardarLesiones(this.lesion).subscribe(
       (data) => {
         console.log(data);
@@ -101,7 +104,7 @@ export class ViewLesionComponent implements OnInit {
         });
       }
     )
-    
+    /*------------------------FINALIZA: GUARDANDO LA LESION EN EL SISTEMA ------------------- */
   }
 
 

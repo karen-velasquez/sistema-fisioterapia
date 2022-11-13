@@ -1,5 +1,7 @@
 package com.sistema.fisioterapia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,12 +11,24 @@ import java.util.Set;
 public class PosicionCamara {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long posicionCamaraId;
     private String descripcion;
     private String imagenUrl;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "posicionCamaraId")
+    @JsonIgnore
     private Set<Ejercicio> posicionCamara = new HashSet<>();
+
+    public PosicionCamara(){
+
+    }
+
+    public PosicionCamara(Long posicionCamaraId, String descripcion, String imagenUrl) {
+        this.posicionCamaraId= posicionCamaraId;
+        this.descripcion = descripcion;
+        this.imagenUrl = imagenUrl;
+    }
 
     public Long getPosicionCamaraId() {
         return posicionCamaraId;
@@ -48,13 +62,5 @@ public class PosicionCamara {
         this.posicionCamara = posicionCamara;
     }
 
-    public PosicionCamara(){
 
-    }
-
-    public PosicionCamara(Long posicionCamaraId, String descripcion, String imagenUrl) {
-        this.posicionCamaraId= posicionCamaraId;
-        this.descripcion = descripcion;
-        this.imagenUrl = imagenUrl;
-    }
 }

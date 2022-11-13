@@ -1,0 +1,29 @@
+<div class = "bootstrap-wrapper">
+    <div class = "container" style="overflow:auto;">
+      <div class = "row" style = "margin-top : 30px;">
+        <div class="container text-center">
+          <div  class = "col-md-6 offset-md-3">
+            <h1 mat-dialog-title class="container text-center">Asignar ejercicios</h1>
+          </div>
+             <!-- Configurando la tabla de ejercicios -->
+            <div mat-dialog-content class="container text-center" >
+                <ejs-grid 
+                #grid
+                [dataSource]='data' 
+                [editSettings]='editSettings' 
+                [toolbar]='toolbar' 
+                height='100px'>
+                  <e-columns>
+                      <e-column field='ejercicioId.nombre' headerText='Nombre' textAlign='Center' isPrimaryKey='true' width=100></e-column>
+                      <e-column [allowEditing]= 'false' field='ejercicioId.tipo' headerText='Tipo' textAlign='Center' width=120></e-column>
+                      <e-column field='repeticiones' headerText='Repeticiones' textAlign='Center' editType= 'dropdownedit' width=150 [edit]='repeticionParams' ></e-column>
+                      <e-column field='series' headerText='Series'  textAlign='Center' editType= 'dropdownedit' width=150 [edit]='serieParams' ></e-column>
+                  </e-columns>
+                  </ejs-grid>
+                  <button style="margin-top: 10px;" class="btn btn-primary" (click)='guardar()'> GUARDAR LOS EJERCICIOS </button>
+                  
+    
+            </div>
+        </div>
+    </div>
+</div>

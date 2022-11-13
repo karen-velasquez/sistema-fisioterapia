@@ -20,6 +20,8 @@ public class Ejercicio {
     private String parteCuerpo;
     private String descripcion;
 
+    private String link_imagen;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private  PosicionCamara posicionCamaraId;
 
@@ -68,6 +70,14 @@ public class Ejercicio {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getLink_imagen() {
+        return link_imagen;
+    }
+
+    public void setLink_imagen(String link_imagen) {
+        this.link_imagen = link_imagen;
     }
 
     public PosicionCamara getPosicionCamaraId() {

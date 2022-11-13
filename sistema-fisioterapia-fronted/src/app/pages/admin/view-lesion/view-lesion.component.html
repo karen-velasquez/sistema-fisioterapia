@@ -10,33 +10,32 @@
 
           <form (ngSubmit) = "formSubmit()">
               <!--Lista de pacientes-->
-              <ejs-dropdownlist
-              #dropdownlistaPacientes
-              [dataSource]="pacientes"
-              [fields]="dataFields"
-              placeholder="Selecciona a un paciente"
-              [ignoreAccent]="true"
-              allowFiltering="true"
-              [filterType]="dropdownListFilterType"
-              filterBarPlaceholder='busca el usuario del paciente'
-              >
-              <ng-template #itemTemplate let-pacientes>
-                <div>
-                  <span class="username">{{pacientes.username}}</span>
-                  <span class="nombres">{{pacientes.nombres}}&nbsp;</span>
-                  <span class="apellidos">{{pacientes.apellidos}}</span>
-                </div>
-              </ng-template>
-              <ng-template #headerTemplate let-pacientes>
-                <!--set the value to headerTemplate property-->
-                <span class='head'>
-                  <span class="username">username</span>
-                  <span class="nombres">nombres</span>
-                  <span class="apellidos">apellidos</span>
-                </span>
-              </ng-template>
-            </ejs-dropdownlist>
-            <br><br>
+                <!-- Aqui configuramos el dropdownList la lista de pacientes-->
+                <ejs-dropdownlist
+                #dropdownlistaPacientes
+                [dataSource]="pacientes"
+                [fields]="dataFields"
+                placeholder="Selecciona a un paciente"
+                [ignoreAccent]="true"
+                allowFiltering="true"
+                [filterType]="dropdownListFilterType"
+                filterBarPlaceholder='busca al paciente mediante su usuario'
+                >
+                <ng-template #itemTemplate let-pacientes>
+                    <div>
+                    <span style="float: left; width: 120px; " class="username">{{pacientes.username}}&nbsp;&nbsp;</span>
+                    <span class="nombres">{{pacientes.nombres}}&nbsp;&nbsp;</span>
+                    <span class="apellidos">{{pacientes.apellidos}}</span>
+                    </div>
+                </ng-template>
+                <ng-template #headerTemplate let-pacientes>
+                    <!--set the value to headerTemplate property-->
+                    <span class='head'>
+                    <span style="float: left; width: 120px; justify-content: center; display: flex; " class="username"><b>Username&nbsp;&nbsp;&nbsp;</b></span>
+                    <span style="justify-content: center; display: flex; " class="nombres"><b>Nombres&nbsp;&nbsp;Apellidos</b></span>
+                    </span>
+                </ng-template>
+                </ejs-dropdownlist><br>
 
             <mat-form-field class="full-width"  appearance = "outline">
               <mat-label>Nombre de lesion</mat-label>

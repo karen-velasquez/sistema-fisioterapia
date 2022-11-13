@@ -1,0 +1,18 @@
+.button{
+    display: block;
+    border: none;
+    border-radius: 40px;
+    width: 35%;
+    background: rgba(79, 148, 222, 0.402); 
+    display: inline-block;
+    margin: 20px;
+    margin-top: 10px;
+    height: 50%;
+    
+}
+
+.h2{
+    color: rgb(255, 255, 255); 
+    -webkit-text-stroke: 1px black;
+    font-size: 2vw;
+}

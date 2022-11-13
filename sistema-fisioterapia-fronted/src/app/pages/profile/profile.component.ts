@@ -8,7 +8,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class ProfileComponent implements OnInit {
 
-  user:any = null;
+  user:any;
 
   constructor(private loginService:LoginService) { }
 
