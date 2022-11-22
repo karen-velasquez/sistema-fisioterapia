@@ -7,6 +7,7 @@ import { SesionService } from 'src/app/services/sesion.service';
 import { EventSettingsModel, ScheduleComponent, PopupOpenEventArgs, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
 import { NotasService } from 'src/app/services/notas.service';
 
+/************ CONFIGURNADO QUE BOTONES ESTARAN EN LA TABLA***************** */
 L10n.load({
   'en-US': {
       'schedule': {
@@ -24,10 +25,6 @@ L10n.load({
   templateUrl: './view-notas.component.html',
   styleUrls: ['./view-notas.component.css']
 })
-
-
-
-
 
 export class ViewNotasComponent implements OnInit {
 

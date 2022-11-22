@@ -9,7 +9,7 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public añadirUsuario(user:any){
+  public guardarUsuario(user:any){
     return this.httpClient.post(`${baserUrl}/usuarios/`,user);
   }
 

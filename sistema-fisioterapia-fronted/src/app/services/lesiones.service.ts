@@ -9,7 +9,7 @@ export class LesionesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public guardarLesiones(lesion:any){
+  public guardarLesion(lesion:any){
     return this.httpClient.post(`${baserUrl}/lesion/les`,lesion);
   }
 }

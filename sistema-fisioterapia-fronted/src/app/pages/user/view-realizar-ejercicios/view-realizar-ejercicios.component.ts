@@ -19,12 +19,24 @@ export class ViewRealizarEjerciciosComponent implements OnInit {
 
 
   ngOnInit() {
+    this.flaskModuleService.obtenerVideo().subscribe(
+      (data:any) =>{
+        console.log("el tipo");
+        console.log("data");
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+
     this.pollData();
   }
 
   pollData () {
     this.id = setInterval(() => {
       this.superball = 'http://127.0.0.1:5000/video_feed';
+
+      
       this.flaskModuleService.obtenerValor().subscribe(
         (data:any) =>{
           console.log(data);

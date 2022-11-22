@@ -107,7 +107,7 @@ const routes: Routes = [
       },
       {
         path:'informacion',
-        component: ViewInformacionComponent
+        component: ViewRealizarEjerciciosComponent
       }
     ]
   }

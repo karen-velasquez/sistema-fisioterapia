@@ -87,7 +87,7 @@ export class ViewCrearUsuarioComponent implements OnInit {
 
 
     /* ---------------- GUARDANDO LOS DATOS EN LA BDD --------------- */
-    this.userService.añadirUsuario(this.user).subscribe(
+    this.userService.guardarUsuario(this.user).subscribe(
       (data) => {
         console.log(data);
         Swal.fire('Usuario guardado','Usuario registrado con exito en el sistema','success');

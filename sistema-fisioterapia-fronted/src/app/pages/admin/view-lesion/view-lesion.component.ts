@@ -93,7 +93,7 @@ export class ViewLesionComponent implements OnInit {
 
 
     /*------------------------GUARDANDO LA LESION EN EL SISTEMA ------------------- */
-    this.lesionService.guardarLesiones(this.lesion).subscribe(
+    this.lesionService.guardarLesion(this.lesion).subscribe(
       (data) => {
         console.log(data);
         Swal.fire('Lesion guardada','Lesion registrada con exito en el sistema','success');

@@ -3,6 +3,8 @@ import com.sistema.fisioterapia.model.Rol;
 import com.sistema.fisioterapia.model.Usuario;
 import com.sistema.fisioterapia.model.UsuarioRol;
 import com.sistema.fisioterapia.services.UsuarioService;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,12 +29,13 @@ public class UsuarioController {
     @PostMapping("/")
     public Usuario guardarUsuario(@RequestBody Usuario usuario) throws Exception {
 
+        //encriptando la contrase;a
         usuario.setPassword(this.bCryptPasswordEncoder.encode(usuario.getPassword()));
         Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
+
         Rol rol = new Rol();
-        rol.setRolId(2L);
-        rol.setRolNombre("PACIENTE");
+        rol.setRolId(Long.valueOf(2));
 
         UsuarioRol usuarioRol = new UsuarioRol();
         usuarioRol.setUsuario(usuario);

@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    this.userService.añadirUsuario(this.user).subscribe(
+    this.userService.guardarUsuario(this.user).subscribe(
       (data) => {
         console.log(data);
         Swal.fire('Usuario guardado','Usuario registrado con exito en el sistema','success');
