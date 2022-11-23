@@ -25,6 +25,8 @@ public class Asignado {
 
     private String series;
 
+    private String fechaAsignado;
+
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "asignadoId")
     @JsonIgnore
@@ -75,6 +77,14 @@ public class Asignado {
 
     public Set<Cumplimiento> getCumplimientoEjercicio() {
         return cumplimientoEjercicio;
+    }
+
+    public String getFechaAsignado() {
+        return fechaAsignado;
+    }
+
+    public void setFechaAsignado(String fechaAsignado) {
+        this.fechaAsignado = fechaAsignado;
     }
 
     public void setCumplimientoEjercicio(Set<Cumplimiento> cumplimientoEjercicio) {

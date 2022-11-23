@@ -28,6 +28,7 @@
     "bootstrap": "^5.2.2",
     "cldr-data": "^36.0.1",
     "jquery": "^3.6.1",
+    "ngx-ui-loader": "^13.0.0",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.4.37",
     "tslib": "^2.3.0",

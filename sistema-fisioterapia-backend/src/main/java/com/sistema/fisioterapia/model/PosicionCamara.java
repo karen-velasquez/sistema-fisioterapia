@@ -15,6 +15,7 @@ public class PosicionCamara {
     private Long posicionCamaraId;
     private String descripcion;
     private String imagenUrl;
+    private String titulo;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "posicionCamaraId")
     @JsonIgnore
@@ -62,5 +63,11 @@ public class PosicionCamara {
         this.posicionCamara = posicionCamara;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
 
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 }

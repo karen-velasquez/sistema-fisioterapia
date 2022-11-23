@@ -2,6 +2,8 @@ package com.sistema.fisioterapia.controller;
 import com.sistema.fisioterapia.model.Rol;
 import com.sistema.fisioterapia.model.Usuario;
 import com.sistema.fisioterapia.model.UsuarioRol;
+import com.sistema.fisioterapia.repositories.NotaSesionRepository;
+import com.sistema.fisioterapia.repositories.RolRepository;
 import com.sistema.fisioterapia.services.UsuarioService;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -26,6 +28,9 @@ public class UsuarioController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private RolRepository rolRepository;
+
     @PostMapping("/")
     public Usuario guardarUsuario(@RequestBody Usuario usuario) throws Exception {
 
@@ -33,9 +38,7 @@ public class UsuarioController {
         usuario.setPassword(this.bCryptPasswordEncoder.encode(usuario.getPassword()));
         Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
-
-        Rol rol = new Rol();
-        rol.setRolId(Long.valueOf(2));
+        Rol rol = rolRepository.obtenerRolPaciente();
 
         UsuarioRol usuarioRol = new UsuarioRol();
         usuarioRol.setUsuario(usuario);

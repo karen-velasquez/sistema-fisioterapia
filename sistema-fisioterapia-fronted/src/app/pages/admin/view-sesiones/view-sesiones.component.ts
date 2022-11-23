@@ -9,13 +9,32 @@ import { UserService } from 'src/app/services/user.service';
 import { LesionesService } from 'src/app/services/lesiones.service';
 import { EventSettingsModel, ScheduleComponent,DayService, WeekService, WorkWeekService, MonthService, PopupOpenEventArgs, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
 import { SesionService } from 'src/app/services/sesion.service';
+import { L10n } from '@syncfusion/ej2-base';
+import { LoginService } from 'src/app/services/login.service';
 
+
+
+L10n.load({
+  'en-US': {
+      'schedule': {
+          'saveButton': 'Adicionar',
+          'cancelButton': 'Cerrar',
+          'newEvent': 'Nueva Sesión',
+          'editEvent': false,
+          'deleteButton': false,
+      },
+  }
+});
 
 @Component({
   selector: 'app-view-sesiones',
   templateUrl: './view-sesiones.component.html',
   styleUrls: ['./view-sesiones.component.css']
 })
+
+
+
+
 export class ViewSesionesComponent implements OnInit {
 
 /************************* CONFIGURANDO EL DROPDOWNLIST ********************************************* */ 
@@ -60,8 +79,8 @@ export class ViewSesionesComponent implements OnInit {
       startTime: { name: 'startTime' },
       endTime: { name: 'endTime' }
     }};
-   
-
+  /* obteniendo el objeto user*/
+  public user:any;
 
  
 
@@ -74,22 +93,29 @@ export class ViewSesionesComponent implements OnInit {
     endTime:'',
     pacienteId:{
       usuarioId:''
+    },
+    fisioterapeutaId:{
+      usuarioId:''
     }
   }
 
 
   constructor(private snack:MatSnackBar, private userService:UserService
-    ,private lesionService:LesionesService, private sesionService:SesionService) { }
+    ,private lesionService:LesionesService, private sesionService:SesionService,
+    private loginService:LoginService) { }
 
   
 
 
   ngOnInit(): void {
     /* ---- INGRESANDO LOS DATOS DE PACIENTES EN EL DROPDOWN ---- */
+    /* Obteniendo el codigo del fisioterapeuta */
+    this.user = this.loginService.getUser();
+    this.sesion.fisioterapeutaId.usuarioId = this.user.usuarioId; 
+    
     this.userService.listaPacientes().subscribe(
       (dato:any) =>{
         this.pacientes = dato;
-        console.log(this.pacientes);
       },
       (error) => {
         console.log(error);
@@ -116,6 +142,11 @@ export class ViewSesionesComponent implements OnInit {
   /* ***************** FUNCION PARA CADA VEZ QUE SE ABRE LA VENTANA DE NUEVO EVENTO************************** */
 
     onPopupOpen(args: PopupOpenEventArgs): void {
+      /* Evitando que se abra el popup de editar y eliminar */
+      if(((<{ [key: string]: Object }>(args.data))['id'] as string) != undefined){
+        args.cancel = true;
+      }
+      //var json = JSON.parse(JSON.stringify(args));
         /* -------- CONFIGURANDO LOS CAMPOS DE FECHA PARA QUE APAREZCAN COMO FECHAS ----*/
       if (args.type === 'Editor' && this.dropDownListObject.value != null) {
         let startElement: HTMLInputElement = args.element.querySelector('#StartTime') as HTMLInputElement;
@@ -143,7 +174,7 @@ export class ViewSesionesComponent implements OnInit {
 
 
 
-
+  
   /******************* FUNCION PARA REALIZAR ACCIONES CUANDO SE HACE CLICK EN SAVE************************ */ 
   public onActionBegin(args: ActionEventArgs): void {
     /* En caso de que se seleccione el boton create */
@@ -156,13 +187,14 @@ export class ViewSesionesComponent implements OnInit {
         this.sesion.endTime = json.data[0].EndTime;
         this.sesion.description = json.data[0].Description;
         this.sesion.pacienteId.usuarioId = (this.dropDownListObject.value).toString();
-      
+        
 
         /* ---- GUARDANDO LA SESION EN EL SISTEMA ---- */
         this.sesionService.guardarSesion(this.sesion).subscribe(
           (data) => {
-            console.log(data);
+            location.reload();
             Swal.fire('Sesion guardada','Sesion registrada con exito en el sistema','success');
+            
           },(error) => {
             this.snack.open('Ha ocurrido un error en el sistema !!','Aceptar',{
               duration : 3000
@@ -197,6 +229,7 @@ export class ViewSesionesComponent implements OnInit {
       console.log("se toco el boton de actualizar");
       console.log(args.data);
     }
+    
 
   
   }

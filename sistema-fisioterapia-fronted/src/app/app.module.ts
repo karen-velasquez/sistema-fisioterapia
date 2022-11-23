@@ -58,6 +58,7 @@ import { ViewSeleccionTipoComponent } from './pages/admin/view-seleccion-tipo/vi
 import { ViewCantidadSeriesComponent } from './pages/admin/view-cantidad-series/view-cantidad-series.component';
 import { ViewEjerciciosAsignadosComponent } from './pages/user/view-ejercicios-asignados/view-ejercicios-asignados.component';
 import { ViewIndicacionesComponent } from './pages/user/view-indicaciones/view-indicaciones.component';
+import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 
 
 
@@ -116,7 +117,11 @@ import { ViewIndicacionesComponent } from './pages/user/view-indicaciones/view-i
     MatNativeDateModule, 
     MatRippleModule,
     MatDialogModule,
-    CarouselModule
+    CarouselModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule.forRoot({
+      showForeground:true
+    })
   ],
   providers: [authInterceptorProviders, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService
   ,EditService, ToolbarService, SortService, PageService],

@@ -63,7 +63,9 @@ export class ViewNotasComponent implements OnInit {
     notaSesion:'',
     sesionId:{
       id:''
-    }
+    },
+    tituloNotaSesion: '',
+    fechaNota: ''
   }
 
   /* ------------ CONSTRUCTOR ----------- */
@@ -71,6 +73,9 @@ export class ViewNotasComponent implements OnInit {
 
 
   ngOnInit(): void {
+    var today = new Date();
+    this.nota.fechaNota = today.toLocaleDateString('en-GB');
+
     /* ---- OBTENIENDO LOS DATOS DE LAS SESIONES ---- */
     this.sesionService.listar().subscribe(
       (data:any) => {
@@ -95,6 +100,7 @@ export class ViewNotasComponent implements OnInit {
     de guardar nota */
     if(args.requestType == 'eventChange') {
       console.log("se toco el boton de actualizar");
+      this.nota.tituloNotaSesion = (<{ [key: string]: Object }>(args.data))['titulo'] as string;
       this.nota.notaSesion = (<{ [key: string]: Object }>(args.data))['nota'] as string;
       this.nota.sesionId.id = (<{ [key: string]: Object }>(args.data))['id'] as string;
 

@@ -45,21 +45,25 @@ export class LoginComponent implements OnInit {
     /* ---- Generando el token para ingresar a la pagina web ----  */
     this.loginService.generateToken(this.loginData).subscribe(
       (data:any) => {
+        /* Obteniendo el usuario actual */
         console.log(data);
         this.loginService.loginUser(data.token);
         this.loginService.getCurrentUser().subscribe((user:any) => {
+          
           this.loginService.setUser(user);
           console.log(user);
+          
 
-          if(this.loginService.getUserRole() == 'ADMIN'){
-            //dashboard admin
-            //window.location.href = '/admin';
+          if(this.loginService.getUserRole() == 'FISIOTERAPEUTA'){
+              //dashboard admin
+              //window.location.href = '/admin';
             this.router.navigate(['admin']);
             this.loginService.loginStatusSubjec.next(true);
           }
-          else if(this.loginService.getUserRole() == 'PACIENTE'){
-            //user dashboard
-            //window.location.href = '/user-dashboard';
+
+          else if(this.loginService.getUserRole() == 'ADMINISTRADOR'){
+              //user dashboard
+              //window.location.href = '/user-dashboard';
             this.router.navigate(['user']);
             this.loginService.loginStatusSubjec.next(true);
           }

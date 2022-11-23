@@ -9,15 +9,8 @@
   </a>
   <span>Portal de Seguimiento</span>
   <span class="example-spacer"></span>
-  <a
-  *ngIf = "!login.isLoggedIn()"
-  [routerLink]="'/login'"
-  mat-icon-button
-  class = "example-icon favorite-icon"
-  aria-label = "Example icon-button with heart icon"
->
-  Iniciar sesión
-</a>
+
+
 <a
   *ngIf = "!login.isLoggedIn()"
   [routerLink]="'/signup'"
@@ -39,14 +32,14 @@
 </a>
 
 <button
-    *ngIf = "login.isLoggedIn()"
+    *ngIf = "isLoggedIn && user"
     mat-button
     style="margin-right: 10px"
     class="example-icon favorite-icon"
     aria-label="Example icon-button with heart icon"
-    routerLink="/admin/profile"
+    routerLink="/admin"
     >
-   {{ login.getUser().username}}
+    {{ user.username }}
   </button>
 
 </mat-toolbar>

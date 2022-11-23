@@ -37,11 +37,6 @@ const routes: Routes = [
     pathMatch : 'full'
   },
   {
-    path : 'login',
-    component : LoginComponent,
-    pathMatch : 'full'
-  },
-  {
     path : 'sendemail',
     component : SendEmailComponent,
     pathMatch : 'full'
@@ -57,12 +52,8 @@ const routes: Routes = [
     canActivate: [AdminGuard],
     children:[
       {
-        path:'profile',
-        component:ProfileComponent
-      },
-      {
         path: '',
-        component: WelcomeComponent
+        component: ProfileComponent
       },
       {
         path: 'pacientes',

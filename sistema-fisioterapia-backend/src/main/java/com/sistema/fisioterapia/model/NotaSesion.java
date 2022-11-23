@@ -14,7 +14,10 @@ public class NotaSesion {
     @ManyToOne(fetch = FetchType.EAGER)
     private Sesion sesionId;
 
+    private String tituloNotaSesion;
     private String notaSesion;
+
+    private String fechaNota;
 
     public Long getNotaId() {
         return notaId;
@@ -38,6 +41,22 @@ public class NotaSesion {
 
     public void setNotaSesion(String notaSesion) {
         this.notaSesion = notaSesion;
+    }
+
+    public String getTituloNotaSesion() {
+        return tituloNotaSesion;
+    }
+
+    public void setTituloNotaSesion(String tituloNotaSesion) {
+        this.tituloNotaSesion = tituloNotaSesion;
+    }
+
+    public String getFechaNota() {
+        return fechaNota;
+    }
+
+    public void setFechaNota(String fechaNota) {
+        this.fechaNota = fechaNota;
     }
 
     public NotaSesion() {

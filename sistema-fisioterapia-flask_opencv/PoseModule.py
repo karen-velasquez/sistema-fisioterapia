@@ -66,7 +66,7 @@ class posture_detector():
         return angle
 
 
-def main():
+'''def main():
     cap = cv2.VideoCapture('C:/Users/asus/Desktop/Videos_Ejercicios/videos_grals/TrenSuperior/Fortalecimiento/remosdorsales.mp4')
     detector = posture_detector()
     while True:
@@ -88,4 +88,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()'''

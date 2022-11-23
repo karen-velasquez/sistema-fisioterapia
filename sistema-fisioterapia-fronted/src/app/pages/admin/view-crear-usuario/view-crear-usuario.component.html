@@ -9,7 +9,8 @@
           <h1 class="text-center">Registra un Paciente</h1>
   
         
-          <form (ngSubmit) = "formSubmit()">
+          <form #sendForm
+          (ngSubmit) = "formSubmit()">
             <mat-form-field class="full-width"  appearance = "outline">
               <mat-label>Nombre de usuario</mat-label>
               <input required [(ngModel)] = "user.username" name = "username" matInput placeholder="Digite su nombre de usuario">

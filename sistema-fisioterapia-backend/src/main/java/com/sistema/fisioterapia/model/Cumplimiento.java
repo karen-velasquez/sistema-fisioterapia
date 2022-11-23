@@ -14,9 +14,9 @@ public class Cumplimiento {
     @ManyToOne(fetch = FetchType.EAGER)
     private Asignado asignadoId;
 
-    private String repeticionRealizada;
-
     private String serieRealizada;
+
+    private String fechaCumplimiento;
 
 
     public Long getCumplimientoId() {
@@ -35,20 +35,20 @@ public class Cumplimiento {
         this.asignadoId = asignadoId;
     }
 
-    public String getRepeticionRealizada() {
-        return repeticionRealizada;
-    }
-
-    public void setRepeticionRealizada(String repeticionRealizada) {
-        this.repeticionRealizada = repeticionRealizada;
-    }
-
     public String getSerieRealizada() {
         return serieRealizada;
     }
 
     public void setSerieRealizada(String serieRealizada) {
         this.serieRealizada = serieRealizada;
+    }
+
+    public String getFechaCumplimiento() {
+        return fechaCumplimiento;
+    }
+
+    public void setFechaCumplimiento(String fechaCumplimiento) {
+        this.fechaCumplimiento = fechaCumplimiento;
     }
 
     public Cumplimiento() {

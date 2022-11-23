@@ -436,7 +436,7 @@ class SimulateTargetExercices:
 
 
     #PRUEBA PARA EL APK
-    def squats2(self, frame):
+    def squats3(self, frame):
         #ingresando el video del ejercicio
         detector = pm.posture_detector()
         per = 0
@@ -476,6 +476,34 @@ class SimulateTargetExercices:
 
         return img
 
+
+
+    #PRUEBA PARA EL APK
+    def la_prueba(self, frame):
+        #ingresando el video del ejercicio
+        detector = pm.posture_detector()
+        per = 0
+        bar = 0
+        stage = ''
+        img = frame
+        img = detector.find_person(img)
+        landmark_list = detector.find_landmarks(img, draw=True)
+
+        if len(landmark_list) != 0:
+            ''' PoseLandmark.LEFT_HIP = 24
+                    PoseLandmark.LEFT_KNEE = 26
+                    PoseLandmark.LEFT_ANKLE = 28
+            '''
+            left_leg_angle = detector.find_angle(img, 24, 26, 28)
+
+
+            # postura inicial
+            if left_leg_angle > 170 and left_leg_angle < 180:
+                stage = "postura inicial"
+            else:
+                if left_leg_angle > 90 and left_leg_angle < 110:
+                    stage = 'no postura'
+        return img
 
 
 
@@ -704,7 +732,7 @@ class StartWorkoutSession:
         # simulate_target_exercies.push_ups()
 
 
-
+'''
 
 
 class MainApp(App):
@@ -742,3 +770,4 @@ class MainApp(App):
 
 MainApp().run()
 
+'''

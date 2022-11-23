@@ -23,10 +23,19 @@
                 <ng-template #editorTemplate>
                     <table class="custom-event-editor" width="100%" cellpadding="1" height='50px'>
                         <tbody>
+                            <br>
+                            <br>
+                            <tr>
+                                <td class="e-textlabel">Titulo</td>
+                                <td colspan="4">
+                                    <input id="titulo"  class="e-field e-input" type="text" value="" name="titulo" style="width: 100%" />
+                                </td>
+                            </tr>
+                            <br>
                             <tr>
                                 <td class="e-textlabel">Nota</td>
-                                <td colspan="2">
-                                    <textarea id="nota" class="e-field e-input" name="nota" rows="3" cols="50" style="width: 100%; height: 100px !important; resize: vertical"></textarea>
+                                <td>
+                                    <textarea id="nota" class="e-field e-input" colspan="2" name="nota" rows="2" cols="20" style="width: 100%; height: 60px !important; resize: vertical"></textarea>
                                 </td>
                             </tr>
                         </tbody>

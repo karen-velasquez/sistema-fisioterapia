@@ -34,9 +34,14 @@ public class Usuario implements UserDetails {
     private Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
     /*uniendolo con la tabla de sesion*/
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "Id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "pacienteId")
     @JsonIgnore
     private Set<Sesion> pacienteId = new HashSet<>();
+
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fisioterapeutaId")
+    @JsonIgnore
+    private Set<Sesion> fisioterapeutaId = new HashSet<>();
 
 
     /*one to many de lesiones*/
@@ -176,6 +181,13 @@ public class Usuario implements UserDetails {
     }
 
 
+    public Set<Sesion> getFisioterapeutaId() {
+        return fisioterapeutaId;
+    }
+
+    public void setFisioterapeutaId(Set<Sesion> fisioterapeutaId) {
+        this.fisioterapeutaId = fisioterapeutaId;
+    }
 
     public Set<Lesion> getLesionId() {
         return lesionId;

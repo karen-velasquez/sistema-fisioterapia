@@ -23,7 +23,6 @@ class MainApp(App):
 
     def build(self):
         self.image = Image(size_hint=(1, .8))
-
         layout = BoxLayout(orientation='horizontal')
         layout.add_widget(self.image)
         layout.add_widget(Button(
@@ -31,14 +30,10 @@ class MainApp(App):
             pos_hint={'center_x': .5, 'center_y': .5},
             size_hint=(None, None)
         ))
-
-
         self.capture = cv2.VideoCapture(0)
-        while True:
-            self.load_video()
-        #Clock.schedule_interval(self.load_video, 1.0/60.0)
-
-
+        '''while True:
+            self.load_video()'''
+        Clock.schedule_interval(self.load_video, 1.0/60.0)
         return layout
 
 

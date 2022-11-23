@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-view-crear-usuario',
@@ -9,6 +10,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./view-crear-usuario.component.css']
 })
 export class ViewCrearUsuarioComponent implements OnInit {
+
+
+
   /* Fecha minima y maxima a colocar se pondra que el rango sea entre 10 a 40 anios */
   minDate: Date;
   maxDate: Date;
@@ -90,7 +94,9 @@ export class ViewCrearUsuarioComponent implements OnInit {
     this.userService.guardarUsuario(this.user).subscribe(
       (data) => {
         console.log(data);
+        location.reload()
         Swal.fire('Usuario guardado','Usuario registrado con exito en el sistema','success');
+        
       },(error) => {
         console.log(error);
         /*---- Error 500 es error al guardar los datos, posiblemente nombre de usuario repetido ---- */
