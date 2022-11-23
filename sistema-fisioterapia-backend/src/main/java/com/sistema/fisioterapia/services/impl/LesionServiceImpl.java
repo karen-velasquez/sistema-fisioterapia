@@ -2,6 +2,7 @@ package com.sistema.fisioterapia.services.impl;
 
 import com.sistema.fisioterapia.exceptions.UsuarioFoundException;
 import com.sistema.fisioterapia.model.Lesion;
+import com.sistema.fisioterapia.model.NotaSesion;
 import com.sistema.fisioterapia.model.Usuario;
 import com.sistema.fisioterapia.model.UsuarioRol;
 import com.sistema.fisioterapia.repositories.LesionRepository;
@@ -10,6 +11,7 @@ import com.sistema.fisioterapia.services.LesionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 @Service
 public class LesionServiceImpl implements LesionService {
@@ -34,6 +36,10 @@ public class LesionServiceImpl implements LesionService {
 
 
     }
+    @Override
+    public List<Lesion> listarLesionesPaciente(Long usuarioId){
+        return lesionRepository.obtener_lesiones_bypacienteId(usuarioId);
+    };
 
     @Override
     public Lesion guardarLesiones(Lesion lesion){

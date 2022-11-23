@@ -13,6 +13,7 @@
                 [ignoreAccent]="true"
                 allowFiltering="true"
                 [filterType]="dropdownListFilterType"
+                (change)="pacienteChange()"
                 filterBarPlaceholder='busca al paciente mediante su usuario'
                 >
                 <ng-template #itemTemplate let-pacientes>
@@ -29,7 +30,21 @@
                     <span style="justify-content: center; display: flex; " class="nombres"><b>Nombres&nbsp;&nbsp;Apellidos</b></span>
                     </span>
                 </ng-template>
-                </ejs-dropdownlist><br>
+                </ejs-dropdownlist><br><br>
+
+
+
+                <h1 class="container text-center">Selecciona un lesion</h1>
+                <!-- Aqui configuramos el dropdownList de lesiones-->
+                <ejs-dropdownlist 
+                    #dropdownlistaLesiones 
+                    [dataSource]="lesiones"
+                    [fields]="dataFields2" 
+                    placeholder="Selecciona la lesion asignada">
+                    </ejs-dropdownlist><br><br>
+            
+
+
           </div>
              <!-- Configurando el dropdown de ejercicios -->
             <div class="container text-center" class = "col-md-6 offset-md-3">
@@ -51,6 +66,9 @@
                     </ejs-multiselect>
 
                 </div>
+                <br>
+                <br>
+                
                 <button 
                 class="btn btn-primary" 
                 (click)="obtenerEjercicios()">SIGUIENTE</button>

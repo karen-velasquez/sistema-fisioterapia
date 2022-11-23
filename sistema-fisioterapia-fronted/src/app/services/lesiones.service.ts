@@ -12,4 +12,10 @@ export class LesionesService {
   public guardarLesion(lesion:any){
     return this.httpClient.post(`${baserUrl}/lesion/les`,lesion);
   }
+
+  /* Listando las lesiones de la BDD */
+  public listarLesionesPaciente(paciente_id:String){
+    return this.httpClient.get(`${baserUrl}/lesion/listar/${paciente_id}`);
+  }
+
 }

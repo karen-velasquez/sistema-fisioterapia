@@ -29,6 +29,10 @@ public class LesionController {
         lesionService.guardarLesion(lesion, usuarioId);
     }
 
+    @GetMapping("/listar/{paciente_id}")
+    public ResponseEntity<?> obtenerLesionesPaciente(@PathVariable("paciente_id") Long paciente_id) {
+        return ResponseEntity.ok(lesionService.listarLesionesPaciente(paciente_id));
+    }
     @PostMapping("/les")
     public ResponseEntity<Lesion> guardarlesiones(@RequestBody Lesion lesion){
         return ResponseEntity.ok(lesionService.guardarLesiones(lesion));

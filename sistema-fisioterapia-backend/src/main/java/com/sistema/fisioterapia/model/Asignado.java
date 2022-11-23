@@ -21,6 +21,9 @@ public class Asignado {
     @ManyToOne(fetch = FetchType.EAGER)
     private Ejercicio ejercicioId;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Lesion lesionId;
+
     private String repeticiones;
 
     private String series;
@@ -89,6 +92,14 @@ public class Asignado {
 
     public void setCumplimientoEjercicio(Set<Cumplimiento> cumplimientoEjercicio) {
         this.cumplimientoEjercicio = cumplimientoEjercicio;
+    }
+
+    public Lesion getLesionId() {
+        return lesionId;
+    }
+
+    public void setLesionId(Lesion lesionId) {
+        this.lesionId = lesionId;
     }
 
     public Asignado(){

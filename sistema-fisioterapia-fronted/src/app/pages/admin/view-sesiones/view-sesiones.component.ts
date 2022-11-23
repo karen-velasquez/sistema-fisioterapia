@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
-
+import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 import { DateTimePicker } from '@syncfusion/ej2-calendars';
@@ -45,6 +45,16 @@ export class ViewSesionesComponent implements OnInit {
   public dropdownListFilterType: string='Contains';
   /*Objeto para obtener la lista de pacientes*/ 
   pacientes:any = []
+
+
+  /************************* CONFIGURANDO EL SEGUNDO DROPDOWNLIST ********************************************* */ 
+ /* Llamando la objeto que muestra la lista de lesiones */
+  @ViewChild('dropdownlistaLesiones')
+  public dropDownListObject2 !: DropDownListComponent;
+  public dataFields2: Object = {text:'nombreLesion', value:'lesionId'};
+  public dropdownListFilterType2: string='Contains';
+  /*Objeto para obtener la lista de lesiones*/ 
+  lesiones:any = []
 
 
 
@@ -96,13 +106,16 @@ export class ViewSesionesComponent implements OnInit {
     },
     fisioterapeutaId:{
       usuarioId:''
+    },
+    lesionId:{
+      lesionId: ''
     }
   }
 
 
   constructor(private snack:MatSnackBar, private userService:UserService
     ,private lesionService:LesionesService, private sesionService:SesionService,
-    private loginService:LoginService) { }
+    private loginService:LoginService, private router:Router) { }
 
   
 
@@ -113,6 +126,7 @@ export class ViewSesionesComponent implements OnInit {
     this.user = this.loginService.getUser();
     this.sesion.fisioterapeutaId.usuarioId = this.user.usuarioId; 
     
+    /* Llenando la lista de pacientes */
     this.userService.listaPacientes().subscribe(
       (dato:any) =>{
         this.pacientes = dato;
@@ -133,6 +147,22 @@ export class ViewSesionesComponent implements OnInit {
   }
 
 
+  /*-------------------------- LLENANDO EL SEGUNDO DROPDOWN  -------------------------- */
+  public pacienteChange(): void {
+    /* Llenando la lista de lesiones */
+    this.lesionService.listarLesionesPaciente((this.dropDownListObject.value).toString()).subscribe(
+      (dato:any) =>{
+        console.log(dato);
+        this.lesiones = dato;
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+
+  }
+
+
 
 
 
@@ -149,7 +179,8 @@ export class ViewSesionesComponent implements OnInit {
       //var json = JSON.parse(JSON.stringify(args));
         /* -------- CONFIGURANDO LOS CAMPOS DE FECHA PARA QUE APAREZCAN COMO FECHAS ----*/
       if (args.type === 'Editor' && this.dropDownListObject.value != null) {
-        let startElement: HTMLInputElement = args.element.querySelector('#StartTime') as HTMLInputElement;
+        if(this.dropDownListObject2.value!=null){
+          let startElement: HTMLInputElement = args.element.querySelector('#StartTime') as HTMLInputElement;
         if (!startElement.classList.contains('e-datetimepicker')) {
             startElement.value = (<{ [key: string]: Object }>(args.data))['startTime'] as string;
             new DateTimePicker({ value: new Date(startElement.value) || new Date() }, startElement);
@@ -160,6 +191,16 @@ export class ViewSesionesComponent implements OnInit {
             new DateTimePicker({ value: new Date(endElement.value) || new Date() }, endElement);
         }
         /* -------- FINALIZA: CONFIGURANDO LOS CAMPOS DE FECHA PARA QUE APAREZCAN COMO FECHAS ----*/
+        }else{
+            /* -------- VERIFICANDO QUE SE HAYA ESCOGIDO UNA LESION EN EL DROPDOWN ----*/
+          args.cancel = true;
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Debes escoger una lesion para programar la lesion!!!',
+          })
+          /* -------- FINALIZA: VERIFICANDO QUE SE HAYA ESCOGIDO UNA LESION EN EL DROPDOWN ----*/ 
+        }
       }else{
          /* -------- VERIFICANDO QUE SE HAYA ESCOGIDO A UN PACIENTE EN EL DROPDOWN ----*/
         args.cancel = true;
@@ -186,13 +227,14 @@ export class ViewSesionesComponent implements OnInit {
         this.sesion.startTime = json.data[0].StartTime;
         this.sesion.endTime = json.data[0].EndTime;
         this.sesion.description = json.data[0].Description;
+        this.sesion.lesionId.lesionId = (this.dropDownListObject2.value).toString()
         this.sesion.pacienteId.usuarioId = (this.dropDownListObject.value).toString();
         
 
         /* ---- GUARDANDO LA SESION EN EL SISTEMA ---- */
         this.sesionService.guardarSesion(this.sesion).subscribe(
           (data) => {
-            location.reload();
+            this.router.navigate(['admin']);
             Swal.fire('Sesion guardada','Sesion registrada con exito en el sistema','success');
             
           },(error) => {

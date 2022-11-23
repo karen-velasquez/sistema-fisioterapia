@@ -6,6 +6,7 @@ import { EjerciciosService } from 'src/app/services/ejercicios.service';
 import { UserService } from 'src/app/services/user.service';
 import { ViewCantidadSeriesComponent } from '../view-cantidad-series/view-cantidad-series.component';
 import Swal from 'sweetalert2';
+import { LesionesService } from 'src/app/services/lesiones.service';
 
 @Component({
   selector: 'app-view-asignar-ejercicios',
@@ -26,6 +27,16 @@ export class ViewAsignarEjerciciosComponent implements OnInit {
  pacientes:any = []
 
 
+ /************************* CONFIGURANDO EL SEGUNDO DROPDOWNLIST ********************************************* */ 
+ /* Llamando la objeto que muestra la lista de lesiones */
+ @ViewChild('dropdownlistaLesiones')
+ public dropDownListObject2 !: DropDownListComponent;
+ public dataFields2: Object = {text:'nombreLesion', value:'lesionId'};
+ public dropdownListFilterType2: string='Contains';
+ /*Objeto para obtener la lista de lesiones*/ 
+ lesiones:any = []
+
+
  /******************* CONFIGURANDO EL MULTISELECTCOMPONENT DE EJERCICIOS ******************************** */ 
   @ViewChild('dropdownlistaEjercicios')
   public multicountryObj!: MultiSelectComponent;
@@ -37,7 +48,10 @@ export class ViewAsignarEjerciciosComponent implements OnInit {
 
 
   /* -*********** LA CREACION DEL CONSTRUCTOR *************** */
-  constructor(private matdialog:MatDialog, private ejerciciosService:EjerciciosService, private userService:UserService) { }
+  constructor(private matdialog:MatDialog, 
+    private ejerciciosService:EjerciciosService, 
+    private userService:UserService,
+    private lesionService:LesionesService) { }
 
   ngOnInit(): void {
       /* ---- INGRESANDO LOS DATOS DE PACIENTES EN EL DROPDOWN ---- */
@@ -71,14 +85,31 @@ export class ViewAsignarEjerciciosComponent implements OnInit {
   /* ----- FINALIZA: COMIENZA LA CREACION DEL POPUP PARA OBTENER EL VALOR DE PARTE DEL CUERPO ----- */
   }
 
+  /*-------------------------- LLENANDO EL SEGUNDO DROPDOWN  -------------------------- */
+  public pacienteChange(): void {
+    /* Llenando la lista de lesiones */
+    this.lesionService.listarLesionesPaciente((this.dropDownListObject.value).toString()).subscribe(
+      (dato:any) =>{
+        console.log(dato);
+        this.lesiones = dato;
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+
+  }
 
 
 
  /************** OBTENIENDO LOS VALORES DEL MULTISELECT Y ENVIARLO A LA TABLA **************** */
   public obtenerEjercicios(): void {
-    if(this.dropDownListObject.value != null && this.multicountryObj.value !=null ){
+    if(this.dropDownListObject.value != null && this.multicountryObj.value !=null && this.dropDownListObject2.value != null){
         var asignadosGuardar = [];
         console.log("a ver que tal");
+        /* Obteniendo la fecah de hoy */
+        var today = new Date();
+    
         /* OBTENIENDO LOS EJERCICIOS SELECCIONADOS */
         for(let i = 0; i<this.ejercicios.length ; i++){
           for(let u=0 ; u<this.multicountryObj.value.length; u++ ){
@@ -92,7 +123,11 @@ export class ViewAsignarEjerciciosComponent implements OnInit {
                     "ejercicioId": this.ejercicios[i]
                     ,
                     "repeticiones": "12",
-                    "series": "3"
+                    "series": "3",
+                    "lesionId": {
+                      "lesionId": this.dropDownListObject2.value.toString(),
+                    },
+                    "fechaAsignado": today.toLocaleDateString('en-GB').toString()
                 });
       
               }
@@ -109,7 +144,7 @@ export class ViewAsignarEjerciciosComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Debes escoger a un paciente y por lo menos un ejercicio para asignar los ejercicios!!!',
+          text: 'Debes escoger a un paciente, una lesion y por lo menos un ejercicio para asignar los ejercicios!!!',
         })
         /* -------- FINALIZA: VERIFICANDO QUE SE HAYA ESCOGIDO A UN PACIENTE EN EL DROPDOWN ----*/ 
     }

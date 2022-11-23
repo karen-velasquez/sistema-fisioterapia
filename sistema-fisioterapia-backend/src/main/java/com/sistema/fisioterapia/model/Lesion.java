@@ -25,6 +25,14 @@ public class Lesion {
     private String evaluacion;
 
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "lesionId")
+    @JsonIgnore
+    private Set<Sesion> lesionSesionId = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "lesionId")
+    @JsonIgnore
+    private Set<Asignado> lesionAsignadoId = new HashSet<>();
+
     public Long getLesionId() {
         return lesionId;
     }
@@ -63,6 +71,22 @@ public class Lesion {
 
     public void setEvaluacion(String evaluacion) {
         this.evaluacion = evaluacion;
+    }
+
+    public Set<Sesion> getLesionSesionId() {
+        return lesionSesionId;
+    }
+
+    public void setLesionSesionId(Set<Sesion> lesionSesionId) {
+        this.lesionSesionId = lesionSesionId;
+    }
+
+    public Set<Asignado> getLesionAsignadoId() {
+        return lesionAsignadoId;
+    }
+
+    public void setLesionAsignadoId(Set<Asignado> lesionAsignadoId) {
+        this.lesionAsignadoId = lesionAsignadoId;
     }
 
     public Lesion(){

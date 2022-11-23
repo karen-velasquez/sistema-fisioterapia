@@ -22,6 +22,10 @@ public class Sesion {
     @ManyToOne(fetch = FetchType.EAGER)
     private Usuario fisioterapeutaId;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Lesion lesionId;
+
     private String Subject;
 
     private String StartTime;
@@ -98,6 +102,13 @@ public class Sesion {
         this.sesion = sesion;
     }
 
+    public Lesion getLesionId() {
+        return lesionId;
+    }
+
+    public void setLesionId(Lesion lesionId) {
+        this.lesionId = lesionId;
+    }
 
     public Sesion(){
 
