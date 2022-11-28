@@ -8,12 +8,16 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class ProfileComponent implements OnInit {
 
+  /* Creando la variable para obtener la fecha */
+
+
   user:any;
 
   constructor(private loginService:LoginService) { }
 
   ngOnInit(): void {
     this.user = this.loginService.getUser();
+
   }
 
 }

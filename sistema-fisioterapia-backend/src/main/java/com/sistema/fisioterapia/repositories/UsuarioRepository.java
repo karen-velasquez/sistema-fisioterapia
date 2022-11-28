@@ -1,5 +1,6 @@
 package com.sistema.fisioterapia.repositories;
 
+import com.sistema.fisioterapia.model.Ejercicio;
 import com.sistema.fisioterapia.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,8 +15,12 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
 
     // @Query(value="select b.* from contact u,phone b where u.id_user =:idUser and b.phones_status =:status and u.id_contact=b.id_contact and b.phone_number=:phoneNumber", nativeQuery=true)
     //PhonesEntity searchExistencePhone(@Param("idUser") int idUser, @Param("phoneNumber")int phoneNumber, @Param("status") int status);
-    public Usuario findByUsername(String username);
+    @Query(value="SELECT c.* FROM usuarios c WHERE c.username =:username", nativeQuery=true)
+    Usuario buscarByUsername(@Param("username") String username);
 
+
+
+    Usuario findByUsername(String username);
     public Usuario findBytokenpassword(String tokenPassword);
 
 

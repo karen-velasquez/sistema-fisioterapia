@@ -8,15 +8,16 @@ ScreenManager:
     MDFloatLayout:
         md_bg_color: 1,1,1,1
         Image:
-            source: "logo2.jpg"
-            pos_hint: {"y": .25}
+            source: "logo_fisio.jpg"
+            pos_hint: {"y": .30}
         MDLabel:
             text: "Ingreso"
-            post_hint: {"center_x": .5,"center_y": .5}
+            post_hint: {"center_x": .5,"center_y": .3}
             halign: "center"
             font_name: "Poppins-SemiBold.ttf"
             font_size: "40sp"
             theme_text_color: "Custom"
+
             text_color: 60/255, 43/255, 117/255, 1
 
         MDFloatLayout:
@@ -80,7 +81,7 @@ ScreenManager:
             background_color: 0,0,0,0
             canvas.before:
                 Color:
-                    rgb: 246/255, 135/255, 177/255, 1
+                    rgb: 145/255, 216/255, 227/255, 1
                 RoundedRectangle:
                     size: self.size
                     pos: self.pos
@@ -88,52 +89,64 @@ ScreenManager:
             on_press: root.login(loginusername.text, loginpassword.text)
 
 
-        Button:
-            text: 'EXERCISE'
-            font_name: "Poppins-Regular.ttf"
-            font_size: "20sp"
-            size_hint: .5, .08
-            pos_hint: {'center_x':0.5,'center_y':0.22}
-            background_color: 0,0,0,0
-            canvas.before:
-                Color:
-                    rgb: 246/255, 135/255, 177/255, 1
-                RoundedRectangle:
-                    size: self.size
-                    pos: self.pos
-            on_press:
-                root.manager.current = 'video'
 
 
 
 <VideoScreen>:
     name: 'video'
-    MDRectangleFlatButton:
-        text: 'Back'
-        pos_hint: {'center_x':0.10,'center_y':0.5}
-        on_press: root.manager.current = 'menu'
-    BoxLayout:
-        id: boxvideo
-        orientation: 'horizontal'
+
+    FloatLayout:
         Label:
-            text: 'this on top'
+            text: "Webcam from OpenCV?"
+            pos_hint: {"x":0.0, "y":0.8}
+            size_hint: 1.0, 0.2
+
+        Image:
+            # this is where the video will show
+            # the id allows easy access
+            id: vid
+            size_hint: 1, 0.9
+            allow_stretch: True  # allow the video image to be scaled
+            keep_ratio: True  # keep the aspect ratio so people don't look squashed
+            pos_hint: {'center_x':0.5, 'top':1}
+
+        Button:
+            text: 'Stop Video'
+            pos_hint: {"x":0.4, "y":0.0}
+            size_hint: .2, 0.1
+            font_size: 20
+            on_release: app.stop_vid()
 
 
 <ListExerciseScreen>:
     name: 'listExercise'
+    MDLabel:
+        pos_hint: {'center_x': .5,'center_y': .90}
+        font_name: "Poppins-SemiBold.ttf"
+        font_size: "40sp"
+        theme_text_color: "Custom"
+        text_color: 60/255, 43/255, 117/255, 1
+        text: 'Ejercicios Asignados'
+        halign: 'center'
+
+    MDLabel:
+        adaptive_size: True
+        height: dp(48)
+        text: 'Realiza los ejercicios asignados\n\n constantemente para una buena recuperacion !!!!'
+        halign: 'center'
+        pos_hint: {'center_x': .5,'center_y': .80}
+
+
     Carousel:
-        MDFloatLayout:
-            size_hint: .9, .58
-            pos_hint: {'center_x': .5,'center_y': .5}
-            Image:
-                source: "login.jpg"
-            MDLabel:
-                text: 'Profile'
-                halign: 'center'
-            MDRectangleFlatButton:
-                text: 'Back'
-                pos_hint: {'center_x':0.5,'center_y':0.1}
-                on_press:
-                    root.manager.transition.direction = 'left'
-                    root.manager.current = 'menu'
+        id: carousel
+
+
+
+
+    MDRectangleFlatButton:
+        text: 'Back'
+        pos_hint: {'center_x':0.5,'center_y':0.1}
+        on_press:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'menu'
 

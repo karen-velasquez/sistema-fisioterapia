@@ -42,4 +42,10 @@ public class NotaSesionController {
         return ResponseEntity.ok(notaSesionService.listarNotasSesiones());
     }
 
+    @GetMapping("/listar/{paciente_id}/{lesion_id}")
+    public ResponseEntity<?> obtenerNotasSesionesPaciente(@PathVariable("paciente_id") Long paciente_id, @PathVariable("lesion_id") Long lesion_id) {
+
+        return ResponseEntity.ok(notaSesionService.listarNotasSesionesPaciente(paciente_id, lesion_id));
+    }
+
 }

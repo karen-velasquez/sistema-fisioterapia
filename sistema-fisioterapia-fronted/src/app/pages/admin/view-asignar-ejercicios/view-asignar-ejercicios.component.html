@@ -57,10 +57,19 @@
                     >
                         <ng-template #itemTemplate let-data>
                             <div>
-                                <img class="ejerImage" [src]='data.link_imagen' alt="ejercicioimagen"/>
-                                <div class="ename">{{data.nombre}}</div>
+                                <span>
+                                <img class="ejerImage" style="width: 20%; height: 20%"[src]='data.linkImagenFinal' alt="ejercicioimagen"/>
+                                </span>
+                                <span class="ename" >{{data.nombre}}</span>
                 
                             </div>
+                        </ng-template>
+                        <ng-template #headerTemplate>
+                            <div class = "header">
+                                <span>Imagen</span>
+                                <span class = 'info'>&nbsp;&nbsp;Nombre de ejercicio</span>
+                            </div>
+
                         </ng-template>
                 
                     </ejs-multiselect>

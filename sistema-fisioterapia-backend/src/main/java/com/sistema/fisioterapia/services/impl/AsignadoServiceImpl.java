@@ -3,7 +3,9 @@ package com.sistema.fisioterapia.services.impl;
 import com.sistema.fisioterapia.model.Asignado;
 import com.sistema.fisioterapia.model.NotaSesion;
 import com.sistema.fisioterapia.model.Sesion;
+import com.sistema.fisioterapia.model.Usuario;
 import com.sistema.fisioterapia.repositories.AsignadoRepository;
+import com.sistema.fisioterapia.repositories.UsuarioRepository;
 import com.sistema.fisioterapia.services.AsignadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class AsignadoServiceImpl implements AsignadoService {
 
     @Autowired
     private AsignadoRepository asignadoRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Override
     public Asignado guardarAsignado(Asignado asignado){
@@ -38,8 +43,9 @@ public class AsignadoServiceImpl implements AsignadoService {
     };
 
     @Override
-    public List<Asignado> obtenerAsignadosPaciente(Long paciente_id){
-        List<Asignado> all= asignadoRepository.find_asignados(paciente_id);
+    public List<Asignado> obtenerAsignadosPaciente(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        List<Asignado> all= asignadoRepository.find_asignados(usuario.getUsuarioId());
         return all;
     };
 

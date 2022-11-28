@@ -32,6 +32,11 @@ const routes: Routes = [
     pathMatch : 'full'
   },
   {
+    path : 'changePassword',
+    component : ChangePasswordComponent,
+    pathMatch : 'full'
+  },
+  {
     path : 'signup',
     component : SignupComponent,
     pathMatch : 'full'
@@ -40,12 +45,8 @@ const routes: Routes = [
     path : 'sendemail',
     component : SendEmailComponent,
     pathMatch : 'full'
-  },
-  {
-    path : 'change-password/:tokenPassword',
-    component : ChangePasswordComponent,
-    pathMatch : 'full'
-  },
+  }
+  ,
   {//admin/profile
     path : 'admin',
     component : DashboardComponent,
@@ -82,6 +83,10 @@ const routes: Routes = [
       {
         path: 'seleccionar',
         component: ViewSeleccionTipoComponent
+      },
+      {
+        path: 'seguimiento',
+        component: ViewSeguimientoNotasComponent
       }
       
 

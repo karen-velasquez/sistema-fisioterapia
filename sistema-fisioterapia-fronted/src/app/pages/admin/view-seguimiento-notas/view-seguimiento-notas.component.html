@@ -1,22 +1,69 @@
-<mat-card>
-    <mat-list>
-        <div mat-subheader>
-            Todas las notas
+<div class = "bootstrap-wrapper">
+    <div class = "container" style="overflow:auto;">
+      <div class = "row" style = "margin-top : 30px;">
+        <div>
+          <div class="container text-center" class = "col-md-6 offset-md-3">
+            <h1 class="container text-center">Seguimiento del paciente - Notas</h1>
+            <!-- Aqui configuramos el dropdownList la lista de pacientes-->
+            <ejs-dropdownlist
+                #dropdownlistaPacientes
+                [dataSource]="pacientes"
+                [fields]="dataFields"
+                placeholder="Selecciona a un paciente"
+                [ignoreAccent]="true"
+                allowFiltering="true"
+                [filterType]="dropdownListFilterType"
+                (change)="pacienteChange()"
+                filterBarPlaceholder='busca al paciente mediante su usuario'
+                >
+                <ng-template #itemTemplate let-pacientes>
+                    <div>
+                    <span style="float: left; width: 120px; " class="username">{{pacientes.username}}&nbsp;&nbsp;</span>
+                    <span class="nombres">{{pacientes.nombres}}&nbsp;&nbsp;</span>
+                    <span class="apellidos">{{pacientes.apellidos}}</span>
+                    </div>
+                </ng-template>
+                <ng-template #headerTemplate let-pacientes>
+                    <!--set the value to headerTemplate property-->
+                    <span class='head'>
+                    <span style="float: left; width: 120px; justify-content: center; display: flex; " class="username"><b>Username&nbsp;&nbsp;&nbsp;</b></span>
+                    <span style="justify-content: center; display: flex; " class="nombres"><b>Nombres&nbsp;&nbsp;Apellidos</b></span>
+                    </span>
+                </ng-template>
+                </ejs-dropdownlist><br><br>
+
+
+            <!-- Aqui configuramos el dropdownList de lesiones-->
+            <ejs-dropdownlist 
+                #dropdownlistaLesiones 
+                [dataSource]="lesiones"
+                [fields]="dataFields2"
+                (change)="lesionChange()"
+                placeholder="Selecciona la lesion asignada">
+                </ejs-dropdownlist><br>
+          
+            </div>
+
+
+
+
+           <!-- Aqui configuramos el conjunto de notas -->
+           <ejs-grid 
+           [dataSource]='data' 
+           [allowPaging]="true"
+           [pageSettings]='pageSettings'
+           allowTextWrap='true' [textWrapSettings]='wrapSettings' height='300'
+           >
+            <e-columns>
+                <e-column field='sesionId.fisioterapeutaId.nombres' headerText='Fisioterapeuta' textAlign='Right' width=90></e-column>
+                <e-column field='sesionId.subject' headerText='Titulo Sesion' width=120></e-column>
+                <e-column field='notaSesion' headerText='Nota Sesion' textAlign='Right' format='C2' width=90></e-column>
+                <e-column field='fechaNota' headerText='Fecha Nota' textAlign='Right' format='yMd' width=120></e-column>
+            </e-columns>
+            </ejs-grid>
+
+            </div>
         </div>
-        <mat-list-item *ngFor = 'let c of notas'>
-            <div mat-line>{{ c.fecha }}</div>
-            <div>{{ c.hora }}</div>
-            <div>{{ c.nota }}</div>
-
-
-        </mat-list-item>
-
-    </mat-list>
-
-    <div class = "container text-center mt20">
-        <button routerLink="/admin/profile" mat-raised-button color="primary"> Siguiente </button>
-
-
     </div>
+</div>
 
-</mat-card>

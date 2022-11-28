@@ -12,8 +12,8 @@ export class EmailPasswordService {
   constructor(private http:HttpClient) { }
 
 
-  public enviarEmail(emailValues:EmailValues){
-    return this.http.post(`${baserUrl}/email/send-html`,emailValues);
+  public enviarEmail(username:String){
+    return this.http.get(`${baserUrl}/email/send_html/${username}`);
   }
   
   public cambiarPassword(changePassword:ChangePassword){

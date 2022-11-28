@@ -24,8 +24,7 @@ public class EmailService {
     @Autowired
     TemplateEngine templateEngine;
 
-    @Value("${mail.urlFront}")
-    private String urlFront;
+
 
 
     public void sendEmailTemplate(EmailValues emailValues){
@@ -36,7 +35,7 @@ public class EmailService {
 
             Map<String, Object> model = new HashMap<>();
             model.put("userName", emailValues.getUserName());
-            model.put("url", urlFront + emailValues.getToken());
+            model.put("token", emailValues.getToken());
 
             context.setVariables(model);
 

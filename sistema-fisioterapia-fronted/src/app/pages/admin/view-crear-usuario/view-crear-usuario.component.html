@@ -36,12 +36,13 @@
               <mat-label>Fecha de Nacimiento</mat-label>
               <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" [(ngModel)] = "user.fechaNac" name = "fechaNac" disabled>
               <mat-hint>MM/DD/YYYY</mat-hint>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
+              <mat-datepicker-toggle matSuffix  [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker  (change)='onChange($event)' touchUi #picker disabled="false"></mat-datepicker>
             </mat-form-field>
 
 
             <mat-form-field class="full-width"  appearance = "outline">
+              
               <mat-label>Correo</mat-label>
               <input required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" type="email" required [(ngModel)] = "user.correo" name = "correo" matInput placeholder="Digite su correo">
               

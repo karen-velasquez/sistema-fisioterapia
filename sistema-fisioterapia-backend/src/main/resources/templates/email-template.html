@@ -5,9 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    <h2>Recuperar contrasenia</h2>
+    <h2>Recuperar contraseña</h2>
     <h3><span> Hola </span><span th:text="${userName}">user</span></h3>
-    <h4>Haz click en el siguiente enlace para acceder a tu cuenta</h4>
-    <a th:href="@{${url}}"><button>Ir a mi cuenta</button></a>
+    <h3><span> Este es tu token para recuperar tu cuenta:   </span><span th:text="${token}">user</span></h3>
 </body>
 </html>

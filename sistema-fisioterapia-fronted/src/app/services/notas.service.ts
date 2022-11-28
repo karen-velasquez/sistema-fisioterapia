@@ -23,4 +23,11 @@ export class NotasService {
     return this.http.post(`${baserUrl}/nota_sesion/todos`,notas)
   }
 
+  /* listando las notas del Paciente */
+  public listaNotasSesionPaciente(paciente_id:String, lesion_id:String){
+    return this.http.get(`${baserUrl}/nota_sesion/listar/${paciente_id}/${lesion_id}`)
+  }
+
+
+
 }

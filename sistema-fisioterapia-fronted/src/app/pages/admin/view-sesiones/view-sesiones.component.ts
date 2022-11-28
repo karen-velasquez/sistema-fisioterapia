@@ -11,6 +11,8 @@ import { EventSettingsModel, ScheduleComponent,DayService, WeekService, WorkWeek
 import { SesionService } from 'src/app/services/sesion.service';
 import { L10n } from '@syncfusion/ej2-base';
 import { LoginService } from 'src/app/services/login.service';
+import { ResourceLoader } from '@angular/compiler';
+import { load } from '@syncfusion/ej2-angular-grids';
 
 
 
@@ -234,7 +236,7 @@ export class ViewSesionesComponent implements OnInit {
         /* ---- GUARDANDO LA SESION EN EL SISTEMA ---- */
         this.sesionService.guardarSesion(this.sesion).subscribe(
           (data) => {
-            this.router.navigate(['admin']);
+            location.reload()
             Swal.fire('Sesion guardada','Sesion registrada con exito en el sistema','success');
             
           },(error) => {

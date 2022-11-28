@@ -2,8 +2,9 @@ from kivymd.app import MDApp
 import APIRequest as request
 
 # Inicializando
-endpoint = 'http://localhost:5000/'
+endpoint = 'http://sistemafisioterapiabackend-env.eba-5tweru88.us-east-1.elasticbeanstalk.com/'
 token = ''
+listaEjercicios = ''
 class AppAPIRequest():
 
     def __init__(self):
@@ -15,12 +16,21 @@ class AppAPIRequest():
         global endpoint
 
         token = request.APIRequest.gettoken(self, username, password, endpoint)
+        return token
 
-        if(token != 500 and token != 0 and token!=''):
-            MDApp.get_running_app().root.current = 'listExercise'
-            return token
-        else:
-            print('Hubo problemas en la autenticacion')
+
+
+    def calllist(self, token, username):
+        # Llamando el endpoint
+        global endpoint
+        global listaEjercicios
+        #Imprimiendo el token
+        print(token)
+        #Imprimiendo la lista de ejercicios
+        listaEjercicios = request.APIRequest.listarAsignados(self, token, username, endpoint)
+        return listaEjercicios
+
+
 
 
     #Funcion para obtener el token para conectarnos

@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,20 +36,23 @@ public class EmailController {
     @Value("${spring.mail.username}")
     private String mailFrom;
 
-    @PostMapping("/send-html")
-    public ResponseEntity<?> sendEmailTemplate(@RequestBody EmailValues emailValues){
-        Optional<Usuario> usuarioOpt = Optional.ofNullable(usuarioService.obtenerUsuario(emailValues.getUserName()));
-        if(!usuarioOpt.isPresent()){
+    @GetMapping("/send_html/{username}")
+    public ResponseEntity<?> sendEmailTemplate(@PathVariable("username") String username){
+        Usuario usuarioOpt = (usuarioService.obtenerUsuario(username));
+        if(usuarioOpt==null){
             return new ResponseEntity<>("no existe un usuario con es nombre ", HttpStatus.NOT_FOUND);
         }
-        Usuario usuario = usuarioOpt.get();
+        Usuario usuario = usuarioOpt;
 
         //Colocando los datos en el modelo de datos del Correo
-        //Colocando los datos en el modelo de datos del Correo
+        EmailValues emailValues = new EmailValues();
+        emailValues.setUserName(username);
         emailValues.setMailFrom(mailFrom);
-        emailValues.setSubject("Cambio de contrasenia");
+        emailValues.setSubject("Cambio de contraseña");
         emailValues.setUserName(usuario.getUsername());
         emailValues.setMailTo(usuario.getCorreo());
+
+        //Generando el token par ala BDD
         UUID uuid = UUID.randomUUID();
         String tokenPassword = uuid.toString();
         emailValues.setToken(tokenPassword);
@@ -57,7 +61,10 @@ public class EmailController {
         usuarioService.actualizarUsuario(usuario);
 
         emailService.sendEmailTemplate(emailValues);
-        return new ResponseEntity<>("Correo enviado correctamente", HttpStatus.OK);
+
+        EmailValues emailValues1 = new EmailValues();
+        emailValues1.setUserName(username);
+        return ResponseEntity.ok(emailValues1);
     }
 
     @PostMapping("/change-password")
@@ -66,7 +73,7 @@ public class EmailController {
             return new ResponseEntity<>("campos mal puestos", HttpStatus.BAD_REQUEST);
         }
         if(!changePassword.getPassword().equals(changePassword.getConfirmPassword())){
-            return new ResponseEntity<>("contrasenias no coinciden", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("contraseñas no coinciden", HttpStatus.BAD_REQUEST);
         }
 
         Optional<Usuario> usuarioOpt = Optional.ofNullable(usuarioService.obterUsuarioPorToken(changePassword.getTokenPassword()));
@@ -78,7 +85,11 @@ public class EmailController {
         usuario.setPassword(newPassword);
         usuario.setTokenpassword(null);
         usuarioService.actualizarUsuario(usuario);
-        return new ResponseEntity<>("Password Actualizada", HttpStatus.OK);
+
+
+        EmailValues emailValues1 = new EmailValues();
+        emailValues1.setUserName(usuario.getUsername());
+        return ResponseEntity.ok(emailValues1);
 
     }
 

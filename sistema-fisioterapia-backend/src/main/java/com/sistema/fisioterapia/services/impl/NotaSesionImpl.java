@@ -1,5 +1,6 @@
 package com.sistema.fisioterapia.services.impl;
 
+import com.sistema.fisioterapia.model.Lesion;
 import com.sistema.fisioterapia.model.NotaSesion;
 import com.sistema.fisioterapia.model.Sesion;
 import com.sistema.fisioterapia.repositories.NotaSesionRepository;
@@ -42,6 +43,13 @@ public class NotaSesionImpl implements NotaSesionService {
     public List<NotaSesion> listarNotasSesiones(){
         List<NotaSesion> all= notaSesionRepository.findAll();
         return all;
+    };
+
+    ;
+
+    @Override
+    public List<NotaSesion> listarNotasSesionesPaciente(Long usuarioId, Long lesionId){
+        return notaSesionRepository.obtener_notaSesion_bypacienteId(usuarioId, lesionId);
     };
 
 }

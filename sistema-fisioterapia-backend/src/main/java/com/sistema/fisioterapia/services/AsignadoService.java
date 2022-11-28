@@ -16,7 +16,7 @@ public interface AsignadoService {
 
     public List<Asignado> guardarAsignados(List<Asignado> asignados);
 
-    public List<Asignado> obtenerAsignadosPaciente(Long paciente_id);
+    public List<Asignado> obtenerAsignadosPaciente(String username);
 
 
 }

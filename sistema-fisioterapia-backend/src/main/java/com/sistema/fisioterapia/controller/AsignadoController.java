@@ -43,9 +43,9 @@ public class AsignadoController {
     }
 
 
-    @GetMapping("/paciente/{paciente_id}")
-    public ResponseEntity <?> guardarAsignados(@PathVariable("paciente_id") Long paciente_id){
-        return ResponseEntity.ok(asignadoService.obtenerAsignadosPaciente(paciente_id));
+    @GetMapping("/paciente/{username}")
+    public ResponseEntity <?> obtenerAsignadosPaciente(@PathVariable("username") String username){
+        return ResponseEntity.ok(asignadoService.obtenerAsignadosPaciente(username));
     }
 
 }

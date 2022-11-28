@@ -5,21 +5,13 @@
     class="example-icon"
     arial-label="Example icon-button with menu icon"
   >
-    <mat-icon>calendar_today</mat-icon>
+    <mat-icon svgIcon="fisioterapia"></mat-icon>
   </a>
   <span>Portal de Seguimiento</span>
   <span class="example-spacer"></span>
 
 
-<a
-  *ngIf = "!login.isLoggedIn()"
-  [routerLink]="'/signup'"
-  mat-icon-button
-  class="example-icon favorite-icon mr20 ml70"
-  aria-label="Example icon-button with heart icon"
->
-  Registrar
-</a>
+
 <a
   *ngIf = "login.isLoggedIn()"
   (click) = "logout()"

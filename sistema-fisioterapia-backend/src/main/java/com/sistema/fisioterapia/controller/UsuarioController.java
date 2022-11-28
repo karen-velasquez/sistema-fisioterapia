@@ -50,7 +50,7 @@ public class UsuarioController {
 
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/username/{username}")
     public Usuario obtenerUsuario(@PathVariable("username") String username) {
         return usuarioService.obtenerUsuario(username);
     }

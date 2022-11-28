@@ -1,5 +1,6 @@
 package com.sistema.fisioterapia.services;
 
+import com.sistema.fisioterapia.model.Lesion;
 import com.sistema.fisioterapia.model.NotaSesion;
 import com.sistema.fisioterapia.model.Sesion;
 
@@ -13,6 +14,8 @@ public interface NotaSesionService {
     public List<NotaSesion> listarNotasSesiones();
 
     public List<NotaSesion> guardarNotasSesiones(List<NotaSesion> notasSesiones);
+
+    public List<NotaSesion> listarNotasSesionesPaciente(Long usuarioId, Long lesion_id );
 
 
 }

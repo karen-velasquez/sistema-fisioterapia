@@ -23,8 +23,7 @@ export class ChangePasswordComponent implements OnInit {
   constructor(private snack:MatSnackBar, 
     private emailPasswordService:EmailPasswordService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-    ) { }
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -34,18 +33,33 @@ export class ChangePasswordComponent implements OnInit {
       console.log("error las contrasenias no coinciden");
       return;
     }
-    this.tokenPassword = this.activatedRoute.snapshot.params['tokenPassword'];
+    //this.tokenPassword = this.activatedRoute.snapshot.params['tokenPassword'];
+
     this.change_password = new ChangePassword(this.password, this.confirmPassword, this.tokenPassword);
     console.log(this.change_password);
     this.emailPasswordService.cambiarPassword(this.change_password).subscribe(
       (data) => {
-        console.log(data);
-        Swal.fire('Cambiado','Se cambio la contrase;a con exito','success');
+        this.router.navigate(['']);
+        Swal.fire('Cambiado','Se cambio la contraseña con exito!!!','success');
+        
+        
       },(error) => {
-        console.log(error);
-        this.snack.open('Ha ocurrido un error en el sistema !!','Aceptar',{
-          duration : 3000
-        });
+        console.log(error['error']);
+        if(error.status === 404){
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error puede que el usuario no exista!!!',
+          })
+        }
+        /* ---- Error 0 en caso de que no haya conexion con el Backend ---- */
+        if(error.status === 0){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No hay conexión con el Servidor',
+          })
+        }
       }
     )
 

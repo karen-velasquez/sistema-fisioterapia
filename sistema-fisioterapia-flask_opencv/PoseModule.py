@@ -50,7 +50,7 @@ class posture_detector():
         print("ANGLE")
         print(angle)
 
-        # Draw
+        ''' # Draw
         if draw:
             cv2.line(img, (x1, y1), (x2, y2), (255, 255, 255), 5)
             cv2.line(img, (x3, y3), (x2, y2), (255, 255, 255), 5)
@@ -62,7 +62,7 @@ class posture_detector():
             cv2.circle(img, (x3, y3), 16, (255, 60, 0), 2)
 
             cv2.putText(img, str(int(angle)), (x2 - 50, y2 + 60),
-                        cv2.FONT_HERSHEY_DUPLEX, 1, (255, 255, 255), 1)
+                        cv2.FONT_HERSHEY_DUPLEX, 1, (255, 255, 255), 1)'''
         return angle
 
 

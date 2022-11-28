@@ -3,6 +3,7 @@ import { EmailPasswordService } from 'src/app/services/email-password.service';
 import { EmailValues } from './../../../models/email-values';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-send-email',
@@ -15,23 +16,40 @@ export class SendEmailComponent implements OnInit {
   public userName!: string;
   public email_values!: EmailValues;
 
-  constructor(private snack:MatSnackBar, private emailPasswordService:EmailPasswordService) { }
+  constructor(private snack:MatSnackBar, private emailPasswordService:EmailPasswordService,private router: Router,) { }
 
   ngOnInit(): void {
   }
 
   formSubmit(){
-    this.email_values = new EmailValues(this.userName);
-    
-    this.emailPasswordService.enviarEmail(this.email_values).subscribe(
+    this.emailPasswordService.enviarEmail(this.userName).subscribe(
       (data) => {
-        console.log(data);
         Swal.fire('Enviado','Se envio el correo con exito','success');
+        this.router.navigate(['changePassword']);
       },(error) => {
         console.log(error);
-        this.snack.open('Ha ocurrido un error en el sistema !!','Aceptar',{
-          duration : 3000
-        });
+        if(error.status === 404){
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error puede que el usuario no exista!!!',
+          })
+        }
+        if(error.status === 500){
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Ya existe un paciente con ese Nombre de Usuario!!!',
+          })
+        }
+        /* ---- Error 0 en caso de que no haya conexion con el Backend ---- */
+        if(error.status === 0){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No hay conexión con el Servidor',
+          })
+        }
       }
     )
 

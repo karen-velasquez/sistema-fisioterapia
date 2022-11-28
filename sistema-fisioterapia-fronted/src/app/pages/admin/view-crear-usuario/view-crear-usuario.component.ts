@@ -11,7 +11,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class ViewCrearUsuarioComponent implements OnInit {
 
-
+  public format: string = "dd/MM/yyyy";
 
   /* Fecha minima y maxima a colocar se pondra que el rango sea entre 10 a 40 anios */
   minDate: Date;
@@ -38,6 +38,14 @@ export class ViewCrearUsuarioComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  onChange(args:any) {
+    console.log(args);
+  }
+
+
+
+
   formSubmit(){
     /* ---- VERIFICANDO QUE LOS ESPACIOS NO SON BLANCOS ---- */
     if(this.user.username == '' || this.user.username == null){
@@ -46,6 +54,7 @@ export class ViewCrearUsuarioComponent implements OnInit {
         verticalPosition : 'top',
         horizontalPosition : 'right'
       });
+
       return;
     }
     if(this.user.password == '' || this.user.password== null){
@@ -64,6 +73,7 @@ export class ViewCrearUsuarioComponent implements OnInit {
         horizontalPosition : 'right'
       });
       return;
+
     }
     if(this.user.fechaNac == '' || this.user.fechaNac == null){
       this.snack.open('La fecha de nacimiento es requerida !!','Aceptar',{
@@ -72,6 +82,7 @@ export class ViewCrearUsuarioComponent implements OnInit {
         horizontalPosition : 'right'
       });
       return;
+
     }
     if(this.user.correo == '' || this.user.correo == null ){
       this.snack.open('El correo es requerido !!','Aceptar',{
@@ -79,17 +90,18 @@ export class ViewCrearUsuarioComponent implements OnInit {
         verticalPosition : 'top',
         horizontalPosition : 'right'
       });
+
       return;
     }
     /* ------- FINALIZA: VERIFICANDO QUE LOS ESPACIOS NO SON BLANCOS ------ */
 
+    /* Cambiando la configuracion de la fecha */
+    var today = new Date(this.user.fechaNac);
+    this.user.fechaNac =  (today.toLocaleDateString('en-GB')).toString();
 
 
 
-
-
-
-
+    
     /* ---------------- GUARDANDO LOS DATOS EN LA BDD --------------- */
     this.userService.guardarUsuario(this.user).subscribe(
       (data) => {

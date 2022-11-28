@@ -27,34 +27,32 @@ class APIRequest():
                 if (request.status_code == 0):
                     return 0
 
-'''    def listarPacientes(self):
+    def listarAsignados(self, token, username, end_point):
         #definiendo el header
-        headers = {"Authorization": "Bearer " + str(self.token)}
+        headers = {"Authorization": "Bearer " + str(token)}
         #creando el request
-        request = requests.get(self.endpoint + 'usuarios/listar', headers=headers)
+        request = requests.get(str(end_point)+"asignado/paciente/"+str(username), headers=headers)
 
         #obteniendo la data
         data = request.json()
 
         if (request.status_code == 200):
             # Obteniendo el data del request
-            for element in data:  # iteramos sobre data
-                print("--------Valores----------")
-                print(element)  # Accedemos a sus valores
-            return 'No hubo problemas con la conexion'
+            return data
         else:
             if (request.status_code == 500):
                 return 'Hubo un error al pedir los datos'
             else:
                 if (request.status_code == 0):
-                    return 'No hay conexion con el servidor'''
+                    return 'No hay conexion con el servidor'
 
 
-def main():
+
+'''def main():
     apiRequest = APIRequest()
     apiRequest.gettoken("karen123","123")
     print(apiRequest.listarPacientes())
 
 
 if __name__ == "__main__":
-    main()
+    main()'''
