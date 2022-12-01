@@ -29,9 +29,11 @@ usernameglobal = ''
 #Guardando el token en una variable para luego realizar las peticiones
 token = ''
 #El ejercicio a realizar
-ejercicio = ''
+ejercicio = 'Flexion codo'
 tipo = ''
-parte = ''
+parte = 'superior'
+amount = 2
+serie = 1
 class MenuScreen(Screen):
 
     '''def update_info(self, username, password):
@@ -92,7 +94,7 @@ class VideoScreen(Screen):
         # resize the window to (0,0) to make it invisible
         #cv2.resizeWindow('Hidden', 0, 0)
         # start processing loop
-        cam = cv2.VideoCapture(1)
+        self.cam = cv2.VideoCapture(1)
         mp_pose = mp.solutions.pose
         mp_drawing = mp.solutions.drawing_utils
 
@@ -103,10 +105,10 @@ class VideoScreen(Screen):
                 min_tracking_confidence=0.7) as pose:
             # start processing loop
             while (self.do_vid):
-                global ejercicio
-                ret, frame = cam.read()
+                global ejercicio, serie, amount
+                ret, frame = self.cam.read()
 
-                frame = caseExercise.poseProcess(frame, pose, mp_drawing, mp_pose, ejercicio)
+                frame = caseExercise.poseProcess(frame, pose, mp_drawing, mp_pose, ejercicio, amount, serie)
 
                 #frame = exerciseModule.pose_estimation(frame, pose, mp_drawing, mp_pose)
 
@@ -127,6 +129,7 @@ class VideoScreen(Screen):
     def stop_vid(self):
         # stop the video capture loop
         self.do_vid = False
+        self.cam.release()
 
     def display_frame(self, frame, dt):
         # display the current video frame in the kivy Image widget

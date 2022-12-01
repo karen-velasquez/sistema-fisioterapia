@@ -72,6 +72,24 @@ ScreenManager:
                 font_size: "18sp"
 
 
+
+        Button:
+            text: 'EXERCISE'
+            font_name: "Poppins-Regular.ttf"
+            font_size: "20sp"
+            size_hint: .5, .08
+            pos_hint: {'center_x':0.5,'center_y':0.22}
+            background_color: 0,0,0,0
+            canvas.before:
+                Color:
+                    rgb: (145/255, 216/255, 227/255, 1)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+            on_press:
+                root.manager.current = 'video'
+
+
         Button:
             text: 'Ingresar'
             font_name: "Poppins-Regular.ttf"
@@ -115,7 +133,7 @@ ScreenManager:
             pos_hint: {"x":0.4, "y":0.0}
             size_hint: .2, 0.1
             font_size: 20
-            on_release: app.stop_vid()
+            on_release: root.stop_vid()
 
 
 <ListExerciseScreen>:
