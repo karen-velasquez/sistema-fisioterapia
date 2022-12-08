@@ -48,4 +48,14 @@ public class AsignadoController {
         return ResponseEntity.ok(asignadoService.obtenerAsignadosPaciente(username));
     }
 
+    @GetMapping("/codigo/{username}")
+    public ResponseEntity <?> obtenerCodigoAsignadosPaciente(@PathVariable("username") String username){
+        return ResponseEntity.ok(asignadoService.obtenerCodigoAsignadosPaciente(username));
+    }
+
+
+    @GetMapping("/codigo/byId/{paciente_id}")
+    public ResponseEntity <?> obtenerCodigoAsignadosPaciente(@PathVariable("paciente_id") Long paciente_id){
+        return ResponseEntity.ok(asignadoService.obtenerCodigoAsignadosPacientebyId(paciente_id));
+    }
 }

@@ -49,4 +49,20 @@ public class AsignadoServiceImpl implements AsignadoService {
         return all;
     };
 
+
+    @Override
+    public List<Object[]> obtenerCodigoAsignadosPaciente(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        List<Object[]> all= asignadoRepository.get_asignados_paciente(usuario.getUsuarioId());
+        return all;
+    };
+
+
+
+    @Override
+    public List<Object[]> obtenerCodigoAsignadosPacientebyId(Long paciente_id){
+        List<Object[]> all= asignadoRepository.get_asignados_paciente(paciente_id);
+        return all;
+    };
+
 }

@@ -39,6 +39,14 @@ public class SesionServiceImpl implements SesionService {
         return all;
     };
 
+    @Override
+    public List<Sesion> listarSesionesFisioterapeuta(String username){
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        List<Sesion> all= sesionRepository.buscarSesionFisioterapeuta(usuario.getUsuarioId());
+
+        return all;
+    };
+
 
 
 }

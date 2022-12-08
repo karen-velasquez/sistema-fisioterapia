@@ -10,7 +10,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import {MatSliderModule} from "@angular/material/slider";
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 
-
 import {DropDownListModule, MultiSelectModule} from '@syncfusion/ej2-angular-dropdowns';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
@@ -59,6 +58,7 @@ import { ViewCantidadSeriesComponent } from './pages/admin/view-cantidad-series/
 import { ViewEjerciciosAsignadosComponent } from './pages/user/view-ejercicios-asignados/view-ejercicios-asignados.component';
 import { ViewIndicacionesComponent } from './pages/user/view-indicaciones/view-indicaciones.component';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
+import { ViewPlotsComponent } from './pages/admin/view-plots/view-plots.component';
 
 
 
@@ -89,7 +89,8 @@ import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
     ViewSeleccionTipoComponent,
     ViewCantidadSeriesComponent,
     ViewEjerciciosAsignadosComponent,
-    ViewIndicacionesComponent
+    ViewIndicacionesComponent,
+    ViewPlotsComponent
   ],
   imports: [
     BrowserModule,

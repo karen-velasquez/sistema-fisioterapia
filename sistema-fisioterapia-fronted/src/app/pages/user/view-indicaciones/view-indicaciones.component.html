@@ -1,25 +1,66 @@
 <div class = "bootstrap-wrapper">
-    <div class = "container" style="overflow:auto;">
-      <div class = "row" style = "margin-top : 30px;">
-        <div>
-          <div class="container text-center" class = "col-md-6 offset-md-3">
-            <h1 class="container text-center">Realizar ejercicios</h1>
-            <h1 class="container text-center">INDICACIONES DEL EJERCICIO Y DE LA CAMARA</h1>
-            <!-- Impriendo los datos obtenidos del ejercicios escogido-->
-            
-            <span>{{ejercicioEscogido.asignadoId}}</span><br>
-            <span>{{ejercicioEscogido.ejercicioId.nombre}}</span><br>
-            <span>{{ejercicioEscogido.ejercicioId.descripcion}}</span><br>
-            <span>{{ejercicioEscogido.ejercicioId.parteCuerpo}}</span><br>
+  <div class = "container" style="overflow:auto;">
+    <div class = "row" style = "margin-top : 20px;">
+      <div class = "col-md-6 offset-md-3">
+        <div class="container text-center">
+          <img src="../../../assets/icons/adicionar_paciente.png" width = "100" height = "100">
         </div>
-          <button mat-raised-button color = "primary"
-          class="container text-center"
-           (click)="onClick()">SIGUIENTE: REALIZAR EJERCICIOS</button><br><br>
-        </div>
-        </div>
-    </div>
-</div>
 
+        <h1 class="text-center"> Registra un Fisioterapeuta </h1>
+
+      
+        <form #sendForm
+        (ngSubmit) = "formSubmit()">
+          <mat-form-field class="full-width"  appearance = "outline">
+            <mat-label>Nombre de usuario</mat-label>
+            <input required [(ngModel)] = "user.username" name = "username" matInput placeholder="Digite su nombre de usuario">
+            <mat-hint>El nombre de usuario debe ser único</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="full-width"  appearance = "outline">
+            <mat-label>Contraseña</mat-label>
+            <input required [(ngModel)] = "user.password" name = "password" type = "password" matInput placeholder="Digite su contraseña">
+          </mat-form-field>
+
+          <mat-form-field class="full-width"  appearance = "outline">
+            <mat-label>Nombres</mat-label>
+            <input required [(ngModel)] = "user.nombres" name = "nombre" matInput placeholder="Digite su nombre">
+          </mat-form-field>
+
+          <mat-form-field class="full-width"  appearance = "outline">
+            <mat-label>Apellidos</mat-label>
+            <input required [(ngModel)] = "user.apellidos" name = "apellido" matInput placeholder="Digite su apellido">
+          </mat-form-field>
+
+          <mat-form-field class="full-width" appearance = "outline">
+            <mat-label>Fecha de Nacimiento</mat-label>
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" [(ngModel)] = "user.fechaNac" name = "fechaNac" disabled>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix  [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker  (change)='onChange($event)' touchUi #picker disabled="false"></mat-datepicker>
+          </mat-form-field>
+
+
+          <mat-form-field class="full-width"  appearance = "outline">
+            
+            <mat-label>Correo</mat-label>
+            <input required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" type="email" required [(ngModel)] = "user.correo" name = "correo" matInput placeholder="Digite su correo">
+            
+  
+          </mat-form-field>
+
+          
+  
+          <div class = "container text-center">
+            <button mat-raised-button color="primary">Registrar</button>
+          </div>
+
+        </form>
+
+          </div>
+      </div>
+  </div>
+</div>
 
 
 

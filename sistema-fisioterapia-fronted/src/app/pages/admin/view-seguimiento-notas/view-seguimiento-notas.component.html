@@ -46,13 +46,13 @@
 
 
 
-
+            <div class="container text-center">
            <!-- Aqui configuramos el conjunto de notas -->
            <ejs-grid 
            [dataSource]='data' 
            [allowPaging]="true"
            [pageSettings]='pageSettings'
-           allowTextWrap='true' [textWrapSettings]='wrapSettings' height='300'
+           allowTextWrap='true' [textWrapSettings]='wrapSettings' height='250'
            >
             <e-columns>
                 <e-column field='sesionId.fisioterapeutaId.nombres' headerText='Fisioterapeuta' textAlign='Right' width=90></e-column>
@@ -61,6 +61,14 @@
                 <e-column field='fechaNota' headerText='Fecha Nota' textAlign='Right' format='yMd' width=120></e-column>
             </e-columns>
             </ejs-grid>
+
+
+            <br>
+            <button 
+                class="btn btn-primary" 
+                (click)="obtenerGrafico()">VER GRÁFICO GENERAL DE LOS EJERCICIOS ASIGNADOS</button>
+            </div>
+    
 
             </div>
         </div>

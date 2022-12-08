@@ -142,6 +142,8 @@ export class ViewSesionesComponent implements OnInit {
     /* ---- OBTENIENDO LOS DATOS DE LAS SESIONES ---- */
     this.sesionService.listar().subscribe(
       (data:any) => {
+        console.log("el data")
+        console.log(data)
         this.scheduleObj.addEvent(data);
       }
     );

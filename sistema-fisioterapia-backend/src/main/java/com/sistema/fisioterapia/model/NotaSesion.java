@@ -19,6 +19,7 @@ public class NotaSesion {
 
     private String fechaNota;
 
+
     public Long getNotaId() {
         return notaId;
     }

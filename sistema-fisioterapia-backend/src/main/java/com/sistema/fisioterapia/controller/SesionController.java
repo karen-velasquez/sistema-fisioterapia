@@ -12,8 +12,6 @@ public class SesionController {
 
     @Autowired
     private SesionService sesionService;
-
-
     @PostMapping("/")
     public ResponseEntity<Sesion> guardarSesiones(@RequestBody Sesion sesion){
         return ResponseEntity.ok(sesionService.guardarSesion(sesion));
@@ -28,6 +26,13 @@ public class SesionController {
     @GetMapping("/listar")
     public ResponseEntity<?> listarSesiones() {
         return ResponseEntity.ok(sesionService.listarSesiones());
+    }
+
+
+
+    @GetMapping("/listar/{fisioterapeuta_username}")
+    public ResponseEntity<?> listarSesionesFisioterapeuta(@PathVariable("fisioterapeuta_username") String fisioterapeuta_username) {
+        return ResponseEntity.ok(sesionService.listarSesionesFisioterapeuta(fisioterapeuta_username));
     }
 
 

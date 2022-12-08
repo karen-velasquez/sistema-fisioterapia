@@ -17,6 +17,20 @@ import { LesionesService } from 'src/app/services/lesiones.service';
 
 export class ViewAsignarEjerciciosComponent implements OnInit {
 
+public format: string = "dd/MM/yyyy";
+
+minDate: Date;
+
+public user = {
+  username : '',
+  password : '',
+  nombres : '',
+  apellidos : '',
+  correo : '',
+  fechaNac : ''
+}
+
+
 /************************* CONFIGURANDO EL DROPDOWNLIST ********************************************* */ 
  /* Llamando la objeto que muestra la lista de Pacientes */
  @ViewChild('dropdownlistaPacientes')
@@ -51,7 +65,12 @@ export class ViewAsignarEjerciciosComponent implements OnInit {
   constructor(private matdialog:MatDialog, 
     private ejerciciosService:EjerciciosService, 
     private userService:UserService,
-    private lesionService:LesionesService) { }
+    private lesionService:LesionesService) {
+      this.minDate = new Date();
+     }
+
+
+     
 
   ngOnInit(): void {
       /* ---- INGRESANDO LOS DATOS DE PACIENTES EN EL DROPDOWN ---- */
@@ -104,10 +123,13 @@ export class ViewAsignarEjerciciosComponent implements OnInit {
 
  /************** OBTENIENDO LOS VALORES DEL MULTISELECT Y ENVIARLO A LA TABLA **************** */
   public obtenerEjercicios(): void {
-    if(this.dropDownListObject.value != null && this.multicountryObj.value !=null && this.dropDownListObject2.value != null){
+    if(this.dropDownListObject.value != null && this.multicountryObj.value !=null && this.dropDownListObject2.value != null && this.user.fechaNac!= '' && this.user.fechaNac != null){
         var asignadosGuardar = [];
-        console.log("a ver que tal");
+        /* Cambiando la configuracion de la fecha */
+        var todayHasta = new Date(this.user.fechaNac);
+
         /* Obteniendo la fecah de hoy */
+
         var today = new Date();
     
         /* OBTENIENDO LOS EJERCICIOS SELECCIONADOS */
@@ -127,7 +149,9 @@ export class ViewAsignarEjerciciosComponent implements OnInit {
                     "lesionId": {
                       "lesionId": this.dropDownListObject2.value.toString(),
                     },
-                    "fechaAsignado": today.toLocaleDateString('en-GB').toString()
+                    "fechaAsignado": today.toLocaleDateString('en-CA').toString(),
+                    "fechafinalizacion": todayHasta.toLocaleDateString('en-CA').toString()
+
                 });
       
               }
@@ -144,14 +168,19 @@ export class ViewAsignarEjerciciosComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Debes escoger a un paciente, una lesion y por lo menos un ejercicio para asignar los ejercicios!!!',
+          text: 'Debes escoger a un paciente, una lesion, la fecha de finalizacion y por lo menos un ejercicio para asignar los ejercicios!!!',
         })
         /* -------- FINALIZA: VERIFICANDO QUE SE HAYA ESCOGIDO A UN PACIENTE EN EL DROPDOWN ----*/ 
     }
-
-
-
-
   }
+
+
+
+
+  //El OnChange del picker
+  onChange(args:any) {
+    console.log(args);
+  }
+
 
 }

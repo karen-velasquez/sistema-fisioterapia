@@ -46,8 +46,23 @@ public class UsuarioController {
 
         usuarioRoles.add(usuarioRol);
         return usuarioService.guardarUsuario(usuario,usuarioRoles);
+    }
 
+    @PostMapping("/fisioterapeuta/")
+    public Usuario guardarFisioterapeuta(@RequestBody Usuario usuario) throws Exception {
 
+        //encriptando la contrase;a
+        usuario.setPassword(this.bCryptPasswordEncoder.encode(usuario.getPassword()));
+        Set<UsuarioRol> usuarioRoles = new HashSet<>();
+
+        //Obtener el rol del Fisioterapeuta
+        Rol rol = rolRepository.obtenerRolFisioterapeuta();
+        UsuarioRol usuarioRol = new UsuarioRol();
+        usuarioRol.setUsuario(usuario);
+        usuarioRol.setRol(rol);
+
+        usuarioRoles.add(usuarioRol);
+        return usuarioService.guardarUsuario(usuario,usuarioRoles);
     }
 
     @GetMapping("/username/{username}")

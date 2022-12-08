@@ -42,6 +42,7 @@ class VideoCamera():
             index += 1
             i -= 1
         print(arr)
+        return arr
 
 
 if __name__ == '__main__':

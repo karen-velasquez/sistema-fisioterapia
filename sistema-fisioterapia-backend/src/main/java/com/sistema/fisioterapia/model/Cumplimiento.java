@@ -16,6 +16,9 @@ public class Cumplimiento {
 
     private String serieRealizada;
 
+
+    private String aciertos;
+
     private String fechaCumplimiento;
 
 
@@ -41,6 +44,14 @@ public class Cumplimiento {
 
     public void setSerieRealizada(String serieRealizada) {
         this.serieRealizada = serieRealizada;
+    }
+
+    public String getAciertos() {
+        return aciertos;
+    }
+
+    public void setAciertos(String aciertos) {
+        this.aciertos = aciertos;
     }
 
     public String getFechaCumplimiento() {

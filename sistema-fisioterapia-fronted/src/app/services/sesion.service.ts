@@ -14,13 +14,22 @@ export class SesionService {
   public urlSesion: string = `${baserUrl}/sesion/listar`;
   constructor(private httpClient: HttpClient) { }
 
+  
   public guardarSesion(sesion:any){
     return this.httpClient.post(`${baserUrl}/sesion/`,sesion);
   }
 
+
   public listar(){
     return this.httpClient.get(`${baserUrl}/sesion/listar`);
   }
+
+  public listarSesionFisioterapeuta(fisioterapeuta_username:String){
+    return this.httpClient.get(`${baserUrl}/sesion/listar/${fisioterapeuta_username}`);
+  }
+
+
+
 
 
   public listarSesiones(){

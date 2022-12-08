@@ -30,6 +30,8 @@ public class Asignado {
 
     private String fechaAsignado;
 
+    private String fechafinalizacion;
+
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "asignadoId")
     @JsonIgnore
@@ -88,6 +90,14 @@ public class Asignado {
 
     public void setFechaAsignado(String fechaAsignado) {
         this.fechaAsignado = fechaAsignado;
+    }
+
+    public String getFechafinalizacion() {
+        return fechafinalizacion;
+    }
+
+    public void setFechafinalizacion(String fechafinalizacion) {
+        this.fechafinalizacion = fechafinalizacion;
     }
 
     public void setCumplimientoEjercicio(Set<Cumplimiento> cumplimientoEjercicio) {

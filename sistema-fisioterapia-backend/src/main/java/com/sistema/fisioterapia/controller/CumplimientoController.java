@@ -17,11 +17,12 @@ public class CumplimientoController {
     private CumplimientoService cumplimientoService;
 
 
-
     @PostMapping("/")
     public ResponseEntity<Cumplimiento> guardarCumpliento(@RequestBody Cumplimiento cumplimiento){
         return ResponseEntity.ok(cumplimientoService.guardarCumplimiento(cumplimiento));
     }
+
+
 
 
     @GetMapping("/{cumplimiento_id}")
@@ -33,6 +34,23 @@ public class CumplimientoController {
     @GetMapping("/listar")
     public ResponseEntity<?> listarCumplimientos() {
         return ResponseEntity.ok(cumplimientoService.listarCumplimientos());
+    }
+
+    @GetMapping("/{username}/{asignado_id}")
+    public ResponseEntity<?> listarPromedioCumplimientos(@PathVariable("username") String username, @PathVariable("asignado_id") Long asignado_id) {
+        return ResponseEntity.ok(cumplimientoService.obtenerPromedioCumplimiento(username, asignado_id));
+    }
+
+
+    @GetMapping("/model/{username}/{asignado_id}")
+    public ResponseEntity<?> listarPromedioCumplimientosModel(@PathVariable("username") String username, @PathVariable("asignado_id") Long asignado_id) {
+        return ResponseEntity.ok(cumplimientoService.obtenerPromedioCumplimientoModel(username, asignado_id));
+    }
+
+
+    @GetMapping("/model/byId/{paciente_id}/{asignado_id}")
+    public ResponseEntity<?> listarPromedioCumplimientosModelbyId(@PathVariable("paciente_id") Long paciente_id, @PathVariable("asignado_id") Long asignado_id) {
+        return ResponseEntity.ok(cumplimientoService.obtenerPromedioCumplimientoModelbyId(paciente_id,asignado_id));
     }
 
 

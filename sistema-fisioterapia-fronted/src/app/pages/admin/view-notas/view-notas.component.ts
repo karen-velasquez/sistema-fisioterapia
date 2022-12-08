@@ -6,6 +6,7 @@ import { L10n } from '@syncfusion/ej2-base';
 import { SesionService } from 'src/app/services/sesion.service';
 import { EventSettingsModel, ScheduleComponent, PopupOpenEventArgs, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
 import { NotasService } from 'src/app/services/notas.service';
+import { LoginService } from 'src/app/services/login.service';
 
 /************ CONFIGURNADO QUE BOTONES ESTARAN EN LA TABLA***************** */
 L10n.load({
@@ -55,6 +56,8 @@ export class ViewNotasComponent implements OnInit {
       startTime: { name: 'startTime' },
       endTime: { name: 'endTime' }
     }};
+    /* Obteniendo el valor del usuario-fisioterapeuta */
+    user:any;
 
 
   
@@ -69,15 +72,21 @@ export class ViewNotasComponent implements OnInit {
   }
 
   /* ------------ CONSTRUCTOR ----------- */
-  constructor(private snack:MatSnackBar, private sesionService:SesionService, private notasService:NotasService) { }
+  constructor(private snack:MatSnackBar, 
+    private sesionService:SesionService, 
+    private notasService:NotasService,
+    private loginService:LoginService) { }
 
 
   ngOnInit(): void {
+    this.user = this.loginService.getUser();
+    console.log(" ES TE ES EL VALOR")
+    console.log(this.user.username)
     var today = new Date();
     this.nota.fechaNota = today.toLocaleDateString('en-GB');
 
     /* ---- OBTENIENDO LOS DATOS DE LAS SESIONES ---- */
-    this.sesionService.listar().subscribe(
+    this.sesionService.listarSesionFisioterapeuta(this.user.username).subscribe(
       (data:any) => {
         this.scheduleObj.addEvent(data);
       }

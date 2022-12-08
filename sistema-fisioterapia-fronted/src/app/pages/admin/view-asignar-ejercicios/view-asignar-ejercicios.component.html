@@ -44,6 +44,16 @@
                     </ejs-dropdownlist><br><br>
             
 
+                <br> 
+                <mat-form-field class="full-width" appearance = "outline">
+                <mat-label>Hasta que fecha se asignan los ejercicios</mat-label>
+                <input matInput [min]="minDate" [matDatepicker]="picker" [(ngModel)] = "user.fechaNac" name = "fecha" disabled>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix  [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker  (change)='onChange($event)' touchUi #picker disabled="false"></mat-datepicker>
+                </mat-form-field>
+
+
 
           </div>
              <!-- Configurando el dropdown de ejercicios -->

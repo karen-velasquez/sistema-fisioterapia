@@ -25,6 +25,7 @@ public class Lesion {
     private String evaluacion;
 
 
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "lesionId")
     @JsonIgnore
     private Set<Sesion> lesionSesionId = new HashSet<>();
@@ -80,6 +81,9 @@ public class Lesion {
     public void setLesionSesionId(Set<Sesion> lesionSesionId) {
         this.lesionSesionId = lesionSesionId;
     }
+
+
+
 
     public Set<Asignado> getLesionAsignadoId() {
         return lesionAsignadoId;

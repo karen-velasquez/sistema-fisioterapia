@@ -19,4 +19,7 @@ public interface AsignadoService {
     public List<Asignado> obtenerAsignadosPaciente(String username);
 
 
+    public List<Object[]> obtenerCodigoAsignadosPaciente(String username);
+
+    public List<Object[]> obtenerCodigoAsignadosPacientebyId(Long paciente_id);
 }

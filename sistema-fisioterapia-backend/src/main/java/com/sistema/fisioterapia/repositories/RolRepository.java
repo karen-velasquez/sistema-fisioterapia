@@ -14,5 +14,8 @@ public interface RolRepository extends JpaRepository<Rol,Long> {
     @Query(value="SELECT c.* FROM roles c WHERE c.rol_nombre ='PACIENTE'", nativeQuery=true)
     Rol obtenerRolPaciente();
 
+    @Query(value="SELECT c.* FROM roles c WHERE c.rol_nombre ='FISIOTERAPEUTA'", nativeQuery=true)
+    Rol obtenerRolFisioterapeuta();
+
 
 }

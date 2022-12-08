@@ -17,4 +17,8 @@ export class UserService {
     return this.httpClient.get(`${baserUrl}/usuarios/listar`)
   }
 
+  public guardarFisioterapeuta(user:any){
+    return this.httpClient.post(`${baserUrl}/usuarios/fisioterapeuta/`,user);
+  }
+
 }

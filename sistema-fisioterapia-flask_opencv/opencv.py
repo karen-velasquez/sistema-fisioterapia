@@ -1,7 +1,7 @@
 import threading
 from functools import partial
 import cv2
-
+import time
 import mediapipe as mp
 import ModuleExercise as exercise
 from kivy.app import App
@@ -9,6 +9,11 @@ from kivy.clock import Clock
 from kivy.graphics.texture import Texture
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from datetime import datetime
+
+
+
+camera = 0
 
 
 class MainScreen(Screen):
@@ -28,6 +33,20 @@ Builder.load_string('''
             text: "Webcam from OpenCV?"
             pos_hint: {"x":0.0, "y":0.8}
             size_hint: 1.0, 0.2
+            
+        Button:
+        
+            text: 'VIDEO 0'
+            on_press: 
+                app.tipoVideo(0)
+            pos_hint: {"x":0.0, "y":0.8}
+            size_hint: 0.3, 0.2
+            
+        Button:
+            text: 'VIDEO 1'
+            on_press: app.tipoVideo(1)
+            pos_hint: {"x":0.6, "y":0.8}
+            size_hint: 0.3, 0.2
 
         Image:
             # this is where the video will show
@@ -67,6 +86,7 @@ class Main(App):
         return sm
 
     def doit(self):
+        global camera
         # this code is run in a separate thread
         self.do_vid = True  # flag to stop loop
 
@@ -76,7 +96,7 @@ class Main(App):
 
         # resize the window to (0,0) to make it invisible
         cv2.resizeWindow('Hidden', 0, 0)'''
-        cam = cv2.VideoCapture(0)
+        cam = cv2.VideoCapture(camera)
         mp_pose = mp.solutions.pose
         mp_drawing = mp.solutions.drawing_utils
 
@@ -90,7 +110,7 @@ class Main(App):
                 list_threads = []
                 ret, frame = cam.read()
 
-                frame = exercise.pose_estimation(frame, pose, mp_drawing, mp_pose)
+                '''frame = exercise.pose_estimation(frame, pose, mp_drawing, mp_pose)'''
 
                 '''target_thread_frame = threading.Thread(
                     target=self.display_frame, args=()
@@ -109,8 +129,14 @@ class Main(App):
                 # display the current video frame in the kivy Image widget
 
                 '''Clock.schedule_interval(self.load_video, 1.0 / 60.0)'''
+                '''print("ESTOY DENTRO EL HILO")
+                now = datetime.now()
+                current_time = now.strftime("%H:%M:%S")
+                print("Current Time =", current_time)
 
+                print(time)'''
                 Clock.schedule_once(partial(self.display_frame, frame))
+
 
                 '''cv2.imshow('Hidden', frame)
                 cv2.waitKey(1)'''
@@ -120,6 +146,23 @@ class Main(App):
     def stop_vid(self):
         # stop the video capture loop
         self.do_vid = False
+        time.sleep(2)
+        '''self.main_screen.ids.vid.clear_widgets()'''
+
+
+
+    def tipoVideo(self, number):
+        # stop the video capture loop
+        self.stop_vid()
+
+        global camera
+        camera = int(number)
+        if(self.do_vid == False):
+            threading.Thread(target=self.doit, daemon=True).start()
+            print("EL NUMERO ESCOGIDO "+str(number))
+
+
+
 
     def display_frame(self, frame, dt):
         # display the current video frame in the kivy Image widget

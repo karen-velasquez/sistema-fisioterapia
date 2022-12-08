@@ -13,4 +13,6 @@ public interface SesionService {
 
     public List<Sesion> listarSesiones();
 
+    public List<Sesion> listarSesionesFisioterapeuta(String username);
+
 }

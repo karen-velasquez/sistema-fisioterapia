@@ -7,6 +7,7 @@ import { ViewLesionComponent } from './pages/admin/view-lesion/view-lesion.compo
 import { ViewNotasComponent } from './pages/admin/view-notas/view-notas.component';
 import { ViewPacientesComponent } from './pages/admin/view-pacientes/view-pacientes.component';
 import { ViewSeguimientoNotasComponent } from './pages/admin/view-seguimiento-notas/view-seguimiento-notas.component';
+import { ViewPlotsComponent } from './pages/admin/view-plots/view-plots.component';
 import { ViewSeleccionTipoComponent } from './pages/admin/view-seleccion-tipo/view-seleccion-tipo.component';
 import { ViewSesionesComponent } from './pages/admin/view-sesiones/view-sesiones.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
@@ -48,7 +49,7 @@ const routes: Routes = [
   }
   ,
   {//admin/profile
-    path : 'admin',
+    path : 'fisioterapeuta',
     component : DashboardComponent,
     canActivate: [AdminGuard],
     children:[
@@ -93,17 +94,17 @@ const routes: Routes = [
     ]
   },
   {
-    path : 'user',
+    path : 'admin',
     component : UserDashboardComponent,
     canActivate: [NormalGuard],
     children:[
       {
-        path:'ejercicios',
-        component: ViewIndicacionesComponent
+        path: '',
+        component: ProfileComponent
       },
       {
-        path:'informacion',
-        component: ViewRealizarEjerciciosComponent
+        path:'crear',
+        component: ViewIndicacionesComponent
       }
     ]
   }

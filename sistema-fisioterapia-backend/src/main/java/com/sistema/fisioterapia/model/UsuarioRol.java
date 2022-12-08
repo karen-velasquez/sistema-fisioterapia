@@ -15,6 +15,7 @@ public class UsuarioRol {
     @ManyToOne
     private Rol rol;
 
+
     public Long getUsuarioRolId() {
         return usuarioRolId;
     }
@@ -30,6 +31,7 @@ public class UsuarioRol {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
 
     public Rol getRol() {
         return rol;

@@ -57,14 +57,14 @@ export class LoginComponent implements OnInit {
           if(this.loginService.getUserRole() == 'FISIOTERAPEUTA'){
               //dashboard admin
               //window.location.href = '/admin';
-            this.router.navigate(['admin']);
+            this.router.navigate(['fisioterapeuta']);
             this.loginService.loginStatusSubjec.next(true);
           }
 
-          else if(this.loginService.getUserRole() == 'ADMINISTRADOR'){
+          else if(this.loginService.getUserRole() == 'ADMIN'){
               //user dashboard
               //window.location.href = '/user-dashboard';
-            this.router.navigate(['user']);
+            this.router.navigate(['admin']);
             this.loginService.loginStatusSubjec.next(true);
           }
           else{
