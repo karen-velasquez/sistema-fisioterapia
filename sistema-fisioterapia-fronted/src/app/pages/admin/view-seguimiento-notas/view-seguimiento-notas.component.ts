@@ -130,13 +130,13 @@ export class ViewSeguimientoNotasComponent implements OnInit {
 
 
                 /* Se obtiene la fecha minima para obtener cual es la minima del dataset */
-                /*var dateget = new Date(this.datasetCoordinates['0']['x'])
+                var dateget = new Date(this.datasetCoordinates['0']['x'])
                 if(new Date(this.modelData.min) > dateget){
                   this.modelData.min = dateget.toString();
                   console.log("es mayor el model min");
                 }
  
-                console.log("fdsfkdslj");*/
+                console.log("fdsfkdslj");
 
                 this.datasetCoordinatesFull.push(
                 {
