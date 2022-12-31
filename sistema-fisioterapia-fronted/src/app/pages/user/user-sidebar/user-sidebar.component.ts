@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatSidenav } from '@angular/material/sidenav';
+import { LoginService } from 'src/app/services/login.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 const CREATE_ICON=
   `
@@ -12,6 +15,10 @@ const DELETE_ICON=
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><linearGradient id="lg1"><stop offset="0" stop-color="#21d1f7"></stop><stop offset="1" stop-color="#2196f3"></stop></linearGradient><linearGradient id="SVGID_1_" gradientTransform="matrix(1 0 0 -1 0 513.77)" gradientUnits="userSpaceOnUse" x1="-110.462" x2="422.648" xlink:href="#lg1" y1="385.612" y2="-84.178"></linearGradient><linearGradient id="SVGID_00000125602749076977960510000000563327354003445180_" gradientTransform="matrix(1 0 0 -1 0 513.77)" gradientUnits="userSpaceOnUse" x1="24.404" x2="557.514" xlink:href="#lg1" y1="538.66" y2="68.87"></linearGradient><linearGradient id="SVGID_00000133521442458159731350000003762347292190040999_" gradientTransform="matrix(1 0 0 -1 0 513.77)" gradientUnits="userSpaceOnUse" x1="87.328" x2="620.438" xlink:href="#lg1" y1="610.063" y2="140.273"></linearGradient><g id="Layer_2_00000090273534146090039370000009675682423000297609_"><g id="add_delete"><path d="m142.4 249h95.5c78.7 0 142.4 63.8 142.4 142.4v40.6c0 33.2-26.9 60.2-60.2 60.2h-260c-33.2-.1-60.1-27-60.1-60.2v-40.6c0-78.7 63.8-142.4 142.4-142.4z" fill="url(#SVGID_1_)" data-original="url(#SVGID_1_)"></path><circle cx="190.2" cy="121.2" fill="url(#SVGID_00000125602749076977960510000000563327354003445180_)" r="101.3" data-original="url(#SVGID_00000125602749076977960510000000563327354003445180_)"></circle><path d="m361 168.4h121.2c16.5 0 29.8 13.3 29.8 29.8 0 16.5-13.4 29.8-29.8 29.8h-121.2c-16.5 0-29.8-13.3-29.8-29.8-.1-16.4 13.3-29.8 29.8-29.8z" fill="url(#SVGID_00000133521442458159731350000003762347292190040999_)" data-original="url(#SVGID_00000133521442458159731350000003762347292190040999_)"></path></g></g></g></svg>
   `;
 
+const FISIOTERAPIA_ICON=
+  `
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g><path d="m302.459 377-11.459 60h191c16.569 0 30-13.431 30-30 0-16.569-13.431-30-30-30z" fill="#2b0552" data-original="#2b0552" class=""></path><path d="m171 272v90h139v-90z" fill="#5e54ac" data-original="#5e54ac" class=""></path><path d="m256 272h54v90h-54z" fill="#453d81" data-original="#453d81"></path><path d="m296 100h-80c-46.944 0-85 38.056-85 85v5l40 82h210v-87c0-46.944-38.056-85-85-85z" fill="#fff5f5" data-original="#fff5f5" class=""></path><path d="m296 100h-40v172h125v-87c0-46.944-38.056-85-85-85z" fill="#e1ebf0" data-original="#e1ebf0" class=""></path><path d="m336 227v35h60v-35c0-16.569-13.431-30-30-30s-30 13.431-30 30z" fill="#f2d1a5" data-original="#f2d1a5" class=""></path><g><path d="m256 332h-113.5c-28.995 0-52.5 23.505-52.5 52.5 0 28.995 23.505 52.5 52.5 52.5h113.5l10-52.5z" fill="#ff7c48" data-original="#ff7c48" class=""></path><path d="m90 384.5c0 28.995 23.505 52.5 52.5 52.5h113.5l10-52.5z" fill="#ff1f3e" data-original="#ff1f3e" class=""></path></g><path d="m441 257h-130c-22.091 0-40 17.909-40 40v35h-15v105h35c33.137 0 60-26.863 60-60v-60h90c16.569 0 30-13.431 30-30 0-16.569-13.431-30-30-30z" fill="#5e54ac" data-original="#5e54ac" class=""></path><path d="m0 497c0 8.284 6.716 15 15 15h482c8.284 0 15-6.716 15-15v-15c0-24.853-20.147-45-45-45h-422c-24.853 0-45 20.147-45 45z" fill="#fff5f5" data-original="#fff5f5" class=""></path><path d="m467 437h-211v75h241c8.284 0 15-6.716 15-15v-15c0-24.853-20.147-45-45-45z" fill="#e1ebf0" data-original="#e1ebf0" class=""></path><circle cx="256" cy="55" fill="#ffe4c2" r="55" data-original="#ffe4c2" class=""></circle><path d="m311 55c0-30.376-24.624-55-55-55v110c30.376 0 55-24.624 55-55z" fill="#f2d1a5" data-original="#f2d1a5" class=""></path><path d="m191 227v-37h-60v57c0 22.091 17.909 40 40 40h100c16.569 0 30-13.431 30-30 0-16.569-13.431-30-30-30z" fill="#ffe4c2" data-original="#ffe4c2" class=""></path><path d="m271 227h-15v60h15c16.569 0 30-13.431 30-30 0-16.569-13.431-30-30-30z" fill="#f2d1a5" data-original="#f2d1a5" class=""></path><g><path d="m256 384.5v52.5h35c30.595 0 55.823-22.905 59.517-52.5z" fill="#453d81" data-original="#453d81"></path></g><circle cx="52.5" cy="384.5" fill="#ffe4c2" r="52.5" data-original="#ffe4c2" class=""></circle><path d="m0 384.5c0 28.995 23.505 52.5 52.5 52.5s52.5-23.505 52.5-52.5z" fill="#f2d1a5" data-original="#f2d1a5" class=""></path></g></g></svg>
+  `;
 
 @Component({
   selector: 'app-user-sidebar',
@@ -19,8 +26,15 @@ const DELETE_ICON=
   styleUrls: ['./user-sidebar.component.css']
 })
 export class UserSidebarComponent implements OnInit {
+  @ViewChild(MatSidenav)
+  sidenav!: MatSidenav;
+  isLoggedIn = false;
+  user:any = null;
+
 
   constructor(
+    public login:LoginService,
+    private observer: BreakpointObserver,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) { 
@@ -31,9 +45,39 @@ export class UserSidebarComponent implements OnInit {
     this.matIconRegistry.addSvgIconLiteral('extra',
     this.domSanitizer.bypassSecurityTrustHtml(DELETE_ICON)
     );
+
+    this.matIconRegistry.addSvgIconLiteral('fisioterapia',
+      this.domSanitizer.bypassSecurityTrustHtml(FISIOTERAPIA_ICON)
+    );
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(){
+    this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
+      if(res.matches){
+        this.sidenav.mode = 'over';
+        this.sidenav.close();
+      }else{
+        this.sidenav.mode = 'side';
+        this.sidenav.open();
+      }
+    })
   }
+
+
+  ngOnInit(): void {
+    this.isLoggedIn = this.login.isLoggedIn();
+    this.user = this.login.getUser();
+    this.login.loginStatusSubjec.asObservable().subscribe(
+      data => {
+        this.isLoggedIn = this.login.isLoggedIn();
+        this.user = this.login.getUser();
+      }
+    )
+  }
+
+  public logout(){
+    this.login.logout();
+  }
+
 
 }

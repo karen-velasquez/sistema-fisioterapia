@@ -1,7 +1,23 @@
-<div class = "bootstrap-wrapper">
+<mat-toolbar color="primary">
+  <a
+  mat-icon-button
+  class="example-icon"
+  arial-label="Example icon-button with menu icon"
+>
+  <mat-icon svgIcon="fisioterapia"></mat-icon>
+</a>
+<span>Portal de Seguimiento</span>
+<span class="example-spacer"></span>
+
+</mat-toolbar>
+
+
+
+<div class = "bootstrap-wrapper" routerLinkActive="active">
     <div class = "container">
        <div class="row mt20">
             <div class="col-md-6 offset-md-3">
+
                 <mat-card>
                     <div class="container text-center">
                         <img src="../../../assets/icon.png" width="100" height="100">
@@ -10,7 +26,7 @@
                     <h1 class = "text-center">Cambiar contraseña</h1>
                     <form (ngSubmit) = "formSubmit()">
                         <mat-form-field class = "full-width"  appearance = "outline">
-                          <mat-label>Te enviaremos un mensaje a tu correo para recuperar tu contraseña </mat-label>
+                          <mat-label>Enviaremos un mensaje al correo para recuperar la contraseña </mat-label>
                           <input [(ngModel)] = "userName" name = "userName" required  matInput placeholder="Digite su nombre de usuario">
                           <mat-hint>El nombre de usuario debe ser valido</mat-hint>
                         </mat-form-field>

@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
-
+import { RouterModule, Routes } from '@angular/router';
 import {MatSliderModule} from "@angular/material/slider";
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import {MatSidenavModule} from '@angular/material/sidenav'
 
 import {DropDownListModule, MultiSelectModule} from '@syncfusion/ej2-angular-dropdowns';
 import {MatListModule} from '@angular/material/list';
@@ -22,7 +23,6 @@ import { GridModule, EditService, ToolbarService, SortService, PageService } fro
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog'
 import { CarouselModule } from "@syncfusion/ej2-angular-navigations";
-
 
 
 import {MatInputModule} from '@angular/material/input';
@@ -59,6 +59,7 @@ import { ViewEjerciciosAsignadosComponent } from './pages/user/view-ejercicios-a
 import { ViewIndicacionesComponent } from './pages/user/view-indicaciones/view-indicaciones.component';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 import { ViewPlotsComponent } from './pages/admin/view-plots/view-plots.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 
@@ -95,6 +96,7 @@ import { ViewPlotsComponent } from './pages/admin/view-plots/view-plots.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
+    LayoutModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -120,12 +122,14 @@ import { ViewPlotsComponent } from './pages/admin/view-plots/view-plots.componen
     MatDialogModule,
     CarouselModule,
     NgxUiLoaderModule,
+    MatSidenavModule,
     NgxUiLoaderHttpModule.forRoot({
       showForeground:true
     })
   ],
   providers: [authInterceptorProviders, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService
   ,EditService, ToolbarService, SortService, PageService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [AppRoutingModule]
 })
 export class AppModule { }

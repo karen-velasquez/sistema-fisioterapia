@@ -1,4 +1,39 @@
+.mat-toolbar{
+  background: #004a9f;
+  color: white;
+}
+
+.example-spacer{
+  flex: 1 1 auto;
+}
+
 .button {
-    background: rgba(124, 178, 236, 0.3); 
+    background: rgba(255, 255, 255, 1); 
     border-radius: 20px;
-  }
+    width: 100%;
+    margin: 10px 0px;
+    padding: 5px 20px;
+    color: #002b5c;
+    font-size: 15px;
+    font-family: Verdana;
+    font-weight: bold;
+    text-align: center;
+}
+.content{
+  margin: 30px 20px;
+}
+.mat-sidenav{
+  margin: 16px;
+  width: 300px;
+  border-right: none;
+  background: #002b5c;
+  color: white;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center; 
+}
+
+
+.mat-sidenav-container {
+  height: calc(100vh - 65px);
+}

@@ -30,22 +30,22 @@ const routes: Routes = [
   {
     path : '',
     component : LoginComponent,
-    pathMatch : 'full'
-  },
-  {
-    path : 'changePassword',
-    component : ChangePasswordComponent,
-    pathMatch : 'full'
+    pathMatch: 'full'
+
   },
   {
     path : 'signup',
     component : SignupComponent,
-    pathMatch : 'full'
+    pathMatch: 'full'
+
   },
   {
     path : 'sendemail',
     component : SendEmailComponent,
-    pathMatch : 'full'
+  },
+  {
+    path : 'changePassword',
+    component : ChangePasswordComponent,
   }
   ,
   {//admin/profile
@@ -88,8 +88,7 @@ const routes: Routes = [
       {
         path: 'seguimiento',
         component: ViewSeguimientoNotasComponent
-      }
-      
+      },
 
     ]
   },
@@ -107,7 +106,8 @@ const routes: Routes = [
         component: ViewIndicacionesComponent
       }
     ]
-  }
+  },
+
 
 
 

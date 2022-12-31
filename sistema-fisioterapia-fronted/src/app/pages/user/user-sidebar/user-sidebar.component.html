@@ -1,5 +1,54 @@
-<mat-card class="user-dashboard-card">
-    <mat-action-list>
+<mat-toolbar color="primary">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>   
+  </button>
+
+  <a
+  [routerLink]="'/'"
+  mat-icon-button
+  class="example-icon"
+  arial-label="Example icon-button with menu icon"
+>
+  <mat-icon svgIcon="fisioterapia"></mat-icon>
+</a>
+<span>Portal de Seguimiento</span>
+<span class="example-spacer"></span>
+
+<a
+*ngIf = "login.isLoggedIn()"
+(click) = "logout()"
+style="margin-right: 50px"
+mat-icon-button
+class="example-icon favorite-icon"
+aria-label="Example icon-button with heart icon"
+>
+Cerrar sesión
+</a>
+
+<button
+  *ngIf = "isLoggedIn && user"
+  mat-button
+  style="margin-right: 10px"
+  class="example-icon favorite-icon"
+  aria-label="Example icon-button with heart icon"
+  routerLink="/admin"
+  >
+  {{ user.username }}
+</button>
+
+
+
+
+</mat-toolbar>
+
+<mat-sidenav-container class="dashboard-card">
+  <mat-sidenav #sidenav="matSidenav">
       <div mat-subheader><h2>Menú</h2></div>
 
       <button class="button" mat-list-item routerLink = "/admin/crear">
@@ -7,5 +56,12 @@
       </button>
       <br>
 
-    </mat-action-list>
-</mat-card>
+    </mat-sidenav>
+
+    <mat-sidenav-container>
+      <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+    </mat-sidenav-container>
+    
+</mat-sidenav-container>

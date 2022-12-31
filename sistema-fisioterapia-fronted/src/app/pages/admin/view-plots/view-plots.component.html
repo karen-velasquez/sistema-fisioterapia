@@ -1,6 +1,33 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
-<div class="divTimeChart">
-    <canvas  id="MyTimeChart" >{{ timechart }}</canvas>
+
+<div style="text-align: right;">
+  <button mat-mini-fab color="primary" (click)="closeChart()" aria-label="Example icon button with a plus one icon">
+    <mat-icon>close</mat-icon>
+  </button>
 </div>
+
+<div style="text-align: left;">
+  <button mat-mini-fab color="primary" (click)="closeChart()" aria-label="Example icon button with a plus one icon">
+    <mat-icon>picture_as_pdf</mat-icon>
+  </button>
+  <button mat-mini-fab color="primary" (click)="download()" aria-label="Example icon button with a plus one icon">
+    <mat-icon>image</mat-icon>
+  </button>
+</div>
+
+
+<div class="divTimeChart">
+    <canvas id="MyTimeChart" >{{ timechart }}</canvas>
+
+    <mat-form-field appearance = "outline">
+      <mat-label>END</mat-label>
+      <input matInput id="end" [min]="2022-06-01" [max]="2022-12-12" [matDatepicker]="picker" (dateChange)="filterDate()" disabled>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix  [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+</div>
+
