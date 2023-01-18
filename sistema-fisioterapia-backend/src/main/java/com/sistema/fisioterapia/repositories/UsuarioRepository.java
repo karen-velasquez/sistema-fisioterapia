@@ -18,9 +18,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     @Query(value="SELECT c.* FROM usuarios c WHERE c.username =:username", nativeQuery=true)
     Usuario buscarByUsername(@Param("username") String username);
 
-
-
     Usuario findByUsername(String username);
+
+
+
+
     public Usuario findBytokenpassword(String tokenPassword);
 
 

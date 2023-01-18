@@ -40,7 +40,7 @@ public class EmailController {
     public ResponseEntity<?> sendEmailTemplate(@PathVariable("username") String username){
         Usuario usuarioOpt = (usuarioService.obtenerUsuario(username));
         if(usuarioOpt==null){
-            return new ResponseEntity<>("no existe un usuario con es nombre ", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("no existe un usuario con ese nombre ", HttpStatus.NOT_FOUND);
         }
         Usuario usuario = usuarioOpt;
 

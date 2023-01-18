@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { registerLicense } from '@syncfusion/ej2-base';
 
-registerLicense('ORg4AjUWIQA/Gnt2VVhjQlFaclhJXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxRd0RhW35ac3xQQGdVV0M=');
+registerLicense('ORg4AjUWIQA/Gnt2VVhkQlFadVdJX3xLYVF2R2BJd1Ryc19FZEwgOX1dQl9gSX9TdUVrWn5ad31WQ2A=');
 
 @Component({
   selector: 'app-root',

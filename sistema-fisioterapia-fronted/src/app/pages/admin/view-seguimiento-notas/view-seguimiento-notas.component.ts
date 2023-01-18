@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PageSettingsModel } from '@syncfusion/ej2-angular-grids';
+import { PageService, PageSettingsModel } from '@syncfusion/ej2-angular-grids';
+import { TextWrapSettingsModel } from '@syncfusion/ej2-angular-grids';
+import { InfiniteScrollService, InfiniteScrollSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 import { LesionesService } from 'src/app/services/lesiones.service';
 
 import { NotasService } from 'src/app/services/notas.service';
-import { TextWrapSettingsModel } from '@syncfusion/ej2-angular-grids';
+
 import { PlotSeguimientoService } from 'src/app/services/plot-seguimiento.service';
 import { ThemeService } from 'ng2-charts';
 
@@ -19,7 +21,8 @@ import { ThemeService } from 'ng2-charts';
 @Component({
   selector: 'app-view-seguimiento-notas',
   templateUrl: './view-seguimiento-notas.component.html',
-  styleUrls: ['./view-seguimiento-notas.component.css']
+  styleUrls: ['./view-seguimiento-notas.component.css'],
+  providers: [PageService]
 })
 export class ViewSeguimientoNotasComponent implements OnInit {
   /************************* CONFIGURANDO EL DROPDOWNLIST ********************************************* */ 
@@ -132,12 +135,9 @@ export class ViewSeguimientoNotasComponent implements OnInit {
                 /* Se obtiene la fecha minima para obtener cual es la minima del dataset */
                 var dateget = new Date(this.datasetCoordinates['0']['x'])
                 if(new Date(this.modelData.min) > dateget){
-                  this.modelData.min = dateget.toString();
-                  console.log("es mayor el model min");
+                  this.modelData.min = dateget.toLocaleDateString('fr-CA').toString();
                 }
  
-                console.log("fdsfkdslj");
-
                 this.datasetCoordinatesFull.push(
                 {
                     label: clave[1],

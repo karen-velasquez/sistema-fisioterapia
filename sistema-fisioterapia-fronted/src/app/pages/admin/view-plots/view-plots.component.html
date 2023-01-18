@@ -1,18 +1,17 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.1.81/pdf.min.js" integrity="sha512-RV+l/3iMDTmIt64ztJmriqLRZl2IwGHcG+655gFxUa20Uq9GljEsY3wibq5BZkGzRlMbYFHUPelVQvWvZxP38w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-<div style="text-align: right;">
-  <button mat-mini-fab color="primary" (click)="closeChart()" aria-label="Example icon button with a plus one icon">
+<div>
+  <button style="margin-right: 50px;" mat-mini-fab color="primary" (click)="closeChart()" aria-label="Example icon button with a plus one icon">
     <mat-icon>close</mat-icon>
   </button>
-</div>
-
-<div style="text-align: left;">
-  <button mat-mini-fab color="primary" (click)="closeChart()" aria-label="Example icon button with a plus one icon">
+  <span class="example-spacer"></span>
+  <button mat-mini-fab color="primary" (click)="downloadPdf()" aria-label="Example icon button with a plus one icon">
     <mat-icon>picture_as_pdf</mat-icon>
   </button>
-  <button mat-mini-fab color="primary" (click)="download()" aria-label="Example icon button with a plus one icon">
+
+  <button mat-mini-fab color="primary" (click)="downloadImage()" aria-label="Example icon button with a plus one icon">
     <mat-icon>image</mat-icon>
   </button>
 </div>
@@ -21,13 +20,29 @@
 <div class="divTimeChart">
     <canvas id="MyTimeChart" >{{ timechart }}</canvas>
 
+    <div class="container text-center">
+    <mat-form-field appearance = "outline">
+      <mat-label>START</mat-label>
+      <input matInput id="start" [matDatepicker]="picker1" [formControl]="startDate" [min]="minDate" [max]="maxDate"
+      (dateChange)="filterDateStart()">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix  [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker1 disabled="false"></mat-datepicker>
+    </mat-form-field>
+    
+
     <mat-form-field appearance = "outline">
       <mat-label>END</mat-label>
-      <input matInput id="end" [min]="2022-06-01" [max]="2022-12-12" [matDatepicker]="picker" (dateChange)="filterDate()" disabled>
+      <input matInput id="end" [matDatepicker]="picker2" [formControl]="endDate" [min]="minDate" [max]="maxDate" 
+       (dateChange)="filterDateEnd()">
       <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matSuffix  [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
+      <mat-datepicker-toggle matSuffix  [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker2 disabled="false"></mat-datepicker>
     </mat-form-field>
+  </div>
+
+
+    
 
 </div>
 

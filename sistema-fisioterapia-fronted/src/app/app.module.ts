@@ -19,14 +19,17 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import { ScheduleModule, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
 import { MatTableModule } from '@angular/material/table'  
 import {MatSelectModule} from '@angular/material/select';
-import { GridModule, EditService, ToolbarService, SortService, PageService } from '@syncfusion/ej2-angular-grids';
+import { GridModule, EditService, ToolbarService, SortService, PageService} from '@syncfusion/ej2-angular-grids';
+
+
+
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog'
 import { CarouselModule } from "@syncfusion/ej2-angular-navigations";
 
 
 import {MatInputModule} from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCardModule} from '@angular/material/card';
@@ -102,6 +105,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,
     MatCardModule,

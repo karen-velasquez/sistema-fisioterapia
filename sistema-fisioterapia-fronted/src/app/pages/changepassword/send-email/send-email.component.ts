@@ -39,7 +39,7 @@ export class SendEmailComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Ya existe un paciente con ese Nombre de Usuario!!!',
+            text: 'Error backend!!!',
           })
         }
         /* ---- Error 0 en caso de que no haya conexion con el Backend ---- */

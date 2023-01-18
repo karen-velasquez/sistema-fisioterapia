@@ -4,3 +4,9 @@
     height: 60vh;
     width: 60vw;
 }
+.example-spacer{
+
+    margin-left: 85%;
+    flex: 1 1 auto;
+}
+
